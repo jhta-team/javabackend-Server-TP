@@ -21,22 +21,6 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>CodyBoardInsert</display-name>
-    <servlet-name>CodyBoardInsert</servlet-name>
-    <servlet-class>com.kkj.codyboard.controller.CodyBoardInsert</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>CodyBoardInsert</servlet-name>
-    <url-pattern>/codyboard/insert</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>CodyBoardInsertProcess</display-name>
-    <servlet-name>CodyBoardInsertProcess</servlet-name>
-    <servlet-class>com.kkj.codyboard.controller.CodyBoardInsertProcess</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>CodyBoardInsertProcess</servlet-name>
-    <url-pattern>/codyboard/insert-process</url-pattern>
+
   </servlet-mapping>
 </web-app>
