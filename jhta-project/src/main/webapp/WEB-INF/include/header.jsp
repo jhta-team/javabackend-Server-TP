@@ -33,8 +33,8 @@
         </form>
 
         <div class="text-end">
-          <button type="button" class="btn btn-outline-light me-2">Login</button>
-          <button type="button" class="btn btn-warning">Sign-up</button>
+          <button type="button" class="btn btn-outline-light me-2" onclick="location.href='../member/login'">Login</button>
+          <button type="button" class="btn btn-warning" onclick="location.href='../member/insert'" >Sign-up</button>
         </div>
       </div>
     </div>
