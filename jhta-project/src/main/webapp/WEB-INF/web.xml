@@ -69,24 +69,4 @@
     <servlet-name>CodyBoardInsertProcess</servlet-name>
     <url-pattern>/codyboard/insert-process</url-pattern>
   </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>CodyBoardFindAll</display-name>
-    <servlet-name>CodyBoardFindAll</servlet-name>
-    <servlet-class>com.kkj.codyboard.controller.CodyBoardFindAll</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>CodyBoardFindAll</servlet-name>
-    <url-pattern>/codyboard/find-all</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>main</display-name>
-    <servlet-name>main</servlet-name>
-    <servlet-class>com.kkj.codyboard.controller.main</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>main</servlet-name>
-    <url-pattern>/codyboard/main</url-pattern>
-  </servlet-mapping>
 </web-app>
