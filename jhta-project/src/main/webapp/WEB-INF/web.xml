@@ -21,32 +21,6 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>MemberLogin</display-name>
-    <servlet-name>MemberLogin</servlet-name>
-    <servlet-class>com.kkj.member.controller.MemberLogin</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>MemberLogin</servlet-name>
-    <url-pattern>/member/login</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>MemberInsert</display-name>
-    <servlet-name>MemberInsert</servlet-name>
-    <servlet-class>com.kkj.member.controller.MemberInsert</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>MemberInsert</servlet-name>
-    <url-pattern>/member/insert</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>MemberIDCheck</display-name>
-    <servlet-name>MemberIDCheck</servlet-name>
-    <servlet-class>com.kkj.member.controller.MemberIDCheck</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>MemberIDCheck</servlet-name>
-    <url-pattern>/member/idCheck</url-pattern>
+
   </servlet-mapping>
 </web-app>

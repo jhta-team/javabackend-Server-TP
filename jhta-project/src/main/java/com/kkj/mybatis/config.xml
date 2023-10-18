@@ -4,8 +4,6 @@
   "https://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-  		<typeAlias alias="MemberDto" type="com.kkj.dto.MemberDto"/>
-  		<!-- <typeAlias alias="BoardDto" type="com.kkj.dto.BoardDto"/> -->
 	</typeAliases>
 	<environments default="development">
 		<environment id="development">
@@ -20,7 +18,7 @@
 		</environment>
 	</environments>
 	<mappers>
-		<mapper resource="com/kkj/mybatis/member.xml"/>
+
 	</mappers>
 </configuration>
 
