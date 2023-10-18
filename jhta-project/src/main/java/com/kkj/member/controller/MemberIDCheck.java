@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.google.gson.Gson;
-import com.kkj.dao.MemberDao;
+import com.kkj.member.dao.MemberDao;
 
 /**
  * Servlet implementation class MemberIDCheck

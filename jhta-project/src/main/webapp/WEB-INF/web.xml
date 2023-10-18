@@ -17,7 +17,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>IndexController</servlet-name>
-    <url-pattern>/index/</url-pattern>
+    <url-pattern>/index/index</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -49,7 +49,7 @@
     <servlet-name>MemberIDCheck</servlet-name>
     <url-pattern>/member/idCheck</url-pattern>
   </servlet-mapping>
-    <servlet>
+  <servlet>
     <description></description>
     <display-name>CodyBoardInsert</display-name>
     <servlet-name>CodyBoardInsert</servlet-name>
@@ -68,5 +68,35 @@
   <servlet-mapping>
     <servlet-name>CodyBoardInsertProcess</servlet-name>
     <url-pattern>/codyboard/insert-process</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>MemberLoginProcess</display-name>
+    <servlet-name>MemberLoginProcess</servlet-name>
+    <servlet-class>com.kkj.member.controller.MemberLoginProcess</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MemberLoginProcess</servlet-name>
+    <url-pattern>/member/login-process</url-pattern>
+  </servlet-mapping>
+    <servlet>
+    <description></description>
+    <display-name>ProductList</display-name>
+    <servlet-name>ProductList</servlet-name>
+    <servlet-class>com.kkj.product.controller.ProductList</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProductList</servlet-name>
+    <url-pattern>/product/list</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ProductListProcess</display-name>
+    <servlet-name>ProductListProcess</servlet-name>
+    <servlet-class>com.kkj.product.controller.ProductListProcess</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProductListProcess</servlet-name>
+    <url-pattern>/product/list-process</url-pattern>
   </servlet-mapping>
 </web-app>
