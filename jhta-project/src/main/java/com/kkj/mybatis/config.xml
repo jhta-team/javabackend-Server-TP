@@ -6,6 +6,7 @@
 	<typeAliases>
 		<typeAlias alias="MemberDto" type="com.kkj.dto.MemberDto"/>
 		<typeAlias alias="CodyBoardDto"   type="com.kkj.codyboard.dto.CodyBoardDto" />
+		<typeAlias alias="ProductDto" type="com.kkj.product.dto.ProductDto"/>
 	</typeAliases>
 	<environments default="development">
 		<environment id="development">
@@ -22,6 +23,7 @@
 	<mappers>
 		<mapper resource="com/kkj/mybatis/member.xml"/>
 		<mapper resource="com/kkj/mybatis/codyboard.xml" />
+		<mapper resource="com/kkj/mybatis/product.xml" />
 	</mappers>
 </configuration>
 
