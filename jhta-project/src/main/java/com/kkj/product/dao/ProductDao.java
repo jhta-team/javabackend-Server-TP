@@ -1,6 +1,5 @@
 package com.kkj.product.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -17,5 +16,11 @@ public class ProductDao {
 		return listPdt;
 	}
 	
-
+	public int insertProduct(ProductDto productDto) {
+		int result = 0;
+		SqlSession sqlSession = MybatisConnectionFactory.getSqlSession();
+		result = sqlSession.update("insertProduct",productDto);
+		sqlSession.close();
+		return result;
+	}
 }

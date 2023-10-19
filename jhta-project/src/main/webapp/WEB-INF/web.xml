@@ -91,12 +91,22 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>ProductListProcess</display-name>
-    <servlet-name>ProductListProcess</servlet-name>
-    <servlet-class>com.kkj.product.controller.ProductListProcess</servlet-class>
+    <display-name>ProductInsert</display-name>
+    <servlet-name>ProductInsert</servlet-name>
+    <servlet-class>com.kkj.product.controller.ProductInsert</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>ProductListProcess</servlet-name>
-    <url-pattern>/product/list-process</url-pattern>
+    <servlet-name>ProductInsert</servlet-name>
+    <url-pattern>/product/insert</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ProductInsertProcess</display-name>
+    <servlet-name>ProductInsertProcess</servlet-name>
+    <servlet-class>com.kkj.product.controller.ProductInsertProcess</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProductInsertProcess</servlet-name>
+    <url-pattern>/product/insert-process</url-pattern>
   </servlet-mapping>
 </web-app>
