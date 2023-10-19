@@ -5,25 +5,25 @@ public class CodyBoardDto {
 	private String title;
 	private String content;
 	private String images;
-	private int view;
+	private int hit;
 	private String regDate; 
 	private int categoryID;
 	
-	public CodyBoardDto(int no, String title, String content, String images, int view, String regDate, int categoryID) {
+	public CodyBoardDto(int no, String title, String content, String images, int hit, String regDate, int categoryID) {
 		super();
 		this.no = no;
 		this.title = title;
 		this.content = content;
 		this.images = images;
-		this.view = view;
+		this.hit = hit;
 		this.regDate = regDate;
 		this.categoryID = categoryID;
 	}
 	
 	@Override
 	public String toString() {
-		return "CodyDto [no=" + no + ", title=" + title + ", content=" + content + ", images=" + images + ", view="
-				+ view + ", regDate=" + regDate + ", categoryID=" + categoryID + "]";
+		return "CodyDto [no=" + no + ", title=" + title + ", content=" + content + ", images=" + images + ", hit="
+				+ hit + ", regDate=" + regDate + ", categoryID=" + categoryID + "]";
 	}
 	
 	public CodyBoardDto() {
@@ -54,11 +54,11 @@ public class CodyBoardDto {
 	public void setImages(String images) {
 		this.images = images;
 	}
-	public int getView() {
-		return view;
+	public int getHit() {
+		return hit;
 	}
-	public void setView(int view) {
-		this.view = view;
+	public void setHit(int hit) {
+		this.hit = hit;
 	}
 	public String getRegDate() {
 		return regDate;

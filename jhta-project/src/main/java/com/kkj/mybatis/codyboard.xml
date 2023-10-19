@@ -6,7 +6,17 @@
 	<insert id="insertCody" parameterType="CodyBoardDto">
 		INSERT INTO codyboard values(seq_cody.NEXTVAL, #{title}, #{content}, #{images}, 0, sysdate, #{categoryID})
 	</insert>
+	
+	<select id="findAllCodyBoard" resultType="CodyBoardDto">
+		SELECT * FROM CODYBOARD order by no asc
+	</select>
   	
-
+	<select id="codyBoardCount" resultType="int">
+	 	SELECT count(*) FROM codyBoard
+	</select>
+	
+	<select id="codyBoardPageNation" resultType="CodyBoardDto" parameterType="int">
+	 	SELECT * FROM codyBoard where no >= #{start} and no <![CDATA[<=]]> #{end}
+	</select>
 </mapper>
 
