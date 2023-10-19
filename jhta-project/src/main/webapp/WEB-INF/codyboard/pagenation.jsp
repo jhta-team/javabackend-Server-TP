@@ -3,7 +3,7 @@
 
 <%@ include file="../include/header.jsp" %>
 	<div class="container">
-		<h2 class="mb-5 mt-5">${countPage} </h2>
+		<h2 class="mb-5 mt-5">코디 게시</h2>
 		<table class="table list">
 		  <thead>
 		    <tr>
@@ -35,7 +35,12 @@
 				
 			</select>
 		</form>
-
+		
+		<div class="d-flex justify-content-center mt- mb-5">
+			<c:forEach var="i" begin="0" end="${10}">
+				<p><a href="../codyboard/page-nation?page=${i+1}" class="link-danger">${i + 1}</a></p>
+			</c:forEach>
+		</div>
 			
 		<div class="d-flex justify-content-center mt-3 mb-3">
 			<a href="../board/write" class="btn btn-primary">글쓰기</a>

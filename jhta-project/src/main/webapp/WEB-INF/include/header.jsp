@@ -25,7 +25,7 @@
           <li><a href="../product/list" class="nav-link px-2 text-white">상품게시판</a></li>
           <li><a href="#" class="nav-link px-2 text-white">상품등록</a></li>
           <li><a href="#" class="nav-link px-2 text-white">코디등록</a></li>
-          <li><a href="../codyboard/find-all" class="nav-link px-2 text-white">코디게시판보기</a></li>
+          <li><a href="../codyboard/page-nation" class="nav-link px-2 text-white">코디게시판보기</a></li>
           <li><a href="#" class="nav-link px-2 text-white">About</a></li>
         </ul>
 

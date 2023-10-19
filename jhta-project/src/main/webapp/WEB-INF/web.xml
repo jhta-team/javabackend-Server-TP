@@ -99,4 +99,24 @@
     <servlet-name>ProductListProcess</servlet-name>
     <url-pattern>/product/list-process</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CodyBoardFindAll</display-name>
+    <servlet-name>CodyBoardFindAll</servlet-name>
+    <servlet-class>com.kkj.codyboard.controller.CodyBoardFindAll</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CodyBoardFindAll</servlet-name>
+    <url-pattern>/codyboard/find-all</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CodyBoardPageNation</display-name>
+    <servlet-name>CodyBoardPageNation</servlet-name>
+    <servlet-class>com.kkj.codyboard.controller.CodyBoardPageNation</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CodyBoardPageNation</servlet-name>
+    <url-pattern>/codyboard/page-nation</url-pattern>
+  </servlet-mapping>
 </web-app>

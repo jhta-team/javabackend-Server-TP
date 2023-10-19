@@ -13,15 +13,15 @@ import com.kkj.codyboard.dao.CodyBoardDao;
 import com.kkj.codyboard.dto.CodyBoardDto;
 
 /**
- * Servlet implementation class CodyBoardFindAll
+ * Servlet implementation class CodyBoardPageNation
  */
-public class CodyBoardFindAll extends HttpServlet {
+public class CodyBoardPageNation extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CodyBoardFindAll() {
+    public CodyBoardPageNation() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,18 +30,18 @@ public class CodyBoardFindAll extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		CodyBoardDao codyBoardDao = new CodyBoardDao();
-		int page = 0;
+		int page = 1;
 		String strPage = request.getParameter("page");
 		if(strPage != null) {
 			page = Integer.parseInt(strPage);
 		}
+		CodyBoardDao codyBoardDao = new CodyBoardDao();
 		System.out.println(page);
-		List<CodyBoardDto> codyBoardList = codyBoardDao.findAll();
-		codyBoardDao.codyBoardPageNation(page);
-		request.setAttribute("codyBoardList", codyBoardList);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/codyboard/find-all.jsp");
+		List<CodyBoardDto> codyboardList = codyBoardDao.codyBoardPageNation(page);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/codyboard/pagenation.jsp");
 		dispatcher.forward(request, response);
+		
+		
 	}
 
 	/**
