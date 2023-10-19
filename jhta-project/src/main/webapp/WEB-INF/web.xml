@@ -79,7 +79,7 @@
     <servlet-name>MemberLoginProcess</servlet-name>
     <url-pattern>/member/login-process</url-pattern>
   </servlet-mapping>
-    <servlet>
+  <servlet>
     <description></description>
     <display-name>ProductList</display-name>
     <servlet-name>ProductList</servlet-name>
