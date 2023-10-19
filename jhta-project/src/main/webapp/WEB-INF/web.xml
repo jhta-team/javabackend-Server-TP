@@ -109,4 +109,14 @@
     <servlet-name>ProductInsertProcess</servlet-name>
     <url-pattern>/product/insert-process</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ProductDetail</display-name>
+    <servlet-name>ProductDetail</servlet-name>
+    <servlet-class>com.kkj.product.controller.ProductDetail</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProductDetail</servlet-name>
+    <url-pattern>/product/detail</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -23,4 +23,12 @@ public class ProductDao {
 		sqlSession.close();
 		return result;
 	}
+	
+	public ProductDto detailProduct(int id) {
+		ProductDto detailDto = new ProductDto();
+		SqlSession sqlSession = MybatisConnectionFactory.getSqlSession();
+		detailDto = sqlSession.selectOne("detailProduct",id);
+		sqlSession.close();
+		return detailDto;
+	}
 }

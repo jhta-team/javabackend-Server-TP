@@ -21,4 +21,7 @@
 				#{pdtColor}
 	)
 	</insert>
+	<select id="detailProduct" parameterType="int" resultType="ProductDto">
+		SELECT * FROM product where id = #{id}
+	</select>
 </mapper>
