@@ -1,8 +1,8 @@
 package com.kkj.member.controller;
 
-import jakarta.servlet.RequestDispatcher;
+
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
+
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -10,10 +10,11 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Map;
+
 
 import com.kkj.member.dao.MemberDao;
 import com.kkj.member.dto.MemberDto;
+import com.kkj.product.util.ScriptWriter;
 
 
 public class MemberLoginProcess extends HttpServlet {
@@ -35,22 +36,17 @@ public class MemberLoginProcess extends HttpServlet {
 		HttpSession session = request.getSession();
 		String userID = request.getParameter("userID");
 		String userPW = request.getParameter("userPW");
-		String check = request.getParameter("check");
 		System.out.println(userID+"==="+userPW);
+		
 		MemberDao memberDao = new MemberDao();
-		MemberDto loginMemberDto =null;
-		HashMap<String,String> loginMap = new HashMap<String, String>();
-		loginMap.put("userID", userID);
-		loginMap.put("userPW", userPW);
+		MemberDto loginMemberDto =new MemberDto();
+		HashMap<String,String> loginMap = new HashMap();
+		loginMap.put("userID", "123");
+		loginMap.put("userPW", "123");
 		loginMemberDto = memberDao.loginMember(loginMap);
 		System.out.println(loginMemberDto.getUserID());
 		String loggedName = loginMemberDto.getUserName();
-		if(loginMemberDto!=null) {
-			session.setAttribute("loggedID", userID);
-			session.setAttribute("loggedName", loggedName);
-			request.setAttribute("loginMemberDto", loginMemberDto);
-			response.sendRedirect("../index/index");
-		}
+		response.sendRedirect("../index/index");
 		
 	}
 
