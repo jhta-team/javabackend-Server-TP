@@ -19,7 +19,7 @@
   	<select id="nickNameCheck" parameterType="String" resultType="int">
   		select count(*) as count from member where nickName=#{nickName}
   	</select>
-  	<select id="infoMember" parameterType="" resultType="MemberDto">
+  	<select id="infoMember" parameterType="String" resultType="MemberDto">
   		select * from member where userID=#{userID}
   	</select>
 </mapper>

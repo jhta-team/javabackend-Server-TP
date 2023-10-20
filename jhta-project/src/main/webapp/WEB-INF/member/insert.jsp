@@ -375,8 +375,8 @@
       			alert("서버오류입니다");
       			history.back();
       		}
-      	})
+      	});
       	return false;
-      })
+      });
     </script>
 <%@ include file="../include/footer.jsp" %>

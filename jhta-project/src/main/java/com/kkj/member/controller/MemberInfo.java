@@ -35,6 +35,7 @@ public class MemberInfo extends HttpServlet {
 		HttpSession session = request.getSession();
 		String userID = (String)session.getAttribute("loggedID");
 		MemberDto infoMember = memberDao.infoMember(userID);
+		
 		if(infoMember !=null) {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/member/info.jsp");
 			request.setAttribute("infoMember", infoMember);

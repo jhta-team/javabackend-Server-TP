@@ -45,8 +45,12 @@ public class MemberLoginProcess extends HttpServlet {
 		loginMap.put("userPW", "123");
 		loginMemberDto = memberDao.loginMember(loginMap);
 		System.out.println(loginMemberDto.getUserID());
-		String loggedName = loginMemberDto.getUserName();
-		response.sendRedirect("../index/index");
+		if(loginMemberDto !=null) {
+			String loggedName = loginMemberDto.getUserName();
+			session.setAttribute("loggedID", userID);
+			session.setAttribute("loggedName",loggedName);
+			response.sendRedirect("../index/index");
+		}
 		
 	}
 

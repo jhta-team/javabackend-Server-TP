@@ -36,7 +36,13 @@ public class MemberDao {
 	public MemberDto infoMember(String userID) {
 		MemberDto memberDto = null;
 		SqlSession sqlSession = MybatisConnectionFactory.getSqlSession();
-		memberDto = sqlSession.selectOne("nickNameCheck", userID);
+		memberDto = sqlSession.selectOne("infoMember", userID);
 		return memberDto;
+	}
+	public String passwordBlur(String userID) {
+		String passwordBlur = null;
+		SqlSession sqlSession = MybatisConnectionFactory.getSqlSession();
+		passwordBlur = sqlSession.selectOne("passwordBlur", userID);
+		return passwordBlur;
 	}
 }

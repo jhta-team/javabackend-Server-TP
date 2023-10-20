@@ -3,46 +3,36 @@
 <div class="form-signin">
 <table class="table striped">
   <tbody>
-  <c:choose>
-  <c:when test="${not empty infomember.profile}">
+ 
     <tr>
       <th scope="row">profile</th>
-      <td><img src="${pageContext.request.contextPath}/upload/${infomember.profile }" class="profile"></td>
-      				<!--${pageContext.request.contextPath}  --> 
+      <td></td>
+      			
     </tr>
-  </c:when>
-  <c:otherwise>
-    <tr>
-      <th scope="row">profile</th>
-      <td><img src="../images/user.png" class="profile"></td>
-      				<!--${pageContext.request.contextPath}  --> 
-    </tr>
-  </c:otherwise>
-  </c:choose>
-  
+
     <tr>
       <th scope="row">ID</th>
-      <td>${loggedID }</td> 
+      <td>${infoMember.userID}</td> 
     </tr>
     <tr>
       <th scope="row">password</th>
-      <td>${infomember.userPW }</td>  
+      <td></td>  
     </tr>
     <tr>
       <th scope="row">name</th>
-      <td colspan="2">${loggedName }</td>
+      <td colspan="2">${loggedName}</td>
     </tr>
       <tr>
       <th scope="row">postcode</th>
-      <td colspan="2">${infomember.postcode }</td>
+      <td colspan="2"></td>
     </tr>
       <tr>
       <th scope="row">address</th>
-      <td colspan="2">${infomember.address }</td>
+      <td colspan="2"></td>
     </tr>
        <tr>
       <th scope="row">regdate</th>
-      <td colspan="2">${infomember.redate }</td>
+      <td colspan="2"></td>
     </tr>
   </tbody>
 </table>
