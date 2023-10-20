@@ -8,17 +8,29 @@ public class CodyBoardUpdateDto {
 	public void setNo(int no) {
 		this.no = no;
 	}
-	public CodyBoardUpdateDto(int no, String title, String content, int categoryID) {
+
+	private int no;
+	public CodyBoardUpdateDto(int no, String title, String content, int categoryID, String images) {
 		super();
 		this.no = no;
 		this.title = title;
 		this.content = content;
 		this.categoryID = categoryID;
+		this.images = images;
 	}
-	private int no;
+
+	public String getImages() {
+		return images;
+	}
+
+	public void setImages(String images) {
+		this.images = images;
+	}
+
 	private String title;
 	private String content;
 	private int categoryID;
+	private String images;
 	
 	public CodyBoardUpdateDto() {
 		super();

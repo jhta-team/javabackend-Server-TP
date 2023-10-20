@@ -4,6 +4,7 @@
 <div class="container">
 	<form action="../codyboard/update-process" method="post" enctype="multipart/form-data">
 	<input type="hidden" name="no" value="${codyBoard.no }">
+	<input type="hidden" name="userID" value="${codyBoard.userID }">
 	<h2>코디 게시판 수정</h2>
 		<div class="mb-3">
 		  <label for="exampleFormControlInput1" class="form-label">제목</label>
@@ -50,10 +51,14 @@
 		  <label for="formFileDisabled" class="form-label">코디사진</label>
 		  <input class="form-control" type="file" id="codyImage" name="codyImage" placeholder="png,jpg" accept="image/gif, image/jpeg, image/png, image/jpg" value="/Users/junghunmok/Desktop/upload/${codyBoard.images} ">
 		</div>
+		<div>
+			<img src="/upload/${codyBoard.images }" id="prevCodyImage" width="200">
+			<input type="hidden" name="prevCodyImage" value="${codyBoard.images }">
+		</div>
 		
 		<div class="mt-5 mb-5 d-flex justify-content-center">
 				<div class="">
-					<button type="submit" class="btn btn-primary" id="btnSubmit">글작성</button>
+					<button type="submit" class="btn btn-primary" id="btnSubmit">글수정</button>
 					<button type="reset" class="btn btn-secondary">취소</button>
 				</div>
 			</div>

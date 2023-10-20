@@ -40,6 +40,9 @@
 					</tr>
 				</tbody>
 			</table>
+			<div>
+					<img src="/upload/${codyBoard.images }" alt="mdo" >
+			</div>
 			
 			<div>
 				<span>이전글</span>

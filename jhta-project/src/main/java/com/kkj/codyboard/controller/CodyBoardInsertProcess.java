@@ -44,7 +44,7 @@ public class CodyBoardInsertProcess extends HttpServlet {
 		int codyCategory = Integer.parseInt(request.getParameter("codyCategory"));
 		String codyContent = request.getParameter("codyBoardContent");
 		
-		String uploadDirectory = "/Users/junghunmok/Desktop/upload";
+		String uploadDirectory = "/Users/junghunmok/upload";
 		String realUploadPath = uploadDirectory;
 		
 		Part codyImage = request.getPart("codyImage");
@@ -53,17 +53,11 @@ public class CodyBoardInsertProcess extends HttpServlet {
 		String prevCodyImage = codyImageArray[1].trim().replace("\"", "");
 		String newCodyImage = "";
 		
-		
-
 		if(!prevCodyImage.isEmpty()) {
 			String userID = "mok119";
 			String firstFileName = prevCodyImage.substring(0, prevCodyImage.lastIndexOf("."));
 			String ext = prevCodyImage.substring(prevCodyImage.lastIndexOf("."));
-			System.out.println("firstFileName =>>>>>>" + firstFileName);
-			System.out.println("ext =>>>>" + ext);
 			newCodyImage = firstFileName + userID + ext;
-			System.out.println(newCodyImage);
-
 			codyImage.write(realUploadPath + File.separator + newCodyImage); 
 		}
 		

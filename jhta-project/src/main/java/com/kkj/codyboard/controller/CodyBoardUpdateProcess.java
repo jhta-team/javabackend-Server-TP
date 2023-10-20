@@ -6,6 +6,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
+
+import java.io.File;
 import java.io.IOException;
 
 import com.kkj.codyboard.dao.CodyBoardDao;
@@ -37,16 +40,26 @@ public class CodyBoardUpdateProcess extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		CodyBoardUpdateDto codyBoardUpdateDto = new CodyBoardUpdateDto();
+		CodyBoardImage codyBoadImage = new CodyBoardImage();
+		
 		int no = Integer.parseInt(request.getParameter("no"));
+		String userID = request.getParameter("userID");
 		String title = request.getParameter("codyBoardTitle");
 		String content = request.getParameter("codyBoardContent");
 		int categoryID = Integer.parseInt(request.getParameter("codyCategory"));
-		System.out.println("asdasdss");
-		CodyBoardUpdateDto codyBoardUpdateDto = new CodyBoardUpdateDto();
+		String prevImage = request.getParameter("prevCodyImage");
+		
+		
+		String updateImage =  codyBoadImage.update(request, response, prevImage, userID);
+		
+		
 		codyBoardUpdateDto.setNo(no);
 		codyBoardUpdateDto.setTitle(title);
 		codyBoardUpdateDto.setContent(content);
 		codyBoardUpdateDto.setCategoryID(categoryID);
+		codyBoardUpdateDto.setImages(prevImage);
+		
 		
 		CodyBoardDao codyBoardDao = new CodyBoardDao();
 		int result = codyBoardDao.update(codyBoardUpdateDto);
