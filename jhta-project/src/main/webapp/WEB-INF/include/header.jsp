@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 <script src="../js/jquery-3.7.1.min.js"></script>
 <script src="../js/bootstrap.bundle.min.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <link href="../css/bootstrap.min.css" rel="stylesheet" />
 <link rel="stylesheet" href="../css/layout.css">
 
@@ -32,11 +33,21 @@
         <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
           <input type="search" class="form-control form-control-dark text-bg-dark" placeholder="Search..." aria-label="Search">
         </form>
-
-        <div class="text-end">
-          <button type="button" class="btn btn-outline-light me-2" onclick="location.href='../member/login'">Login</button>
-          <button type="button" class="btn btn-warning" onclick="location.href='../member/insert'" >Sign-up</button>
-        </div>
+		<c:choose>
+		<c:when test="${loggedName ==null }">
+			<div class="text-end">
+         	 <button type="button" class="btn btn-outline-light me-2" onclick="location.href='../member/login'">Login</button>
+         	 <button type="button" class="btn btn-warning" onclick="location.href='../member/insert'" >Sign-up</button>
+        	</div>
+		</c:when>
+		<c:otherwise>
+			<div class="text-end">
+         	 <button type="button" class="btn btn-outline-light me-2" onclick="location.href='../member/info'">${loggedName}</button>
+         	 <button type="button" class="btn btn-warning" onclick="location.href='../member/logout'" >Logout</button>
+        	</div>
+		</c:otherwise>
+		</c:choose>
+      
       </div>
     </div>
   </header>

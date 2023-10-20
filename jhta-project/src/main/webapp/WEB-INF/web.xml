@@ -99,4 +99,34 @@
     <servlet-name>ProductListProcess</servlet-name>
     <url-pattern>/product/list-process</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>MemberLogout</display-name>
+    <servlet-name>MemberLogout</servlet-name>
+    <servlet-class>com.kkj.member.controller.MemberLogout</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MemberLogout</servlet-name>
+    <url-pattern>/member/logout</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>MemberInsertProcess</display-name>
+    <servlet-name>MemberInsertProcess</servlet-name>
+    <servlet-class>com.kkj.member.controller.MemberInsertProcess</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MemberInsertProcess</servlet-name>
+    <url-pattern>/member/insert-process</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>MemberSendEmail</display-name>
+    <servlet-name>MemberSendEmail</servlet-name>
+    <servlet-class>com.kkj.member.controller.MemberSendEmail</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MemberSendEmail</servlet-name>
+    <url-pattern>/member/sendEmail</url-pattern>
+  </servlet-mapping>
 </web-app>

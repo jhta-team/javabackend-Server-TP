@@ -15,6 +15,12 @@ public class MemberDao {
 		loginMemberDto = sqlSession.selectOne("loginMember", loginMap);
 		return loginMemberDto;
 	}
+	public int insertMember(MemberDto memberDto){
+		int result=0;
+		SqlSession sqlSession = MybatisConnectionFactory.getSqlSession();
+		result = sqlSession.insert("insertMember", memberDto);
+		return result;
+	}
 	public int idCheckMember(String userID) {
 		int result =0;
 		SqlSession sqlSession = MybatisConnectionFactory.getSqlSession();
