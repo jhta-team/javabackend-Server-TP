@@ -22,6 +22,18 @@
 	)
 	</insert>
 	<select id="detailProduct" parameterType="int" resultType="ProductDto">
-		SELECT * FROM product where id = #{id}
+		SELECT * FROM product where pdtId = #{pdtId}
 	</select>
+	
+	<select id="listImage" parameterType="int" resultType="ImageDto">
+		SELECT i.* FROM product p 
+			RIGHT OUTER JOIN PDT_IMG i
+				ON p.pdtId = i.pdtId
+					WHERE p.pdtid = #{pdtId} 
+	</select>
+	
+	<select id="listImage2" resultType="ImageDto">
+		SELECT * from pdt_img
+	</select>
+	
 </mapper>

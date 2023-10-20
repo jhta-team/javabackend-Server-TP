@@ -24,10 +24,10 @@ public class ProductDao {
 		return result;
 	}
 	
-	public ProductDto detailProduct(int id) {
+	public ProductDto detailProduct(int pdtId) {
 		ProductDto detailDto = new ProductDto();
 		SqlSession sqlSession = MybatisConnectionFactory.getSqlSession();
-		detailDto = sqlSession.selectOne("detailProduct",id);
+		detailDto = sqlSession.selectOne("detailProduct",pdtId);
 		sqlSession.close();
 		return detailDto;
 	}

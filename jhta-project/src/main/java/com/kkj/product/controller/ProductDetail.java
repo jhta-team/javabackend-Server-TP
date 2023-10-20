@@ -8,7 +8,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import com.kkj.product.dao.ImageDao;
 import com.kkj.product.dao.ProductDao;
+import com.kkj.product.dto.ImageDto;
 import com.kkj.product.dto.ProductDto;
 
 public class ProductDetail extends HttpServlet {
@@ -19,12 +21,19 @@ public class ProductDetail extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int id = Integer.parseInt(request.getParameter("id"));
+		int pdtId = Integer.parseInt(request.getParameter("pdtId")); // 쿼리스트링으로 받아온 상품 id값 저장
 		ProductDao detailDao = new ProductDao();
 		ProductDto detailDto = new ProductDto();
-		detailDto = detailDao.detailProduct(id);
-		request.setAttribute("detailDto", detailDto);
+		detailDto = detailDao.detailProduct(pdtId); 
+		request.setAttribute("detailDto", detailDto); //제품상세보기 정보 저장
 		//System.out.println(detailDto.toString());
+		
+		//상품이미지 
+		ImageDao imageDao = new ImageDao();
+		ImageDto imageDto = new ImageDto();
+		imageDto = imageDao.getListImg(pdtId);
+		request.setAttribute("imageDto", imageDto);
+
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/product/productdetail.jsp");
 		dispatcher.forward(request, response);
 	}

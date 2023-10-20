@@ -11,7 +11,7 @@
 		</div>
 		<div class="detail m-3">
 			<div class="detail-info">
-			<p>상품ID: ${detailDto.id}</p>
+			<p>상품ID: ${detailDto.pdtId}</p>
 			<p>상품이름: ${detailDto.pdtName}</p>
 			<p>카테고리: ${detailDto.pdtCty}</p>
 			<p>가격: ${detailDto.pdtPrice}</p>
@@ -40,12 +40,19 @@
 		<h2>상품 이미지</h2>
 		<div>
 			<img alt="" src="">
+			<p>상품 메인 이미지 : ${imageDto.imgMain }</p>
 		</div>
 		<div>
 			<img alt="" src="">
+			<p>상품 이미지1 : ${imageDto.img1 }</p>
 		</div>
 		<div>
 			<img alt="" src="">
+			<p>상품 이미지2: ${imageDto.img2 }</p>
+		</div>
+		<div>
+			<img alt="" src="">
+			<p>상품 이미지3 : ${imageDto.img3 }</p>
 		</div>
 	</div>
 </div>

@@ -11,7 +11,7 @@
 					<div
 						class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
 						<h3 class="mb-4 display-6 lh-1 fw-bold">${Product.pdtName }</h3>
-						<a href="../product/detail?id=${Product.id }">
+						<a href="../product/detail?pdtId=${Product.pdtId }">
 						<img src="${pageContext.request.contextPath }/upload/${Product.pdtThum}">
 						</a>
 						<ul class="d-flex list-unstyled mt-2">

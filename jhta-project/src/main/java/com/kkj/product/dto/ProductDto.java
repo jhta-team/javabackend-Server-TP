@@ -1,7 +1,7 @@
 package com.kkj.product.dto;
 
 public class ProductDto {
-	int id;
+	int pdtId;
 	String pdtName;
 	String pdtCty;
 	String pdtContent;
@@ -13,11 +13,12 @@ public class ProductDto {
 	String pdtThum;
 	String pdtColor;
 	
-	public int getId() {
-		return id;
+	
+	public int getPdtId() {
+		return pdtId;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setPdtId(int pdtId) {
+		this.pdtId = pdtId;
 	}
 	public String getPdtName() {
 		return pdtName;
@@ -78,20 +79,15 @@ public class ProductDto {
 	}
 	public void setPdtColor(String pdtColor) {
 		this.pdtColor = pdtColor;
-	}
-	
+	}	
 	public ProductDto() {
 		super();
 	}
 	@Override
 	public String toString() {
-		return "ProductDto [id=" + id + ", pdtName=" + pdtName + ", pdtCty=" + pdtCty + ", pdtContent=" + pdtContent
-				+ ", pdtPrice=" + pdtPrice + ", pdtCount=" + pdtCount + ", pdtState=" + pdtState + ", pdtDate="
-				+ pdtDate + ", pdtModDate=" + pdtModDate + ", pdtThum=" + pdtThum + ", pdtColor=" + pdtColor + "]";
-	}
-	
-	
-	
-	
-	
+		return "ProductDto [pdtId=" + pdtId + ", pdtName=" + pdtName + ", pdtCty=" + pdtCty + ", pdtContent="
+				+ pdtContent + ", pdtPrice=" + pdtPrice + ", pdtCount=" + pdtCount + ", pdtState=" + pdtState
+				+ ", pdtDate=" + pdtDate + ", pdtModDate=" + pdtModDate + ", pdtThum=" + pdtThum + ", pdtColor="
+				+ pdtColor + "]";
+	}		
 }
