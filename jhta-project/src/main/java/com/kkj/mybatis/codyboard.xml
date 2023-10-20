@@ -18,5 +18,14 @@
 	<select id="codyBoardPageNation" resultType="CodyBoardDto" parameterType="int">
 	 	SELECT * FROM codyBoard where no >= #{start} and no <![CDATA[<=]]> #{end}
 	</select>
+	
+	<select id="codyBoardFindOne" resultType="CodyBoardDto" parameterType="int">
+		SELECT * FROM CODYBOARD WHERE NO = #{codyBoardNo}
+	</select>
+	
+	<update id="codyBoardUpdate" parameterType="CodyBoardUpdateDto">
+	update codyboard set title=#{title}, content=#{content}, categoryID=#{categoryID}, regDate=sysdate where no=#{no}
+	</update>
+	
 </mapper>
 

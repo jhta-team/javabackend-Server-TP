@@ -8,8 +8,10 @@ public class CodyBoardDto {
 	private int hit;
 	private String regDate; 
 	private int categoryID;
+	private String userID;
 	
-	public CodyBoardDto(int no, String title, String content, String images, int hit, String regDate, int categoryID) {
+	public CodyBoardDto(int no, String title, String content, String images, int hit, String regDate, int categoryID,
+			String userID) {
 		super();
 		this.no = no;
 		this.title = title;
@@ -18,7 +20,18 @@ public class CodyBoardDto {
 		this.hit = hit;
 		this.regDate = regDate;
 		this.categoryID = categoryID;
+		this.userID = userID;
 	}
+
+	public String getUserID() {
+		return userID;
+	}
+
+	public void setUserID(String userID) {
+		this.userID = userID;
+	}
+
+	
 	
 	@Override
 	public String toString() {

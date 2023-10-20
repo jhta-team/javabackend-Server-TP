@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 
 import com.kkj.codyboard.dto.CodyBoardDto;
+import com.kkj.codyboard.dto.CodyBoardUpdateDto;
 import com.kkj.codyboard.dto.PageNationDto;
 import com.kkj.mybatis.MybatisConnectionFactory;
 
@@ -25,6 +26,14 @@ public class CodyBoardDao {
 		SqlSession sqlSession = MybatisConnectionFactory.getSqlSession();
 		codyBoardList = sqlSession.selectList("findAllCodyBoard");
 		return codyBoardList;
+	}
+	
+	public CodyBoardDto findOne(int codyBoardNo) {
+		CodyBoardDto codyBoardDto = new CodyBoardDto();
+		SqlSession sqlSession = MybatisConnectionFactory.getSqlSession();
+		codyBoardDto = sqlSession.selectOne("codyBoardFindOne", codyBoardNo);
+		return codyBoardDto;
+		
 	}
 	
 	public int codyBoardCount() {
@@ -47,6 +56,13 @@ public class CodyBoardDao {
 		return codyBoardList;
 		
 		
+	}
+	
+	public int update(CodyBoardUpdateDto codyBoardUpdateDto) {
+		int result = 0;
+		SqlSession sqlSession = MybatisConnectionFactory.getSqlSession();
+		result = sqlSession.update("codyBoardUpdate", codyBoardUpdateDto);
+		return result;
 	}
 
 }

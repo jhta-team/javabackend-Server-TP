@@ -17,7 +17,10 @@
 		  	<c:forEach items="${codyBoardList }" var="codyBoard" varStatus="status">
 		    <tr>
 		      <td>${codyBoard.no }</td>
-		      <td>${codyBoard.title }</td>
+		      <td>
+		      
+		      	<a href="../codyboard/findone?no=${codyBoard.no}">${codyBoard.title }</a>
+		      </td>
 		      <td>${codyBoard.regDate }</td>
 		      <td>${codyBoard.hit }</td>		      
 		    </tr>

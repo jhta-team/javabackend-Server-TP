@@ -139,4 +139,34 @@
     <servlet-name>CodyBoardPageNation</servlet-name>
     <url-pattern>/codyboard/page-nation</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CodyBoardFindOne</display-name>
+    <servlet-name>CodyBoardFindOne</servlet-name>
+    <servlet-class>com.kkj.codyboard.controller.CodyBoardFindOne</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CodyBoardFindOne</servlet-name>
+    <url-pattern>/codyboard/findone</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CodyBoardUpdate</display-name>
+    <servlet-name>CodyBoardUpdate</servlet-name>
+    <servlet-class>com.kkj.codyboard.controller.CodyBoardUpdate</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CodyBoardUpdate</servlet-name>
+    <url-pattern>/codyboard/update</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CodyBoardUpdateProcess</display-name>
+    <servlet-name>CodyBoardUpdateProcess</servlet-name>
+    <servlet-class>com.kkj.codyboard.controller.CodyBoardUpdateProcess</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CodyBoardUpdateProcess</servlet-name>
+    <url-pattern>/codyboard/update-process</url-pattern>
+  </servlet-mapping>
 </web-app>
