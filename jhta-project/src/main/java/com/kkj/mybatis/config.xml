@@ -6,6 +6,7 @@
 	<typeAliases>
 		<typeAlias alias="MemberDto" type="com.kkj.member.dto.MemberDto"/>
 		<typeAlias alias="CodyBoardDto"   type="com.kkj.codyboard.dto.CodyBoardDto" />
+		<typeAlias alias="CodyBoardUpdateDto" type="com.kkj.codyboard.dto.CodyBoardUpdateDto"/>
 		<typeAlias alias="ProductDto" type="com.kkj.product.dto.ProductDto"/>
 	</typeAliases>
 	<environments default="development">
