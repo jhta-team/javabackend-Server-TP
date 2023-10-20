@@ -8,6 +8,7 @@
 		<typeAlias alias="CodyBoardDto"   type="com.kkj.codyboard.dto.CodyBoardDto" />
 		<typeAlias alias="CodyBoardUpdateDto" type="com.kkj.codyboard.dto.CodyBoardUpdateDto"/>
 		<typeAlias alias="ProductDto" type="com.kkj.product.dto.ProductDto"/>
+		<typeAlias alias="ImageDto" type="com.kkj.product.dto.ImageDto"/>
 	</typeAliases>
 	<environments default="development">
 		<environment id="development">
