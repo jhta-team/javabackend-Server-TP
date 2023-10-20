@@ -6,6 +6,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -30,8 +32,10 @@ public class MemberLoginProcess extends HttpServlet {
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
 		String userID = request.getParameter("userID");
 		String userPW = request.getParameter("userPW");
+		String check = request.getParameter("check");
 		System.out.println(userID+"==="+userPW);
 		MemberDao memberDao = new MemberDao();
 		MemberDto loginMemberDto =null;
@@ -40,8 +44,11 @@ public class MemberLoginProcess extends HttpServlet {
 		loginMap.put("userPW", userPW);
 		loginMemberDto = memberDao.loginMember(loginMap);
 		System.out.println(loginMemberDto.getUserID());
-		request.setAttribute("loginMemberDto", loginMemberDto);
+		String loggedName = loginMemberDto.getUserName();
 		if(loginMemberDto!=null) {
+			session.setAttribute("loggedID", userID);
+			session.setAttribute("loggedName", loggedName);
+			request.setAttribute("loginMemberDto", loginMemberDto);
 			response.sendRedirect("../index/index");
 		}
 		

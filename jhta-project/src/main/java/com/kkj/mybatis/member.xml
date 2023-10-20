@@ -7,7 +7,11 @@
 	<select id="loginMember" parameterType="HashMap" resultType="MemberDto">
   		select * from member where userID= #{userID} and userPW = #{userPW}
   	</select>
-  	
+  	<insert id="insertMember" parameterType="MemberDto" >
+  		insert into member values(#{userID},#{userPW},#{userName},#{gender},
+  		#{address},#{detailAddress},#{postCode},#{email},#{mobileTelcom},#{tel},
+  		#{profile},#{nickName},sysdate,3) 
+  	</insert>
   	<select id="idCheck" parameterType="String" resultType="int">
   		select count(*) as count from member where userID=#{userID}
   	</select>
