@@ -5,5 +5,23 @@
  <mapper namespace="com.kkj.mybatis">
  	<select id="listProduct" resultType="ProductDto">
 	SELECT * FROM product
-	</select>	
+	</select>
+	<insert id="insertProduct" parameterType="ProductDto">
+	INSERT INTO product values(
+				seq_product.nextval,
+				#{pdtName},
+				#{pdtCty},
+				#{pdtContent},
+				#{pdtPrice},
+				#{pdtCount},
+				default,
+				default,
+				null,
+				#{pdtThum},
+				#{pdtColor}
+	)
+	</insert>
+	<select id="detailProduct" parameterType="int" resultType="ProductDto">
+		SELECT * FROM product where id = #{id}
+	</select>
 </mapper>
