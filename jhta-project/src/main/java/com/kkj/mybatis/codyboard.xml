@@ -24,7 +24,7 @@
 	</select>
 	
 	<update id="codyBoardUpdate" parameterType="CodyBoardUpdateDto">
-	update codyboard set title=#{title}, content=#{content}, categoryID=#{categoryID}, regDate=sysdate where no=#{no}
+	update codyboard set title=#{title}, content=#{content}, categoryID=#{categoryID}, regDate=sysdate, images=#{images} where no=#{no}
 	</update>
 	
 </mapper>
