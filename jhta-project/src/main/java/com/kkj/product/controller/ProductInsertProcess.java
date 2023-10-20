@@ -80,6 +80,23 @@ public class ProductInsertProcess extends HttpServlet {
 		String pdtThum = folder+"/"+newFileName;
 		System.out.println(pdtThum);
 		productDto.setPdtThum(pdtThum);
+		
+		
+		//파일 이미지들		
+		Part imgs = request.getPart("pdtImage");
+		System.out.println(imgs);
+		String imgsHeader = imgs.getHeader("Content-disposition");
+		System.out.println(imgsHeader);
+		//String partArray[] = partHeader.split("filename=");
+		//String originalFileName = partArray[1].trim().replace("\"", "");
+		//String newFileName = "";		
+		//String folder = "";		
+		//Date now = new Date();
+		//SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
+		//folder = simpleDateFormat.format(now);
+		//File dir = new File(realUploadPath+File.separator+folder);
+		
+		
 		//Dao 객체 생성 후 정의된 상품 등록 메서드 실행
 		ProductDao productDao = new ProductDao();		
 		int result = productDao.insertProduct(productDto);
