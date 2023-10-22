@@ -40,8 +40,8 @@
 		</form>
 		
 		<div class="d-flex justify-content-center mt- mb-5">
-			<c:forEach var="i" begin="0" end="${10}">
-				<p><a href="../codyboard/page-nation?page=${i+1}" class="link-danger">${i + 1}</a></p>
+			<c:forEach var="i" begin="1" end="${codyBoardPage }">
+				<p><a href="../codyboard/page-nation?page=${i}" class="link-danger">${i}</a></p>
 			</c:forEach>
 		</div>
 			

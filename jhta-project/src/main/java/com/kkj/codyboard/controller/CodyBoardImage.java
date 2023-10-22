@@ -9,21 +9,36 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 
 public class CodyBoardImage {
-	public String update(HttpServletRequest request, HttpServletResponse response, String prevImage, String userID) throws IOException {
-		System.out.println("여기는다른 서블릿안입니다.!!!");
-		Part updateImagePart;
+	public String upload(HttpServletRequest request, HttpServletResponse response, String uploadImage) {
+		String newCodyImage = "";
+		try {
+			Part codyImage = request.getPart("codyImage");
+			if(!uploadImage.isEmpty()) {
+				String userID = "mok119";
+				String uploadDirectory = "/Users/junghunmok/upload";
+				String firstFileName = uploadImage.substring(0, uploadImage.lastIndexOf("."));
+				String ext = uploadImage.substring(uploadImage.lastIndexOf("."));
+				newCodyImage = userID + ext;
+				codyImage.write(uploadDirectory + File.separator + newCodyImage); 
+			}
+		} catch (IOException | ServletException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return newCodyImage;
+	}
+	
+	
+	
+	
+	public String update(HttpServletRequest request, HttpServletResponse response, String prevImage, String userID, String checkImage) throws IOException {
 		String saveUpdateImage ="";
 		try {
-			updateImagePart = request.getPart("codyImage");
-			
-			String updateImageHeader = updateImagePart.getHeader("Content-disposition");
-			String updateImageArr[] = updateImageHeader.split("filename=");
-			String checkImage = updateImageArr[1].trim().replace("\"", "");
-			
+			Part updateImagePart = request.getPart("codyImage");
+			String imageType = checkImage.substring(checkImage.lastIndexOf("."));
 			if(!checkImage.isEmpty()) {
 				String uploadDirectory = "/Users/junghunmok/upload";
-				saveUpdateImage = userID+ "_1";
-				System.out.println("저장될 이미지 이름=>>>" + saveUpdateImage);
+				saveUpdateImage = userID+ "_1" + imageType;
 				File oldImage = new File(uploadDirectory + File.separator + prevImage);
 				
 				oldImage.delete();
@@ -31,9 +46,7 @@ public class CodyBoardImage {
 				
 			}
 			
-			System.out.println("여기는다른 서블릿안입니다.!!!");
 		} catch (IOException | ServletException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return saveUpdateImage;

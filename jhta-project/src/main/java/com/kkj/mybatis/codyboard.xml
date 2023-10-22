@@ -4,7 +4,7 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.mybatis.example.BlogMapper">
 	<insert id="insertCody" parameterType="CodyBoardDto">
-		INSERT INTO codyboard values(seq_cody.NEXTVAL, #{title}, #{content}, #{images}, 0, sysdate, #{categoryID})
+		INSERT INTO codyboard values(seq_cody.NEXTVAL, #{title}, #{content}, #{images}, 0, sysdate, #{categoryID}, #{userID})
 	</insert>
 	
 	<select id="findAllCodyBoard" resultType="CodyBoardDto">
@@ -26,6 +26,5 @@
 	<update id="codyBoardUpdate" parameterType="CodyBoardUpdateDto">
 	update codyboard set title=#{title}, content=#{content}, categoryID=#{categoryID}, regDate=sysdate, images=#{images} where no=#{no}
 	</update>
-	
 </mapper>
 

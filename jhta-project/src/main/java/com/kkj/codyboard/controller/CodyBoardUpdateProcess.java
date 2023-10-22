@@ -49,16 +49,22 @@ public class CodyBoardUpdateProcess extends HttpServlet {
 		String content = request.getParameter("codyBoardContent");
 		int categoryID = Integer.parseInt(request.getParameter("codyCategory"));
 		String prevImage = request.getParameter("prevCodyImage");
-		
-		
-		String updateImage =  codyBoadImage.update(request, response, prevImage, userID);
-		
+		Part updateImagePart = request.getPart("codyImage");
+		String updateImageHeader = updateImagePart.getHeader("Content-disposition");
+		String updateImageArr[] = updateImageHeader.split("filename=");
+		String checkImage = updateImageArr[1].trim().replace("\"", "");
+		String realImage = prevImage; 
+		if(!checkImage.isEmpty()) {
+			String updateImage =  codyBoadImage.update(request, response, prevImage, userID, checkImage);
+			realImage = updateImage;
+		}
+		 
 		
 		codyBoardUpdateDto.setNo(no);
 		codyBoardUpdateDto.setTitle(title);
 		codyBoardUpdateDto.setContent(content);
 		codyBoardUpdateDto.setCategoryID(categoryID);
-		codyBoardUpdateDto.setImages(prevImage);
+		codyBoardUpdateDto.setImages(realImage);
 		
 		
 		CodyBoardDao codyBoardDao = new CodyBoardDao();

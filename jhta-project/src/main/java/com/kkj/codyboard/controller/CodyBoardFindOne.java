@@ -32,10 +32,14 @@ public class CodyBoardFindOne extends HttpServlet {
 		CodyBoardDao codyBoardDao = new CodyBoardDao();
 		CodyBoardDto codyBoardDto = new CodyBoardDto();
 		int codyBoardNo = Integer.parseInt(request.getParameter("no"));
+		
+		
 		codyBoardDto = codyBoardDao.findOne(codyBoardNo);
 		request.setAttribute("codyBoard", codyBoardDto);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/codyboard/findone.jsp");
 		dispatcher.forward(request, response);
+		
+		
 	}
 
 	/**
