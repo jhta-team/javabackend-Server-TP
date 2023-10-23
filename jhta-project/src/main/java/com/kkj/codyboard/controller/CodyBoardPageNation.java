@@ -35,10 +35,12 @@ public class CodyBoardPageNation extends HttpServlet {
 		if(strPage != null) {
 			page = Integer.parseInt(strPage);
 		}
+		
 		CodyBoardDao codyBoardDao = new CodyBoardDao();
-		System.out.println(page);
+		int pageCount = (int)Math.ceil(codyBoardDao.codyBoardCount()/10.0);
 		List<CodyBoardDto> codyboardList = codyBoardDao.codyBoardPageNation(page);
 		request.setAttribute("codyBoardList", codyboardList);
+		request.setAttribute("codyBoardPage", pageCount);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/codyboard/pagenation.jsp");
 		dispatcher.forward(request, response);
 		

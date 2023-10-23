@@ -52,7 +52,6 @@ public class CodyBoardDao {
 		pageNationDto.setEnd(end);
 		SqlSession sqlSession = MybatisConnectionFactory.getSqlSession();
 		codyBoardList = sqlSession.selectList("codyBoardPageNation", pageNationDto);
-		System.out.println(codyBoardList);
 		return codyBoardList;
 		
 		

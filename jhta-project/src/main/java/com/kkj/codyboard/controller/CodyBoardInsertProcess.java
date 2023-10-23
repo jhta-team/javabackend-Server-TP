@@ -1,5 +1,6 @@
 package com.kkj.codyboard.controller;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -44,22 +45,20 @@ public class CodyBoardInsertProcess extends HttpServlet {
 		int codyCategory = Integer.parseInt(request.getParameter("codyCategory"));
 		String codyContent = request.getParameter("codyBoardContent");
 		
-		String uploadDirectory = "/Users/junghunmok/upload";
-		String realUploadPath = uploadDirectory;
-		
+		CodyBoardImage codyBoardImage = new CodyBoardImage();
 		Part codyImage = request.getPart("codyImage");
 		String codyImageHeader = codyImage.getHeader("Content-disposition");
 		String codyImageArray[] = codyImageHeader.split("filename=");
-		String prevCodyImage = codyImageArray[1].trim().replace("\"", "");
-		String newCodyImage = "";
 		
-		if(!prevCodyImage.isEmpty()) {
-			String userID = "mok119";
-			String firstFileName = prevCodyImage.substring(0, prevCodyImage.lastIndexOf("."));
-			String ext = prevCodyImage.substring(prevCodyImage.lastIndexOf("."));
-			newCodyImage = firstFileName + userID + ext;
-			codyImage.write(realUploadPath + File.separator + newCodyImage); 
-		}
+
+		
+		String uploadCodyImage = codyImageArray[1].trim().replace("\"", "");
+		String newCodyImage = codyBoardImage.upload(request,response, uploadCodyImage);
+		
+		System.out.println(codyImageHeader);
+		System.out.println(codyImageArray[1]);
+		
+
 		
 
 		CodyBoardDto codyBoardDto = new CodyBoardDto();
@@ -68,10 +67,14 @@ public class CodyBoardInsertProcess extends HttpServlet {
 		codyBoardDto.setCategoryID(codyCategory);
 		codyBoardDto.setContent(codyContent);
 		codyBoardDto.setImages(newCodyImage);
+		codyBoardDto.setUserID("mok119");
 		
 	
 		int result = codyBoardDao.insert(codyBoardDto);
 		if(result > 0) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/codyboard/pagenation.jsp");
+			dispatcher.forward(request, response);
+			
 			System.out.println("성공하였습니다.");
 		}else {
 			System.out.println("실패하였습니다.");
