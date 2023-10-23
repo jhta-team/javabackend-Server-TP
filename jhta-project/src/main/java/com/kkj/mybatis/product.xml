@@ -36,7 +36,4 @@
 		SELECT * from pdt_img
 	</select>
 	
-	<insert id="inserImage" parameterType="ImageDao">
-	</insert>
-	
 </mapper>

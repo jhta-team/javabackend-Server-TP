@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="org.mybatis.example.BlogMapper">
+	<insert id="insertCbReply" parameterType="CbReplyDto">
+		insert into cbreply VALUES(seq_cbreply.nextval, #{replyUserID}, #{reply}, sysdate, #{codyBoardNo}, #{cbCommentNo})
+	</insert>
+</mapper>
