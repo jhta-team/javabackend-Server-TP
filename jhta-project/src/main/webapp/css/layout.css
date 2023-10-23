@@ -3,8 +3,12 @@
 	padding-top: 100px;
 	min-height: 500px;
 }
-
-
+.left {
+	width: 50%;
+}
+.right{
+	width: 50%;
+}
 .step:before {
 	content:"\F132";
 	display:inline-block;
