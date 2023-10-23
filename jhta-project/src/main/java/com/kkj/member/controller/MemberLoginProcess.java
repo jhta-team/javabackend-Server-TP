@@ -14,6 +14,7 @@ import java.util.HashMap;
 
 import com.kkj.member.dao.MemberDao;
 import com.kkj.member.dto.MemberDto;
+import com.kkj.product.util.CookieManager;
 import com.kkj.product.util.ScriptWriter;
 
 
@@ -36,20 +37,30 @@ public class MemberLoginProcess extends HttpServlet {
 		HttpSession session = request.getSession();
 		String userID = request.getParameter("userID");
 		String userPW = request.getParameter("userPW");
+		String check = request.getParameter("check");
 		System.out.println(userID+"==="+userPW);
 		
 		MemberDao memberDao = new MemberDao();
-		MemberDto loginMemberDto =new MemberDto();
+		MemberDto loginMember =new MemberDto();
 		HashMap<String,String> loginMap = new HashMap();
-		loginMap.put("userID", "123");
-		loginMap.put("userPW", "123");
-		loginMemberDto = memberDao.loginMember(loginMap);
-		System.out.println(loginMemberDto.getUserID());
-		if(loginMemberDto !=null) {
-			String loggedName = loginMemberDto.getUserName();
+		loginMap.put("userID", userID);
+		loginMap.put("userPW", userPW);
+		loginMember = memberDao.loginMember(loginMap);
+		if(loginMember !=null) {
+			String loggedName = loginMember.getUserName();
 			session.setAttribute("loggedID", userID);
 			session.setAttribute("loggedName",loggedName);
+			session.setAttribute("loggedMember", loginMember);
+			if(check !=null) {
+				CookieManager.createCookie(response, "cookieID", userID, 60*60*24);
+				String cookieID = CookieManager.readCookie(request, "cookieID");
+				request.setAttribute("cookieID", cookieID);
+			}else {
+				CookieManager.deleteCookie(response, "cookieID");
+			}
 			response.sendRedirect("../index/index");
+		}else {
+			ScriptWriter.alertAndBack(response, "아이디와 비밀번호를 확인해주세요");
 		}
 		
 	}

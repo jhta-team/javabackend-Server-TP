@@ -35,7 +35,6 @@
             </div>
           </div>
         </div>
-
         <div class="row d-flex justify-content-center">
           <div class="col-6">
             <div class="mb-3">
@@ -116,11 +115,13 @@
             <div class="mb-3">
               <label for="mobile" class="form-label">통신사</label>
 				<select id="mobile" class="form-control" name="mobileTelcom">
-    				<option value="untitled" selected>mobileTelcom</option> 
-    				<option value="LG">LGU+</option>
-    				<option value="SKT">SKT</option>
-    				<option value="KT" >KT</option>
-    				<option value="">알뜰폰</option>
+    				<option  id="telcom"value="untitled" selected>통신사 선택</option> 
+    				<option id="telcom" value="LG">LGU+</option>
+    				<option id="telcom" value="SKT">SKT</option>
+    				<option id="telcom" value="KT" >KT</option>
+    				<option id="telcom" value="alLG" >알뜰폰 LG</option>
+    				<option id="telcom" value="alSKT" >알뜰폰 SKT</option>
+    				<option id="telcom" value="alKT" >알뜰폰 KT</option>
 				</select>        
             </div>
           </div>
