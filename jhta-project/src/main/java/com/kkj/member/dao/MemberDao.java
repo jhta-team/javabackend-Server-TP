@@ -27,4 +27,22 @@ public class MemberDao {
 		result = sqlSession.selectOne("idCheck", userID);
 		return result;
 	}
+	public int nickNameCheckMember(String nickName) {
+		int result =0;
+		SqlSession sqlSession = MybatisConnectionFactory.getSqlSession();
+		result = sqlSession.selectOne("nickNameCheck", nickName);
+		return result;
+	}
+	public MemberDto infoMember(String userID) {
+		MemberDto memberDto = null;
+		SqlSession sqlSession = MybatisConnectionFactory.getSqlSession();
+		memberDto = sqlSession.selectOne("infoMember", userID);
+		return memberDto;
+	}
+	public String passwordBlur(String userID) {
+		String passwordBlur = null;
+		SqlSession sqlSession = MybatisConnectionFactory.getSqlSession();
+		passwordBlur = sqlSession.selectOne("passwordBlur", userID);
+		return passwordBlur;
+	}
 }

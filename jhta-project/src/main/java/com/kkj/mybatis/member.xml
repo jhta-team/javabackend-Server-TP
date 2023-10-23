@@ -7,6 +7,7 @@
 	<select id="loginMember" parameterType="HashMap" resultType="MemberDto">
   		select * from member where userID= #{userID} and userPW = #{userPW}
   	</select>
+  	
   	<insert id="insertMember" parameterType="MemberDto" >
   		insert into member values(#{userID},#{userPW},#{userName},#{gender},
   		#{address},#{detailAddress},#{postCode},#{email},#{mobileTelcom},#{tel},
@@ -14,5 +15,11 @@
   	</insert>
   	<select id="idCheck" parameterType="String" resultType="int">
   		select count(*) as count from member where userID=#{userID}
+  	</select>
+  	<select id="nickNameCheck" parameterType="String" resultType="int">
+  		select count(*) as count from member where nickName=#{nickName}
+  	</select>
+  	<select id="infoMember" parameterType="String" resultType="MemberDto">
+  		select * from member where userID=#{userID}
   	</select>
 </mapper>

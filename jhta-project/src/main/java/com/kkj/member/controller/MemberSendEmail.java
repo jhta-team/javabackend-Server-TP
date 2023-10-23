@@ -21,8 +21,8 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import com.google.gson.Gson;
-import com.kkj.util.RandomEmailCheck;
-import com.kkj.util.SMTPAuthenticator;
+import com.kkj.member.util.RandomEmailCheck;
+import com.kkj.member.util.SMTPAuthenticator;
 
 /**
  * Servlet implementation class MemberSendEmail
@@ -42,12 +42,25 @@ public class MemberSendEmail extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+	}
+	
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int number =0;
+		RandomEmailCheck check = new RandomEmailCheck();
+		number = check.createRandomNum();
 		HttpSession session = request.getSession();
 		String to_email = request.getParameter("email"); //받는 이메일 주소
 		System.out.println(to_email);
 		String from_email ="kimhg1103@naver.com";
 		String subject = "본인 인증을 위한 인증번호 메일입니다.";
-		String content = "안녕하세요 본인인증번호는 ==";
+		String content = "<h3>" + "요청하신 인증 번호" + "</h3> \r"+"<h2>"+number+"</h2> \r"
+				+"해당 인증번호를 입력해주세요";
+		
 		Properties p = new Properties(); // 정보를 담을 객체
 		p.put("mail.smtp.host","smtp.naver.com"); //smtp.naver.com 네이버 SMTP
 		p.put("mail.smtp.port", "465");
@@ -59,10 +72,9 @@ public class MemberSendEmail extends HttpServlet {
 		p.put("mail.smtp.socketFactory.fallback", "false");
 		p.put("mail.smtp.ssl.protocols", "TLSv1.2");
 		// SMTP 서버에 접속하기 위한 정보들
-		int number =0;
+		
 		try{
-			RandomEmailCheck check = new RandomEmailCheck();
-			number = check.createRandomNum();
+			
 		    Authenticator auth = new SMTPAuthenticator();
 		    Session ses = Session.getInstance(p, auth);     
 		    ses.setDebug(true); 
@@ -75,7 +87,7 @@ public class MemberSendEmail extends HttpServlet {
 		    Address toAddr = new InternetAddress(to_email);
 		    msg.addRecipient(Message.RecipientType.TO, toAddr); // 받는 사람 
 		    
-		    msg.setContent(content+number+"입니다.", "text/html;charset=UTF-8"); // 내용과 인코딩
+		    msg.setContent(content, "text/html;charset=UTF-8"); // 내용과 인코딩
 		    Transport.send(msg); // 전송
 		    
 		    HashMap<String, Integer> map = new HashMap();
@@ -89,15 +101,6 @@ public class MemberSendEmail extends HttpServlet {
 		    e.printStackTrace();
 		    return;
 		}
-	}
-	
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
 	}
 
 }

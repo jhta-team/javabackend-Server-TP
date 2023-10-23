@@ -156,8 +156,9 @@
 
     <script> 
     	let isIDCheck=false;
-    	let isNickName=false;
-  	
+    	let isNickNameCheck=false;
+  		var emailCode = "";
+  		
     	  function emailCheck(){
     	    	let emailPattern = /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
     	    	let email = $("#email").val().trim();
@@ -175,56 +176,34 @@
     	    	console.log("dsa");
     	    $.ajax({
     	    	url:"../member/sendEmail",
+    	    	type:"POST",
     	    	data:{email:$("#email").val()},
     	    	success:function(data){
     	    		console.log("data : " + data.checkNum);
     	    		$("#checkNum").attr('disabled',false)
+    	    		emailCode = data.checkNum;
     	    		alert("인증번호가 발송되었습니다.");
     	    	}
     	    });		
     	    	return false;
     	    })
-    $("#btnSubmitAjax").on("click",function(){
-    	$.ajax({
-    		url:"../member/insert-member-process.jsp",
-    		data: $("#joinform").serialize(),// form 안에 있는 모든 데이터 값을 한번에 보낼 수 있는 장점이 있다.
-    		         //serialize()중요함       //무조건 알아 두자!! 
-    		success:function(response) {
-    			alert("가입하셨습니다");
-    			$(location).attr("href","../member/login.jsp"); //location을 이용한 주소이동
-    			// == location.href="../member/login.jsp"
-    			
-    		},
-    		fail:function(){
-    			alert("서버오류입니다");
-    			history.back();
-    		}
-    	})
-    	return false;
-    })
-    
-     // 우편주소 
-      function postcode() {
-        new daum.Postcode({
-          oncomplete: function (data) {
-         
-            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-            const roadAddr = data.roadAddress; // 도로명 주소 변수
-            const extraRoadAddr = ""; // 참고 항목 변수
-
-          
-            document.querySelector("#postCode").value = data.zonecode;
-            document.querySelector("#address").value = roadAddr;
-            
-          },
-        }).open();
-      }
-
-      $("#btnPostcode").on("click", function () {
-        postcode();
-        return false;
-      });
-
+    	   $("#btnCheck").on("click",function(){
+    		   if($("#checkNum").val() != emailCode){
+    			   alert("인증번호가 다릅니다. 다시 입력해주세요");
+    			   $("#checkNum").val("");
+    			   $("#checkNum").focus();
+    		   }else{
+    			   if($("#checkNum").val()==""){
+    				   alert("공란입니다. 이메일 인증을 받으세요");
+    				   $("#checkNum").focus();
+    			   }else{
+    				   alert("인증번호 확인 되었습니다.");
+        			   $("#checkNum").attr("readonly",true);
+    			   } 
+    		   }
+    		   return false;
+    	   }) 
+    	   
       $("#btnSubmit").on("click", function (e) {   //document.querySelector
         if ($("#userID").val().trim() === "") {    // val: value, trim : 공백
           $("#userID").val("");
@@ -251,12 +230,14 @@
             $("#userPW02").focus();
             $(".invalid-feedback").show();
             $(".invalid-feedback").text("이름을 입력해주세요");
-            return false;
-          }
-        else if(!isIDCheck){
+            return false;          
+        }else if(!isIDCheck){
         	 alert("아이디 중복 체크해주세요");
         	 return false;
-        }
+        }else if(!isNickNameCheck){
+       	 	alert("닉네임 중복 체크해주세요");
+    	 	return false;
+    }
       });
       $("#userID").on("keyup" , function(){
     	  $(".invalid-feedback").hide();
@@ -292,7 +273,7 @@
         						  if(useID){
           					  		$("#userID").attr("readonly",false);
           					  		isIDCheck = true;
-          					  	``}
+          					  		}
         						  }else{
         							  alert("공란입니다. 다시입력해주세여");
         							  $("#userID").focus();
@@ -306,22 +287,28 @@
       });
       $("#btnNickNameCheck").on("click", function(){
     	  $.ajax({
-    		  url:"../member/nickName-check",
-    		  data:{nickName :$("#nickName").val()},
-    		  sucess : function(data){
+    		  url:"../member/nickNameCheck",
+    		  data:{nickName:$("#nickName").val()},
+    		  success : function(data){
+    			  console.log(data);
     			  if(data.count>0){
     				  alert("중복된 닉네임입니다.");
     				  $("#nickName").val("");
     				  $("#nickName").focus();
     			  }else{
+    				  if($("#nickName").val()!=""){
     				  const nickName = confirm("사용가능한 닉네입니다.")
     				  if(nickName){
-    					  $("#nickName").atter("readonly",false);
+    					  $("#nickName").attr("readonly",false);
     					  isNickNameCheck = true;
     				  }
-    			  }
+    			  		}else{
+					  		alert("공란입니다 입려해주세요");
+					  		$("#nickName").focus();
+				  		}    		  
+    		 		 }
     		  }
-    	  })
+    	  });
     	  return false;
       })
       $("#btnShowPassword").on("click", function(){
@@ -351,6 +338,45 @@
     		  $(".preview").html(`<img src="\${e.target.result}">`);
     	  }
     	  reader.readAsDataURL(file);
-      })
+      });
+      // 우편주소 
+      function postcode() {
+        new daum.Postcode({
+          oncomplete: function (data) {
+         
+            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+            const roadAddr = data.roadAddress; // 도로명 주소 변수
+            const extraRoadAddr = ""; // 참고 항목 변수
+
+          
+            document.querySelector("#postCode").value = data.zonecode;
+            document.querySelector("#address").value = roadAddr;
+            
+          },
+        }).open();
+      }
+
+      $("#btnPostcode").on("click", function () {
+        postcode();
+        return false;
+      });
+      $("#btnSubmitAjax").on("click",function(){
+      	$.ajax({
+      		url:"../member/insert-member-process.jsp",
+      		data: $("#joinform").serialize(),// form 안에 있는 모든 데이터 값을 한번에 보낼 수 있는 장점이 있다.
+      		         //serialize()중요함       //무조건 알아 두자!! 
+      		success:function(response) {
+      			alert("가입하셨습니다");
+      			$(location).attr("href","../member/login.jsp"); //location을 이용한 주소이동
+      			// == location.href="../member/login.jsp"
+      			
+      		},
+      		fail:function(){
+      			alert("서버오류입니다");
+      			history.back();
+      		}
+      	});
+      	return false;
+      });
     </script>
 <%@ include file="../include/footer.jsp" %>

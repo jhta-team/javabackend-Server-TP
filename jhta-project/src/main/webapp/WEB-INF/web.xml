@@ -199,4 +199,24 @@
     <servlet-name>MemberSendEmail</servlet-name>
     <url-pattern>/member/sendEmail</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>MemberInfo</display-name>
+    <servlet-name>MemberInfo</servlet-name>
+    <servlet-class>com.kkj.member.controller.MemberInfo</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MemberInfo</servlet-name>
+    <url-pattern>/member/info</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>MemberNickNameCheck</display-name>
+    <servlet-name>MemberNickNameCheck</servlet-name>
+    <servlet-class>com.kkj.member.controller.MemberNickNameCheck</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MemberNickNameCheck</servlet-name>
+    <url-pattern>/member/nickNameCheck</url-pattern>
+  </servlet-mapping>
 </web-app>

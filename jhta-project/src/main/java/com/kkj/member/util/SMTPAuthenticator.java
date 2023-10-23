@@ -1,4 +1,4 @@
-package com.kkj.util;
+package com.kkj.member.util;
 
 import javax.mail.PasswordAuthentication;
 import javax.mail.Authenticator;
