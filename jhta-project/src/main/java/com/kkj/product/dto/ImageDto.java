@@ -1,31 +1,20 @@
 package com.kkj.product.dto;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class ImageDto {
 	int imgId;
-	String imgMain;
 	String img1;
 	String img2;
 	String img3;
-	int pdtId; 
-	
-	public int getPdtId() {
-		return pdtId;
-	}
-	public void setPdtId(int pdtId) {
-		this.pdtId = pdtId;
-	}
+	int pdtId; 	
 	
 	public int getImgId() {
 		return imgId;
 	}
 	public void setImgId(int imgId) {
 		this.imgId = imgId;
-	}
-	public String getImgMain() {
-		return imgMain;
-	}
-	public void setImgMain(String imgMain) {
-		this.imgMain = imgMain;
 	}
 	public String getImg1() {
 		return img1;
@@ -45,23 +34,16 @@ public class ImageDto {
 	public void setImg3(String img3) {
 		this.img3 = img3;
 	}
-
-	public ImageDto(int imgId, String imgMain, String img1, String img2, String img3, int pdtId) {
-		super();
-		this.imgId = imgId;
-		this.imgMain = imgMain;
-		this.img1 = img1;
-		this.img2 = img2;
-		this.img3 = img3;
+	public int getPdtId() {
+		return pdtId;
+	}
+	public void setPdtId(int pdtId) {
 		this.pdtId = pdtId;
 	}
+
 	public ImageDto() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
-	@Override
-	public String toString() {
-		return "ImageDto [imgId=" + imgId + ", imgMain=" + imgMain + ", img1=" + img1 + ", img2=" + img2 + ", img3="
-				+ img3 + ", pdtId=" + pdtId + "]";
-	}	
+	
+
 }

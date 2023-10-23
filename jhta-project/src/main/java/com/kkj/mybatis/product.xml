@@ -32,11 +32,15 @@
 					WHERE p.pdtid = #{pdtId} 
 	</select>
 	
-	<select id="listImage2" resultType="ImageDto">
-		SELECT * from pdt_img
-	</select>
-	
-	<insert id="inserImage" parameterType="ImageDao">
+	<insert id="insertImage" parameterType="ImageDto">
+		INSERT INTO PDT_IMG VALUES(
+			seq_image.nextval,
+			#{img1},
+			#{img2},
+			#{img3},
+			seq_product.nextval-1
+		)
 	</insert>
+
 	
 </mapper>

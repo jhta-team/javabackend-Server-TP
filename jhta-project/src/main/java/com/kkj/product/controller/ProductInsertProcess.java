@@ -42,8 +42,7 @@ public class ProductInsertProcess extends HttpServlet {
 		int pdtCount = Integer.parseInt(request.getParameter("pdtCount"));
 		
 		//파일 저장 관련 변수들
-		String uploadDirectory = "C:\\upload";
-		//String realUploadPath = uploadDirectory;		
+		String uploadDirectory = "C:\\upload";	
 		String newFileName = "";		
 		String folderName = "";
 		String imageName = "";
@@ -59,12 +58,12 @@ public class ProductInsertProcess extends HttpServlet {
 		//request 헤더값에서 이미지들 받아와서 저장 하는 코드 	
 		Collection<Part> imgs = request.getParts();
 		ArrayList<String> imgNameArray = new ArrayList<>();
-	
+
 		for(Part part : imgs) {
-			System.out.println(part.getName());
-			if(part.getName().startsWith("pdtImage")){ // 메인 이미지
+			//System.out.println(part.getName());
+			if(part.getName().startsWith("pdtImage") && !part.getSubmittedFileName().isEmpty()){ // 메인 이미지
 				imageName = FileName.getFileName(part); // 이미지 파일 이름(확장자포함) 저장
-				imgNameArray.add(imageName); // 상품 이미지 테이블 저장용 배열에 이미지 파일 이름 각각 저장
+				
 				if(imageName != null && !imageName.isEmpty()) {
 					if(!dir.exists()) {
 						dir.mkdir();
@@ -75,13 +74,14 @@ public class ProductInsertProcess extends HttpServlet {
 					SimpleDateFormat simpleDateFormat02 = new SimpleDateFormat("yyyyMMddHHmmss");
 					String strNow = simpleDateFormat02.format(now);
 					newFileName =  FileName+strNow+ext;
+					imgNameArray.add(newFileName); // 상품 이미지 테이블 저장용 배열에 이미지 파일 이름 각각 저장
 					//System.out.println(newFileName);
 					//파일이름 변경(상품등록 날짜 추가)
 					File oldFile = new File(dir+File.separator+imageName);
 					File newFile = new File(dir+File.separator+newFileName);
 					oldFile.renameTo(newFile);
 				}
-			} else if(part.getName().startsWith("pdtThum")) { //썸네일 
+			} else if(part.getName().startsWith("pdtThum") && !part.getSubmittedFileName().isEmpty()) { //썸네일 
 				thumName = FileName.getFileName(part); // 썸네일 이미지 파일 이름(확장자 포함)
 				if(thumName != null && !thumName.isEmpty()) {
 					if(!dir.exists()) {
@@ -102,99 +102,43 @@ public class ProductInsertProcess extends HttpServlet {
 			}
 		}
 				
-		
-		//썸네일 관련 
-		//Part Thum = request.getPart("pdtThum");
-		
-		//System.out.println(Thum);
-		//String partHeader = Thum.getHeader("Content-disposition");
-		//System.out.println(partHeader);
-		//String partArray[] = partHeader.split("filename=");
-		//String originalFileName = partArray[1].trim().replace("\"", "");		
-		//String originalFileName = FileName.getFileName(Thum);
-		
-		
-		// 썸네일 이미지 업로드 유무 체크
-		/*
-		if(!thumName.isEmpty()) {
-			if(!dir.exists()) {
-				dir.mkdir();
-			}
-			thum.write(dir+File.separator+originalFileName);	// 서버에 파일 작성
-			
-			String firstFileName = originalFileName.substring(0,originalFileName.lastIndexOf("."));
-			String ext = originalFileName.substring(originalFileName.lastIndexOf("."));
-			SimpleDateFormat simpleDateFormat02 = new SimpleDateFormat("yyyyMMddHHmmss");
-			String strNow = simpleDateFormat02.format(now);
-			newFileName =  firstFileName+strNow+ext;
-			//System.out.println(newFileName);
-			//파일이름 변경(상품등록 날짜 추가)
-			File oldFile = new File(dir+File.separator+originalFileName);
-			File newFile = new File(dir+File.separator+newFileName);
-			oldFile.renameTo(newFile);
-		}
-		
-		// 이미지들 업로드 유무 체크
-		if(!fileNameArray.isEmpty()) {
-			if(!dir.exists()) {
-				dir.mkdir();
-			}
-			imgs.write(dir+File.separator+originalFileName);	// 서버에 파일 작성
-			
-			String firstFileName = originalFileName.substring(0,originalFileName.lastIndexOf("."));
-			String ext = originalFileName.substring(originalFileName.lastIndexOf("."));
-			SimpleDateFormat simpleDateFormat02 = new SimpleDateFormat("yyyyMMddHHmmss");
-			String strNow = simpleDateFormat02.format(now);
-			newFileName =  firstFileName+strNow+ext;
-			//System.out.println(newFileName);
-			//파일이름 변경(상품등록 날짜 추가)
-			File oldFile = new File(dir+File.separator+originalFileName);
-			File newFile = new File(dir+File.separator+newFileName);
-			oldFile.renameTo(newFile);
-		}		
-		*/
-		String pdtThum = folderName+"/"+newFileName; // 상품 테이블에 pdtthum 컬럼에 저장되는 값(이미지 주소)
-		//System.out.println(pdtThum);
-		
 
-		//Dto 객체 생성 후 각 변수에 값 할당
+		String pdtThum = folderName+"/"+newFileName; // 상품 테이블에 pdtthum 컬럼에 저장되는 값(이미지 주소)
+		String img1 = (imgNameArray.size()>=1) ? imgNameArray.get(0) : "null";
+		System.out.println(img1);
+		String img2 = (imgNameArray.size()>=2) ? imgNameArray.get(1) : "null";
+		System.out.println(img2);
+		String img3 = (imgNameArray.size()>=3) ? imgNameArray.get(2) : "null";
+		System.out.println(img3);
 		ProductDto productDto = new ProductDto();
+		ProductDao productDao = new ProductDao();
 		productDto.setPdtName(pdtName);
 		productDto.setPdtCty(pdtCty);
 		productDto.setPdtPrice(pdtPrice);
 		productDto.setPdtCount(pdtCount);
 		productDto.setPdtColor(pdtColor);
 		productDto.setPdtContent(pdtContent);
-		productDto.setPdtThum(pdtThum);
+		productDto.setPdtThum(pdtThum);		
+		int resultProduct = productDao.insertProduct(productDto);
 		
-		ImageDto imageDto = new ImageDto();
-		imageDto.getPdtId(pdt)
-
-
-		//System.out.println(imgs);
-		//String imgsHeader = imgs.getHeader("Content-disposition");
-		//System.out.println(imgsHeader);
-		//String partArray[] = partHeader.split("filename=");
-		//String originalFileName = partArray[1].trim().replace("\"", "");
-		//String newFileName = "";		
-		//String folder = "";		
-		//Date now = new Date();
-		//SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
-		//folder = simpleDateFormat.format(now);
-		//File dir = new File(realUploadPath+File.separator+folder);
-		
-		
-		//Dao 객체 생성 후 정의된 상품 등록 메서드 실행
-		ProductDao productDao = new ProductDao();
-		int result = productDao.insertProduct(productDto);
 		ImageDao imageDao = new ImageDao();
+		ImageDto imageDto = new ImageDto();
+		imageDto.setImg1(img1);
+		imageDto.setImg2(img2);
+		imageDto.setImg3(img3);
+		int resultImage = imageDao.insertImg(imageDto);
 		
 		//결과값 처리
-		if(result > 0) {
-			ScriptWriter.alertAndNext(response, "상품등록 완료","../product/list");
+
+		if(resultProduct > 0) {
+			if(resultImage > 0) {
+				ScriptWriter.alertAndNext(response, "상품등록 완료","../product/list");
+			}
+			ScriptWriter.alertAndBack(response, "이미지 등록 오류");
 		} else {
 			ScriptWriter.alertAndBack(response, "등록 오류");
 		}
+
 
 	}
 
