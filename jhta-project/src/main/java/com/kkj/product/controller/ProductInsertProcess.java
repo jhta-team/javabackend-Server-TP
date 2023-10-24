@@ -168,7 +168,6 @@ public class ProductInsertProcess extends HttpServlet {
 		productDto.setPdtThum(pdtThum);
 		
 		ImageDto imageDto = new ImageDto();
-		imageDto.getPdtId(pdt)
 
 
 		//System.out.println(imgs);

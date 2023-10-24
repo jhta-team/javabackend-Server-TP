@@ -11,15 +11,30 @@
   	<insert id="insertMember" parameterType="MemberDto" >
   		insert into member values(#{userID},#{userPW},#{userName},#{gender},
   		#{address},#{detailAddress},#{postCode},#{email},#{mobileTelcom},#{tel},
-  		#{profile},#{nickName},sysdate,3) 
+  		#{profile},#{nickName},sysdate,4) 
   	</insert>
+  	
   	<select id="idCheck" parameterType="String" resultType="int">
   		select count(*) as count from member where userID=#{userID}
   	</select>
+  	
   	<select id="nickNameCheck" parameterType="String" resultType="int">
   		select count(*) as count from member where nickName=#{nickName}
   	</select>
   	<select id="infoMember" parameterType="String" resultType="MemberDto">
   		select * from member where userID=#{userID}
   	</select>
+  	<select id="passwordBlur" parameterType="String" resultType="String">
+  		SELECT RPAD(REPLACE (SUBSTR(USERPW ,1,1),SUBSTR(USERPW ,1,1),'*'),LENGTH(USERPW),'*') AS PASSWORD FROM MEMBER WHERE  userID=#{userID}
+  	</select>
+  	<select id="infoModify" parameterType="HashMap" resultType="MemberDto">
+  		select * from member where userID= #{userID} and userPW = #{userPW}
+  	</select>
+  	<update id="infoUpdateMember" parameterType="MemberDto">
+  		update member set nickName = #{nickName}, postCode = #{postCode},address=#{address}, detailAddress=#{detailAddress},email=#{email},
+  		tel=#{tel}, profile=#{profile}, userName=#{userName} where userID=#{userID}
+  	</update>
+  	<delete id="deleteMember" parameterType="HashMap">
+  		delete from member where userID = #{userID} and userPW = #{userPW}
+  	</delete>
 </mapper>

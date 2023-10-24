@@ -45,4 +45,22 @@ public class MemberDao {
 		passwordBlur = sqlSession.selectOne("passwordBlur", userID);
 		return passwordBlur;
 	}
+	public MemberDto infoModify(HashMap<String,String> modifyMap) {
+		MemberDto loginMemberDto =null;
+		SqlSession sqlSession = MybatisConnectionFactory.getSqlSession();
+		loginMemberDto = sqlSession.selectOne("infoModify", modifyMap);
+		return loginMemberDto;
+	}
+	public int infoUpdateMember(MemberDto memberDto){
+		int result=0;
+		SqlSession sqlSession = MybatisConnectionFactory.getSqlSession();
+		result = sqlSession.update("infoUpdateMember", memberDto);
+		return result;
+	}
+	public int deleteMember(HashMap<String,String> deleteMap){
+		int result=0;
+		SqlSession sqlSession = MybatisConnectionFactory.getSqlSession();
+		result = sqlSession.delete("deleteMember", deleteMap);
+		return result;
+	}
 }
