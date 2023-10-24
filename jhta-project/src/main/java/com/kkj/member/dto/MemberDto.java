@@ -16,7 +16,7 @@ public class MemberDto {
 	private String nickName;
 	private String regdate;
 	private int no;
-	
+
 	public String getUserID() {
 		return userID;
 	}
