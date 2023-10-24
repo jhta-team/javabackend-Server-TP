@@ -1,4 +1,4 @@
-package com.kkj.codyboard.controller;
+package com.kkj.cbcomment.controller;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -7,23 +7,20 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
 import com.kkj.cbcomment.dao.CbCommentDao;
 import com.kkj.cbcomment.dto.CbCommentDto;
-import com.kkj.codyboard.dao.CodyBoardDao;
-import com.kkj.codyboard.dto.CodyBoardDto;
 
 /**
- * Servlet implementation class CodyBoardFindOne
+ * Servlet implementation class CbcommentInsert
  */
-public class CodyBoardFindOne extends HttpServlet {
+public class CbcommentInsert extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CodyBoardFindOne() {
+    public CbcommentInsert() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,21 +29,25 @@ public class CodyBoardFindOne extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		CodyBoardDao codyBoardDao = new CodyBoardDao();
-		CodyBoardDto codyBoardDto = new CodyBoardDto();
+		String userID = request.getParameter("userID");
+		String comment = request.getParameter("comment");
+		int codyBoardNo = Integer.parseInt(request.getParameter("codyBoardNo"));
 		CbCommentDao cbCommentDao = new CbCommentDao();
+		CbCommentDto cbCommentDto = new CbCommentDto();
+		System.out.println(userID + "===" + comment + "=====" + codyBoardNo);
+		cbCommentDto.setUserID(userID);
+		cbCommentDto.setComment(comment);
+		cbCommentDto.setCodyBoardNo(codyBoardNo);
+		cbCommentDao.findAll(codyBoardNo);
 		
-		
-		int codyBoardNo = Integer.parseInt(request.getParameter("no"));
-		
-		codyBoardDto = codyBoardDao.findOne(codyBoardNo);
-		List<CbCommentDto> cbCommentList = cbCommentDao.findAll(codyBoardNo);
-		request.setAttribute("codyBoard", codyBoardDto);
-		request.setAttribute("cbComment", cbCommentList);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/codyboard/findone.jsp");
-		dispatcher.forward(request, response);
-		
-		
+		int result = cbCommentDao.insert(cbCommentDto);
+		if(result > 0) {
+			System.out.println("등록성공!!!");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/codyboard/findone?no="+ request.getParameter("codyBoardNo"));
+			dispatcher.forward(request, response);
+		}else {
+			System.out.println("등록실패!!!");
+		}
 	}
 
 	/**

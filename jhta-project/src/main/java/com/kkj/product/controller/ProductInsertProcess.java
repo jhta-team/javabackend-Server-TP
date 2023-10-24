@@ -95,8 +95,9 @@ public class ProductInsertProcess extends HttpServlet {
 		productDto.setPdtColor(pdtColor);
 		productDto.setPdtContent(pdtContent);
 		productDto.setPdtThum(pdtThum);		
-		
+
 		int resultProduct = productDao.insertProduct(productDto);
+
 		
 		ImageDao imageDao = new ImageDao();
 		ImageDto imageDto = new ImageDto();
