@@ -1,6 +1,5 @@
 package com.kkj.cbreply.controller;
 
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -9,18 +8,17 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import com.kkj.cbreply.dao.CbReplyDao;
-import com.kkj.cbreply.dto.CbReplyDto;
 
 /**
- * Servlet implementation class CbReplyInsert
+ * Servlet implementation class CbReplyDelete
  */
-public class CbReplyInsert extends HttpServlet {
+public class CbReplyDelete extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CbReplyInsert() {
+    public CbReplyDelete() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,31 +27,16 @@ public class CbReplyInsert extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String replyUserID = request.getParameter("replyUserID");
-		String reply = request.getParameter("reply");
-		int codyBoardNo = Integer.parseInt(request.getParameter("codyBoardNo"));
-		int cbCommentNo = Integer.parseInt(request.getParameter("cbCommentNo"));
-		
-		CbReplyDto cbReplyDto = new CbReplyDto();
-		cbReplyDto.setReplyUserID(replyUserID);
-		cbReplyDto.setReply(reply);
-		cbReplyDto.setCbCommentNo(cbCommentNo);
-		cbReplyDto.setCodyBoardNo(codyBoardNo);
-		System.out.println(replyUserID);
-		System.out.println(reply);
-		System.out.println(codyBoardNo);
-		System.out.println(cbCommentNo);
-		
+		int replyNo = Integer.parseInt(request.getParameter("replyNo"));
+		System.out.println(replyNo);
 		CbReplyDao cbReplyDao = new CbReplyDao();
-	
-		int result = cbReplyDao.insert(cbReplyDto);
+		int result = cbReplyDao.delete(replyNo);
 		if(result > 0) {
-			System.out.println("등록성");
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/codyboard/findone?no=" + request.getParameter("codyBoardNo"));
-			dispatcher.forward(request, response);
+			System.out.println("대댓글 삭제 성공");
 		}else {
-			System.out.println("등록실패@@");
+			System.out.println("대댓글 삭제 실패");
 		}
+		
 	}
 
 	/**
