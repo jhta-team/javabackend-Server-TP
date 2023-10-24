@@ -269,4 +269,24 @@
     <servlet-name>MemberDeleteProcess</servlet-name>
     <url-pattern>/member/delete-process</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CbcommentInsert</display-name>
+    <servlet-name>CbcommentInsert</servlet-name>
+    <servlet-class>com.kkj.cbcomment.controller.CbcommentInsert</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CbcommentInsert</servlet-name>
+    <url-pattern>/cbcomment/insert</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CbReplyInsert</display-name>
+    <servlet-name>CbReplyInsert</servlet-name>
+    <servlet-class>com.kkj.cbreply.controller.CbReplyInsert</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CbReplyInsert</servlet-name>
+    <url-pattern>/cbreply/insert</url-pattern>
+  </servlet-mapping>
 </web-app>

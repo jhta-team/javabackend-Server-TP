@@ -31,7 +31,6 @@
 				ON p.pdtId = i.pdtId
 					WHERE p.pdtid = #{pdtId} 
 	</select>
-	
 
 	<insert id="insertImage" parameterType="ImageDto">
 		INSERT INTO PDT_IMG VALUES(
@@ -42,6 +41,4 @@
 			seq_product.nextval-1
 		)
 	</insert>
-
-	
 </mapper>
