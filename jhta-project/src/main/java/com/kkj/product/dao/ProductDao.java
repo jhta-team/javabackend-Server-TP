@@ -31,4 +31,22 @@ public class ProductDao {
 		sqlSession.close();
 		return detailDto;
 	}
+
+	public ProductDto selectOneProduct(int pdtId) {
+		ProductDto pdtDto = null;
+		SqlSession sqlSession = MybatisConnectionFactory.getSqlSession();
+		pdtDto = sqlSession.selectOne("selectOneProduct",pdtId);
+		sqlSession.close();
+		return pdtDto;
+		// TODO Auto-generated method stub
+		
+	}
+
+	public int updateProduct(ProductDto productDto) {
+		int result = 0;
+		SqlSession sqlSession = MybatisConnectionFactory.getSqlSession();
+		result = sqlSession.update("updateProduct",productDto);
+		sqlSession.close();
+		return result;
+	}
 }

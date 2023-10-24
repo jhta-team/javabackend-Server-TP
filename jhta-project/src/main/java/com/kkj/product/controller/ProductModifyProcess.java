@@ -1,6 +1,7 @@
 package com.kkj.product.controller;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -12,7 +13,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 
 import com.kkj.product.dao.ImageDao;
 import com.kkj.product.dao.ProductDao;
@@ -21,19 +21,19 @@ import com.kkj.product.dto.ProductDto;
 import com.kkj.product.util.FileManager;
 import com.kkj.product.util.ScriptWriter;
 
-public class ProductInsertProcess extends HttpServlet {
+public class ProductModifyProcess extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public ProductInsertProcess() {
+    public ProductModifyProcess() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	}
 
-	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//상품등록에서 받아온 값 변수에 저장
+		//상품수정에서 받아온 값 변수에 저장
+		int pdtId = Integer.parseInt(request.getParameter("pdtId"));
 		String pdtName = request.getParameter("pdtName");
 		String pdtCty = request.getParameter("pdtCty");
 		int pdtPrice = Integer.parseInt(request.getParameter("pdtPrice"));
@@ -41,6 +41,8 @@ public class ProductInsertProcess extends HttpServlet {
 		String pdtContent = request.getParameter("pdtContent");
 		int pdtCount = Integer.parseInt(request.getParameter("pdtCount"));
 		Collection<Part> parts = request.getParts();
+		int pdtState = 1;
+		if(pdtCount==0) { pdtState = 0;	}
 		
 		//파일 저장 관련 변수들
 		String uploadDirectory = "C:\\upload";	
@@ -67,8 +69,10 @@ public class ProductInsertProcess extends HttpServlet {
 		for(Part part : parts) {
 			if(part.getName().startsWith("pdtImage") && !part.getSubmittedFileName().isEmpty() ){ 
 				//추가 이미지 
-				//content-type 이 pdtImage이고 추가 이미지 파일이 있는 경우
+				//content-type 이 pdtImage이고 추가 이미지 파일이 있는 경우				
 				FileManager fileManager = new FileManager();
+				fileManager.deleteImageFile(pdtId);
+				
 				newFileName = fileManager.changeFileName(part, dir, strNow);
 				imgNameArray.add(newFileName);
 				img1 = (imgNameArray.size()>=1) ? folderName+"/"+imgNameArray.get(0) : "null"; //추가 이미지 1개일 경우
@@ -79,14 +83,14 @@ public class ProductInsertProcess extends HttpServlet {
 				//썸네일
 				//content-type 이 pdtThum이고 썸네일을 업로드 했다면
 					FileManager fileManager = new FileManager();
+					fileManager.deleteThumFile(pdtId);
 					pdtThum = folderName+"/"+fileManager.changeFileName(part, dir, strNow);					
 			}
 		}
-	
-
 		
 		ProductDto productDto = new ProductDto();
 		ProductDao productDao = new ProductDao();
+		productDto.setPdtId(pdtId);
 		productDto.setPdtName(pdtName);
 		productDto.setPdtCty(pdtCty);
 		productDto.setPdtPrice(pdtPrice);
@@ -94,29 +98,31 @@ public class ProductInsertProcess extends HttpServlet {
 		productDto.setPdtColor(pdtColor);
 		productDto.setPdtContent(pdtContent);
 		productDto.setPdtThum(pdtThum);		
+		productDto.setPdtState(pdtState);		
 
-		int resultProduct = productDao.insertProduct(productDto);
+
+		int resultProduct = productDao.updateProduct(productDto);
 
 		
 		ImageDao imageDao = new ImageDao();
 		ImageDto imageDto = new ImageDto();
+		
+		imageDto.setPdtId(pdtId);
 		imageDto.setImg1(img1);
 		imageDto.setImg2(img2);
 		imageDto.setImg3(img3);
-		int resultImage = imageDao.insertImg(imageDto);
+		
+		int resultImage = imageDao.updateImg(imageDto);
 		
 		//결과값 처리
 
 		if(resultProduct > 0) {
 			if(resultImage > 0) {
-				ScriptWriter.alertAndNext(response, "상품등록 완료","../product/list");
+				ScriptWriter.alertAndNext(response, "상품수정 완료","../product/list");
 			}
-			ScriptWriter.alertAndBack(response, "이미지 등록 오류");
+			ScriptWriter.alertAndBack(response, "이미지 수정 오류");
 		} else {
-			ScriptWriter.alertAndBack(response, "등록 오류");
+			ScriptWriter.alertAndBack(response, "수정 오류");
 		}
-
-
 	}
-
 }

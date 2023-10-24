@@ -3,42 +3,45 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="com.kkj.mybatis">
+ 
  	<select id="listProduct" resultType="ProductDto">
 	SELECT * FROM product order by pdtId asc
 	</select>
-	<insert id="insertProduct" parameterType="ProductDto">
-	INSERT INTO product values(
-				seq_product.nextval,
-				#{pdtName},
-				#{pdtCty},
-				#{pdtContent},
-				#{pdtPrice},
-				#{pdtCount},
-				default,
-				default,
-				null,
-				#{pdtThum},
-				#{pdtColor}
-	)
-	</insert>
+	
 	<select id="detailProduct" parameterType="int" resultType="ProductDto">
 		SELECT * FROM product where pdtId = #{pdtId}
 	</select>
 	
-	<select id="listImage" parameterType="int" resultType="ImageDto">
-		SELECT i.* FROM product p 
-			RIGHT OUTER JOIN PDT_IMG i
-				ON p.pdtId = i.pdtId
-					WHERE p.pdtid = #{pdtId} 
+	<select id="selectOneProduct" parameterType="int" resultType="ProductDto">
+		select * from product where pdtid = #{pdtId}
 	</select>
-
-	<insert id="insertImage" parameterType="ImageDto">
-		INSERT INTO PDT_IMG VALUES(
-			seq_image.nextval,
-			#{img1},
-			#{img2},
-			#{img3},
-			seq_product.nextval-1
+	
+	<insert id="insertProduct" parameterType="ProductDto">
+		INSERT INTO product values(
+					seq_product.nextval,
+					#{pdtName},
+					#{pdtCty},
+					#{pdtContent},
+					#{pdtPrice},
+					#{pdtCount},
+					default,
+					default,
+					null,
+					#{pdtThum},
+					#{pdtColor}
 		)
 	</insert>
+	
+	<update id="updateProduct" parameterType="ProductDto">
+			UPDATE PRODUCT SET 		pdtname = #{pdtName},
+									pdtcty = #{pdtCty},
+									pdtcontent = #{pdtContent},
+									pdtprice = #{pdtPrice},
+									pdtcount = #{pdtCount},
+									pdtstate = #{pdtState},
+									pdtmoddate = sysdate,
+									pdtthum = #{pdtThum},
+									pdtColor = #{pdtColor}
+								 	WHERE pdtId = #{pdtId}
+	</update>
 </mapper>

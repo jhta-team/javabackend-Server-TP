@@ -29,6 +29,7 @@
 		<mapper resource="com/kkj/mybatis/member.xml"/>
 		<mapper resource="com/kkj/mybatis/codyboard.xml" />
 		<mapper resource="com/kkj/mybatis/product.xml" />
+		<mapper resource="com/kkj/mybatis/productimage.xml" />
 		<mapper resource="com/kkj/mybatis/cbcomment.xml" />
 		<mapper resource="com/kkj/mybatis/cbreply.xml" />
 	</mappers>
