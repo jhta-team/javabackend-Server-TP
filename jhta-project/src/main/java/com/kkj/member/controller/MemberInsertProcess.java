@@ -6,6 +6,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Part;
 
 import java.io.File;
@@ -15,6 +16,7 @@ import java.util.Date;
 
 import com.kkj.member.dao.MemberDao;
 import com.kkj.member.dto.MemberDto;
+import com.kkj.member.dto.ModalState;
 
 /**
  * Servlet implementation class MemberInsertProcess
@@ -62,7 +64,10 @@ public class MemberInsertProcess extends HttpServlet {
 		String detailAddress = request.getParameter("detailAddress");
 		String email = request.getParameter("email");
 		String mobileTelcom = request.getParameter("mobileTelcom");
-		String tel = request.getParameter("tel");
+		String tel01 = request.getParameter("tel01");
+		String tel02 = request.getParameter("tel02");
+		String tel03 = request.getParameter("tel03");
+		String tel =tel01+"-"+tel02+"-"+tel03;
 		String nickName = request.getParameter("nickName");
 		String strNo = request.getParameter("no");
 		int no =0;
@@ -97,6 +102,9 @@ public class MemberInsertProcess extends HttpServlet {
 		memberInsert.setPostCode(postCode);
 		memberInsert.setEmail(email);
 		memberInsert.setMobileTelcom(mobileTelcom);
+		memberInsert.setTel01(tel01);
+		memberInsert.setTel02(tel02);
+		memberInsert.setTel03(tel03);
 		memberInsert.setTel(tel);
 		memberInsert.setProfile(newFileName);
 		memberInsert.setNickName(nickName);
@@ -104,6 +112,9 @@ public class MemberInsertProcess extends HttpServlet {
 		
 		result=memberDao.insertMember(memberInsert);
 		if(result>0) {
+			HttpSession session = request.getSession();
+			ModalState modalState = new ModalState("show", "회원가입 되었습니다.");
+			session.setAttribute("modalState", modalState);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/member/login.jsp");
 			dispatcher.forward(request, response);
 		}

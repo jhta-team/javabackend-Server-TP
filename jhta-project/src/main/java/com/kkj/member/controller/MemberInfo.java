@@ -41,7 +41,15 @@ public class MemberInfo extends HttpServlet {
 			request.setAttribute("infoMember", infoMember);
 			request.setAttribute("passwordBlur", passwordBlur);
 			dispatcher.forward(request, response);
+			
+			if(session.getAttribute("modalState")!=null) {
+				session.removeAttribute("modalState");
+			}
+		}else {
+			
+			response.sendRedirect("../member/login");
 		}
+		
 	}
 
 	/**
