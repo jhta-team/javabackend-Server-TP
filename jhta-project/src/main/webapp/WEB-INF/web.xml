@@ -201,6 +201,16 @@
   </servlet-mapping>
   <servlet>
     <description></description>
+    <display-name>MemberNickNameCheck</display-name>
+    <servlet-name>MemberNickNameCheck</servlet-name>
+    <servlet-class>com.kkj.member.controller.MemberNickNameCheck</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MemberNickNameCheck</servlet-name>
+    <url-pattern>/member/nickNameCheck</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
     <display-name>MemberInfo</display-name>
     <servlet-name>MemberInfo</servlet-name>
     <servlet-class>com.kkj.member.controller.MemberInfo</servlet-class>
@@ -211,13 +221,53 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>MemberNickNameCheck</display-name>
-    <servlet-name>MemberNickNameCheck</servlet-name>
-    <servlet-class>com.kkj.member.controller.MemberNickNameCheck</servlet-class>
+    <display-name>MemberInfoModify</display-name>
+    <servlet-name>MemberInfoModify</servlet-name>
+    <servlet-class>com.kkj.member.controller.MemberInfoModify</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>MemberNickNameCheck</servlet-name>
-    <url-pattern>/member/nickNameCheck</url-pattern>
+    <servlet-name>MemberInfoModify</servlet-name>
+    <url-pattern>/member/infoModify</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>MemberInfoModifyProcess</display-name>
+    <servlet-name>MemberInfoModifyProcess</servlet-name>
+    <servlet-class>com.kkj.member.controller.MemberInfoModifyProcess</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MemberInfoModifyProcess</servlet-name>
+    <url-pattern>/member/infoModify-process</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>MemberInfoModifyUpdate</display-name>
+    <servlet-name>MemberInfoModifyUpdate</servlet-name>
+    <servlet-class>com.kkj.member.controller.MemberInfoModifyUpdate</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MemberInfoModifyUpdate</servlet-name>
+    <url-pattern>/member/infoModifyUpdate</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>MemberDelete</display-name>
+    <servlet-name>MemberDelete</servlet-name>
+    <servlet-class>com.kkj.member.controller.MemberDelete</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MemberDelete</servlet-name>
+    <url-pattern>/member/delete</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>MemberDeleteProcess</display-name>
+    <servlet-name>MemberDeleteProcess</servlet-name>
+    <servlet-class>com.kkj.member.controller.MemberDeleteProcess</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MemberDeleteProcess</servlet-name>
+    <url-pattern>/member/delete-process</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>

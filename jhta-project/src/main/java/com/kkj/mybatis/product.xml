@@ -4,7 +4,7 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="com.kkj.mybatis">
  	<select id="listProduct" resultType="ProductDto">
-	SELECT * FROM product order by pdtid asc
+	SELECT * FROM product order by pdtId asc
 	</select>
 	<insert id="insertProduct" parameterType="ProductDto">
 	INSERT INTO product values(
@@ -31,9 +31,14 @@
 				ON p.pdtId = i.pdtId
 					WHERE p.pdtid = #{pdtId} 
 	</select>
-	
-	<select id="listImage2" resultType="ImageDto">
-		SELECT * from pdt_img
-	</select>
-	
+
+	<insert id="insertImage" parameterType="ImageDto">
+		INSERT INTO PDT_IMG VALUES(
+			seq_image.nextval,
+			#{img1},
+			#{img2},
+			#{img3},
+			seq_product.nextval-1
+		)
+	</insert>
 </mapper>
