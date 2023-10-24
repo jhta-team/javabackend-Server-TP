@@ -22,6 +22,10 @@
 			#{img2},
 			#{img3},
 			seq_product.nextval-1
-								)
-	</insert>		
+			)
+	</insert>
+	
+	<delete id="deleteImage" parameterType="int">
+		delete from pdt_img where pdtid=#{pdtId}
+	</delete>	
 </mapper>

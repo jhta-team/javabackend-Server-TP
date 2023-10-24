@@ -44,4 +44,8 @@
 									pdtColor = #{pdtColor}
 								 	WHERE pdtId = #{pdtId}
 	</update>
+	
+	<delete id="deleteProduct" parameterType="int">
+		delete from product where pdtid=#{pdtId}
+	</delete>	
 </mapper>

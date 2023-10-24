@@ -83,7 +83,8 @@
 			
 			<div class="mt-5 mb-5 d-flex justify-content-center">
 				<div class="">
-					<button type="submit" class="btn btn-sm btn-outline-secondary mb-5" id="btnSubmit" onclick="uploadFiles()">상품수정</button>
+					<button type="submit" class="btn btn-sm btn-outline-secondary mb-5" id="btnSubmit">상품수정</button>
+					<a href="../product/delete?pdtId=${Product.pdtId }" class="btn btn-sm btn-outline-secondary mb-5">상품삭제</a>
 					<button type="reset" class="btn btn-sm btn-outline-secondary mb-5">취소</button>
 				</div>
 			</div>

@@ -49,4 +49,12 @@ public class ProductDao {
 		sqlSession.close();
 		return result;
 	}
+
+	public int deleteProduct(int pdtId) {
+		int result = 0;
+		SqlSession sqlSession = MybatisConnectionFactory.getSqlSession();
+		result = sqlSession.update("deleteProduct",pdtId);
+		sqlSession.close();
+		return result;
+		}
 }

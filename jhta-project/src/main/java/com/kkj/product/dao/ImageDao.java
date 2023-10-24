@@ -29,4 +29,12 @@ public class ImageDao {
 		sqlSession.close();
 		return result;
 	}
+
+	public int deleteImg(int pdtId) {
+		int result = 0;
+		SqlSession sqlSession = MybatisConnectionFactory.getSqlSession();
+		result = sqlSession.update("deleteImage", pdtId);
+		sqlSession.close();
+		return result;
+	}
 }

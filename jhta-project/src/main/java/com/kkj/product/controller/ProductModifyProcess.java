@@ -116,11 +116,8 @@ public class ProductModifyProcess extends HttpServlet {
 		
 		//결과값 처리
 
-		if(resultProduct > 0) {
-			if(resultImage > 0) {
-				ScriptWriter.alertAndNext(response, "상품수정 완료","../product/list");
-			}
-			ScriptWriter.alertAndBack(response, "이미지 수정 오류");
+		if(resultProduct > 0 && resultImage > 0 ) {
+			ScriptWriter.alertAndNext(response, "상품수정 완료","../product/list");
 		} else {
 			ScriptWriter.alertAndBack(response, "수정 오류");
 		}
