@@ -15,11 +15,11 @@ public class ImageDao {
 		return imageDto; 
 	}
 	
-	public ImageDto getListAll(){ // 상품 이미지 테이블 전체 조회 메서드
-		ImageDto imageDto = new ImageDto();
+	public int insertImg(ImageDto imageDto){ // 상품 이미지 테이블 전체 조회 메서드
+		int result = 0;
 		SqlSession sqlSession = MybatisConnectionFactory.getSqlSession();
-		imageDto = sqlSession.selectOne("listImage2");
+		result = sqlSession.update("insertImage", imageDto);
 		sqlSession.close();
-		return imageDto;
+		return result;
 	}
 }
