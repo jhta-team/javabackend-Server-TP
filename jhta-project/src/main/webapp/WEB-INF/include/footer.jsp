@@ -16,6 +16,13 @@
 	      <li class="ms-3"><a class="text-body-secondary" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"></use></svg></a></li>
 	    </ul>
 	  </footer>
-	</div>	
+	</div>
+		<c:if test="${modalState.state eq 'show' || param.state eq 'show'}">
+			<jsp:include page="/WEB-INF/include/modal.jsp" />
+			<script >
+				const myModal = new bootstrap.Modal("#myModal");
+				myModal.show();
+			</script>
+		</c:if>
 </body>
 </html>

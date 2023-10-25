@@ -115,10 +115,16 @@
         </div>
           <div class="row d-flex justify-content-center">
           <div class="col-6">
-            <div class="mb-3">
-              <label for="tel" class="form-label">tel</label>
-              <input type="text" class="form-control" id="tel" 
-              name="tel" placeholder="tel" value="${infoModifyMember.tel }"/>
+           <div class="mb-3">
+              <label for="tel" class="form-label">전화 번호</label>
+              <div class="d-flex flex-row mb-3 gap-1" id="tel">
+              <input type="text" maxlength="3" class="form-control tel01" id="tel01" placeholder="tel" name="tel01" value="${tel01 }" />
+              <h2>-</h2>
+              <input type="text" maxlength="4" class="form-control tel01" id="tel02" name="tel02" value="${tel02 }"/>
+              <h2>-</h2>
+              <input type="text" maxlength="4" class="form-control tel01" id="tel03" name="tel03" value="${tel03 }"/>
+              </div>
+            <div class="invalid-feedback" id="invalid-feedbackTel">글자 써보기</div> 
             </div>
           </div>
         </div>

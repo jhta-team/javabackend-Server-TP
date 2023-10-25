@@ -13,6 +13,7 @@ import java.util.HashMap;
 
 import com.kkj.member.dao.MemberDao;
 import com.kkj.member.dto.MemberDto;
+import com.kkj.member.dto.ModalState;
 import com.kkj.product.util.ScriptWriter;
 
 /**
@@ -53,11 +54,21 @@ public class MemberInfoModifyProcess extends HttpServlet {
 		
 	 	MemberDto infoModifyMember = memberDao.infoModify(map);
 	 	if(infoModifyMember !=null) {
+	 		String telList[] =infoModifyMember.getTel().split("-");
+	 		String tel01= telList[0];
+	 		String tel02= telList[1];
+	 		String tel03= telList[2];
+	 		request.setAttribute("tel01", tel01);
+	 		request.setAttribute("tel02", tel02);
+	 		request.setAttribute("tel03", tel03);
 	 		request.setAttribute("infoModifyMember", infoModifyMember);
 	 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/member/infoModify-form.jsp");
 	 		dispatcher.forward(request, response);
-	 	} else {
-	 		ScriptWriter.alertAndBack(response, "오류입니다.");
+	 	}else {
+	 		ModalState modalState = new ModalState("show", "비밀번호가 틀립니다. 다시입력해주세요");
+	 		session.setAttribute("modalState", modalState);
+	 		response.sendRedirect("../member/infoModify");
+	 		
 	 	}
 	}
 

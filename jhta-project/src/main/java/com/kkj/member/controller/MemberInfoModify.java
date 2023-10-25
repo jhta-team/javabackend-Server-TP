@@ -6,6 +6,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
 
 /**
@@ -27,7 +29,11 @@ public class MemberInfoModify extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/member/infoModify.jsp");
+		HttpSession session = request.getSession();
 		dispatcher.forward(request, response);
+		if(session.getAttribute("modalState")!=null) {
+			session.removeAttribute("modalState");
+		}
 	}
 
 	/**

@@ -15,6 +15,7 @@ import java.util.Date;
 
 import com.kkj.member.dao.MemberDao;
 import com.kkj.member.dto.MemberDto;
+import com.kkj.member.dto.ModalState;
 import com.kkj.product.util.ScriptWriter;
 
 /**
@@ -59,7 +60,10 @@ public class MemberInfoModifyUpdate extends HttpServlet {
 		String detailAddress = request.getParameter("detailAddress");
 		String email = request.getParameter("email");
 		String mobileTelcom = request.getParameter("mobileTelcom");
-		String tel = request.getParameter("tel");
+		String tel01 = request.getParameter("tel01");
+		String tel02 = request.getParameter("tel02");
+		String tel03 = request.getParameter("tel03");
+		String tel = tel01+"-"+tel02+"-"+tel03;
 		Part profile = request.getPart("profile");
 		
 		String uploadPath = "C:\\upload";
@@ -94,12 +98,17 @@ public class MemberInfoModifyUpdate extends HttpServlet {
 		updateMember.setDetailAddress(detailAddress);
 		updateMember.setEmail(email);
 		updateMember.setTel(tel);
+		updateMember.setMobileTelcom(mobileTelcom);
 		updateMember.setProfile(newFileName);
 		if(fileName.isEmpty()) {  //이미지 변경 없으면 이전 파일 그대로 사용하기위해
-			updateMember.setProfile(preProfile);
+			if(preProfile!=null) {
+				updateMember.setProfile(preProfile);				
+			}
 		}
 		int result = memberDao.infoUpdateMember(updateMember);
 		if(result>0) {
+			String modalCheck = "1";
+			
 			session.setAttribute("loggedName", userName);
 			session.setAttribute("loggedMember",updateMember );
 			if(file.exists()) {	
@@ -107,7 +116,9 @@ public class MemberInfoModifyUpdate extends HttpServlet {
 					file.delete();										
 				}
 			}
-			ScriptWriter.alertAndNext(response, "정보 변경 완료", "../index/index");
+			ModalState modalState = new ModalState("show", "정보 변경하시겠습니까?");
+		    session.setAttribute("modalState", modalState);
+			response.sendRedirect("../member/update-check?modalCheck="+modalCheck);
 		}else {
 			ScriptWriter.alertAndBack(response, "서버오류입니다.");
 		}

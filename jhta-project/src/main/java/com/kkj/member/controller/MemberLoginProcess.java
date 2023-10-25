@@ -14,6 +14,7 @@ import java.util.HashMap;
 
 import com.kkj.member.dao.MemberDao;
 import com.kkj.member.dto.MemberDto;
+import com.kkj.member.dto.ModalState;
 import com.kkj.product.util.CookieManager;
 import com.kkj.product.util.ScriptWriter;
 
@@ -51,6 +52,8 @@ public class MemberLoginProcess extends HttpServlet {
 			session.setAttribute("loggedID", userID);
 			session.setAttribute("loggedName",loggedName);
 			session.setAttribute("loggedMember", loginMember);
+			ModalState modalState = new ModalState("show","로그인 성공");
+			session.setAttribute("modalState", modalState);
 			if(check !=null) {
 				CookieManager.createCookie(response, "cookieID", userID, 60*60*24);
 				String cookieID = CookieManager.readCookie(request, "cookieID");

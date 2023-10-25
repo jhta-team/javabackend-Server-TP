@@ -291,6 +291,14 @@
   </servlet-mapping>
   <servlet>
     <description></description>
+
+    <display-name>MemberUpdateCheck</display-name>
+    <servlet-name>MemberUpdateCheck</servlet-name>
+    <servlet-class>com.kkj.member.controller.MemberUpdateCheck</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MemberUpdateCheck</servlet-name>
+    <url-pattern>/member/update-check</url-pattern>
     <display-name>CbReplyUpdate</display-name>
     <servlet-name>CbReplyUpdate</servlet-name>
     <servlet-class>com.kkj.cbreply.controller.CbReplyUpdate</servlet-class>

@@ -9,6 +9,8 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
+import com.kkj.member.dto.ModalState;
+
 /**
  * Servlet implementation class MemberLogout
  */
