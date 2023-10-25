@@ -329,4 +329,14 @@
     <servlet-name>CbCommentDelete</servlet-name>
     <url-pattern>/cbcomment/delete</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>cbLike</display-name>
+    <servlet-name>cbLike</servlet-name>
+    <servlet-class>com.kkj.cblike.controller.cbLike</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>cbLike</servlet-name>
+    <url-pattern>/cblike/cblike</url-pattern>
+  </servlet-mapping>
 </web-app>

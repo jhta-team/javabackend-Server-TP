@@ -75,9 +75,9 @@
 					<!-- 				목록을 눌렀을때 뒤로 가는 방법을 찾아보자 뒤에 page번호 값을 줘서 다시 돌아가는 방법이나 바로 전 페이지로 가는방법 찾아보 -->
 					<a href="../codyboard/page-nation" class="btn btn-primary">목록</a> <a
 						href="../board/reply?regroup=${viewBoard.regroup }&relevel=${viewBoard.relevel}&restep=${viewBoard.restep}"
-						class="btn btn-primary mx-1">답글달기</a> <a
-						href="../board/delete?no=${viewBoard.no }"
-						class="btn btn-primary mx-1">좋아요</a>
+						class="btn btn-primary mx-1">답글달기</a>
+						${likeCount } 
+						<button id="btncbLike">좋아요</button>
 					<!-- 여기는 로그인한 사람만 볼수있게 -->
 					<a href="../codyboard/update?no=${codyBoard.no}"
 						class="btn btn-primary mx-1">수정</a> <a
@@ -256,6 +256,21 @@
 		}
 		return false;
 		})
+		
+	
+	$("#btncbLike").on("click", function(){
+		const userID = "mok555"
+		const cbNo = ${codyBoard.no}
+		console.log(cbNo)
+		$.ajax({
+			url:"../cblike/cblike?userID=" + userID + "&cbNo=" + cbNo
+		
+			})
+			
+		return false;
+		
+		})
+	
 	
 	
 	
