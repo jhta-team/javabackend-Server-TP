@@ -38,11 +38,8 @@ public class CodyBoardDao {
 	
 	public int codyBoardCount() {
 		int count = 0;
-		System.out.println("111111111111111111");
 		SqlSession sqlSession = MybatisConnectionFactory.getSqlSession();
-		System.out.println("222222222222222222");
 		count = sqlSession.selectOne("codyBoardCount");
-		System.out.println("33333333333333333333");
 		return count;
 	}
 	
@@ -55,7 +52,6 @@ public class CodyBoardDao {
 		pageNationDto.setEnd(end);
 		SqlSession sqlSession = MybatisConnectionFactory.getSqlSession();
 		codyBoardList = sqlSession.selectList("codyBoardPageNation", pageNationDto);
-		System.out.println(codyBoardList);
 		return codyBoardList;
 		
 		
@@ -65,6 +61,13 @@ public class CodyBoardDao {
 		int result = 0;
 		SqlSession sqlSession = MybatisConnectionFactory.getSqlSession();
 		result = sqlSession.update("codyBoardUpdate", codyBoardUpdateDto);
+		return result;
+	}
+	
+	public int hit(int codyBoardNo) {
+		int result = 0;
+		SqlSession sqlSession = MybatisConnectionFactory.getSqlSession();
+		result = sqlSession.update("codyBoardHit", codyBoardNo);
 		return result;
 	}
 

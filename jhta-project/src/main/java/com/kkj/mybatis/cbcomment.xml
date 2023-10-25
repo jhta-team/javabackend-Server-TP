@@ -3,7 +3,7 @@
 <mapper namespace="org.mybatis.example.BlogMapper">
   	<insert id="insertCbComment" parameterType="CbCommentDto">
 		insert into cbComment values(seq_cbcomment.nextval, #{userID}, #{cbComment},
-		sysdate, #{codyBoardNo})
+		to_char(sysdate + 90), #{codyBoardNo})
 	</insert>
 	
 	<select id="findAllCbComment" parameterType="int" resultType="CbCommentDto">

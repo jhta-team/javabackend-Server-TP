@@ -299,7 +299,6 @@
     <servlet-name>ProductDelete</servlet-name>
     <url-pattern>/product/delete</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <description></description>
     <display-name>ProductModify</display-name>
@@ -310,7 +309,6 @@
     <servlet-name>ProductModify</servlet-name>
     <url-pattern>/product/modify</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <description></description>
     <display-name>ProductModifyProcess</display-name>
@@ -320,9 +318,8 @@
   <servlet-mapping>
     <servlet-name>ProductModifyProcess</servlet-name>
     <url-pattern>/product/modify-process</url-pattern>
-   </servlet-mapping>
-
- <servlet>
+  </servlet-mapping>
+  <servlet>
     <description></description>
     <display-name>MemberUpdateCheck</display-name>
     <servlet-name>MemberUpdateCheck</servlet-name>
@@ -331,8 +328,8 @@
   <servlet-mapping>
     <servlet-name>MemberUpdateCheck</servlet-name>
     <url-pattern>/member/update-check</url-pattern>
-   </servlet-mapping> 
-    <servlet>
+  </servlet-mapping>
+  <servlet>
     <description></description>
     <display-name>CbReplyUpdate</display-name>
     <servlet-name>CbReplyUpdate</servlet-name>
