@@ -28,7 +28,6 @@
 
           <c:choose>
           <c:when test="${loggedMember.adminNumber eq 1}">
-          
           <li><a href="../product/insert" class="nav-link px-2 text-white">상품등록</a></li>
           </c:when>
           <c:otherwise>
@@ -39,6 +38,7 @@
           <li><a href="../codyboard/insert" class="nav-link px-2 text-white">코디등록</a></li>
           <li><a href="../codyboard/page-nation" class="nav-link px-2 text-white">코디게시판보기</a></li>
           <li><a href="#" class="nav-link px-2 text-white">About</a></li>
+          <li><a href="../member/list" class="nav-link px-2 text-white">회원관리</a></li>
         </ul>
 
         <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">

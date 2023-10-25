@@ -14,18 +14,18 @@ public class MemberDto {
 	private String tel;
 	private String profile;
 	private String nickName;
-	private String regdate;
+	private String redate;
 	private int no;
 
 	private String tel01;
 	private String tel02;
 	private String tel03;
-	private String adminNumber;
+	private int adminNumber;
 	
-	public String getAdminNumber() {
+	public int getAdminNumber() {
 		return adminNumber;
 	}
-	public void setAdminNumber(String adminNumber) {
+	public void setAdminNumber(int adminNumber) {
 		this.adminNumber = adminNumber;
 	}
 
@@ -101,11 +101,11 @@ public class MemberDto {
 	public void setNickName(String nickName) {
 		this.nickName = nickName;
 	}
-	public String getRegdate() {
-		return regdate;
+	public String getRedate() {
+		return redate;
 	}
-	public void setRegdate(String regdate) {
-		this.regdate = regdate;
+	public void setRedate(String redate) {
+		this.redate = redate;
 	}
 	public int getNo() {
 		return no;
