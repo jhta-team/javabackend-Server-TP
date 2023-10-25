@@ -11,6 +11,7 @@
 		<typeAlias alias="ImageDto" type="com.kkj.product.dto.ImageDto"/>
 		<typeAlias alias="CbCommentDto" type="com.kkj.cbcomment.dto.CbCommentDto"/>
 		<typeAlias alias="CbReplyDto" type="com.kkj.cbreply.dto.CbReplyDto"/>
+		<typeAlias alias="CbReplyUpdateDto" type="com.kkj.cbreply.dto.CbReplyUpdateDto"/>
 		
 	</typeAliases>
 	<environments default="development">
