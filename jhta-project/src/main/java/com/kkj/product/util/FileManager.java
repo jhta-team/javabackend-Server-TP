@@ -4,6 +4,11 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
 
+import com.kkj.product.dao.ImageDao;
+import com.kkj.product.dao.ProductDao;
+import com.kkj.product.dto.ImageDto;
+import com.kkj.product.dto.ProductDto;
+
 import jakarta.servlet.http.Part;
 
 public class FileManager {
@@ -42,4 +47,25 @@ public class FileManager {
 		} 				
 		return newFileName;
 	}
+	public void deleteThumFile(int pdtId) {
+		String uploadDirectory = "C:\\upload\\";
+		ProductDao pdtDao = new ProductDao();
+		ProductDto pdtDto = pdtDao.selectOneProduct(pdtId);
+		File file = new File(uploadDirectory + pdtDto.getPdtThum());
+		if(file.exists()) {file.delete();}	
+	}
+	
+	public void deleteImageFile(int pdtId) {
+		String uploadDirectory = "C:\\upload\\";		
+		ImageDao imgDao = new ImageDao();
+		ImageDto imgDto = imgDao.selectOneImg(pdtId);
+		File file1  = new File(uploadDirectory + imgDto.getImg1());
+		File file2  = new File(uploadDirectory + imgDto.getImg1());
+		File file3  = new File(uploadDirectory + imgDto.getImg1());
+		if(file1.exists()) {file1.delete();}
+		if(file1.exists()) {file2.delete();}
+		if(file1.exists()) {file3.delete();}		
+	}
+
+	
 }

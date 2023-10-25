@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="com.kkj.mybatis">	
+ 
+	<select id="selectOneImage" parameterType="int" resultType="ImageDto">
+		select * from pdt_img where pdtid = #{pdtId}
+	</select>
+	
+	<update id="updateImage" parameterType="ImageDto">
+		update pdt_img set			img1 = #{img1},
+									img2 = #{img2},
+									img3 = #{img3}
+									where pdtid = #{pdtId}
+	</update>
+
+	<insert id="insertImage" parameterType="ImageDto">
+		INSERT INTO PDT_IMG VALUES(
+			seq_image.nextval,
+			#{img1},
+			#{img2},
+			#{img3},
+			seq_product.nextval-1
+			)
+	</insert>
+	
+	<delete id="deleteImage" parameterType="int">
+		delete from pdt_img where pdtid=#{pdtId}
+	</delete>	
+</mapper>

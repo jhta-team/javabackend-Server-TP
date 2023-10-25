@@ -16,6 +16,7 @@ public class MemberDto {
 	private String nickName;
 	private String regdate;
 	private int no;
+
 	private String tel01;
 	private String tel02;
 	private String tel03;
@@ -27,6 +28,7 @@ public class MemberDto {
 	public void setAdminNumber(String adminNumber) {
 		this.adminNumber = adminNumber;
 	}
+
 	public String getUserID() {
 		return userID;
 	}

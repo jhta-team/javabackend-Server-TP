@@ -291,6 +291,34 @@
   </servlet-mapping>
   <servlet>
     <description></description>
+    <display-name>ProductDelete</display-name>
+    <servlet-name>ProductDelete</servlet-name>
+    <servlet-class>com.kkj.product.controller.ProductDelete</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProductDelete</servlet-name>
+    <url-pattern>/product/delete</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ProductModify</display-name>
+    <servlet-name>ProductModify</servlet-name>
+    <servlet-class>com.kkj.product.controller.ProductModify</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProductModify</servlet-name>
+    <url-pattern>/product/modify</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ProductModifyProcess</display-name>
+    <servlet-name>ProductModifyProcess</servlet-name>
+    <servlet-class>com.kkj.product.controller.ProductModifyProcess</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProductModifyProcess</servlet-name>
+    <url-pattern>/product/modify-process</url-pattern>
+=======
 
     <display-name>MemberUpdateCheck</display-name>
     <servlet-name>MemberUpdateCheck</servlet-name>

@@ -31,7 +31,7 @@ public class ProductDetail extends HttpServlet {
 		//상품이미지 
 		ImageDao imageDao = new ImageDao();
 		ImageDto imageDto = new ImageDto();
-		imageDto = imageDao.getListImg(pdtId);
+		imageDto = imageDao.selectOneImg(pdtId);
 		request.setAttribute("imageDto", imageDto);
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/product/productdetail.jsp");
