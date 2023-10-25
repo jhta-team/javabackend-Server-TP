@@ -291,6 +291,7 @@
   </servlet-mapping>
   <servlet>
     <description></description>
+
     <display-name>MemberUpdateCheck</display-name>
     <servlet-name>MemberUpdateCheck</servlet-name>
     <servlet-class>com.kkj.member.controller.MemberUpdateCheck</servlet-class>
@@ -298,5 +299,52 @@
   <servlet-mapping>
     <servlet-name>MemberUpdateCheck</servlet-name>
     <url-pattern>/member/update-check</url-pattern>
+    <display-name>CbReplyUpdate</display-name>
+    <servlet-name>CbReplyUpdate</servlet-name>
+    <servlet-class>com.kkj.cbreply.controller.CbReplyUpdate</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CbReplyUpdate</servlet-name>
+    <url-pattern>/cbreply/update</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CbReplyDelete</display-name>
+    <servlet-name>CbReplyDelete</servlet-name>
+    <servlet-class>com.kkj.cbreply.controller.CbReplyDelete</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CbReplyDelete</servlet-name>
+    <url-pattern>/cbreply/delete</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CbCommentUpdate</display-name>
+    <servlet-name>CbCommentUpdate</servlet-name>
+    <servlet-class>com.kkj.cbcomment.controller.CbCommentUpdate</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CbCommentUpdate</servlet-name>
+    <url-pattern>/cbcomment/update</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CbCommentDelete</display-name>
+    <servlet-name>CbCommentDelete</servlet-name>
+    <servlet-class>com.kkj.cbcomment.controller.CbCommentDelete</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CbCommentDelete</servlet-name>
+    <url-pattern>/cbcomment/delete</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>cbLike</display-name>
+    <servlet-name>cbLike</servlet-name>
+    <servlet-class>com.kkj.cblike.controller.cbLike</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>cbLike</servlet-name>
+    <url-pattern>/cblike/cblike</url-pattern>
   </servlet-mapping>
 </web-app>

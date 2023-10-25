@@ -9,4 +9,12 @@
 	<select id="findAllCbComment" parameterType="int" resultType="CbCommentDto">
 		select * from cbComment where codyBoardNo = #{codyBoardNo} ORDER BY NO asc
 	</select>
+	
+	<update id="updateCbComment" parameterType="CbReplyUpdateDto">
+		UPDATE cbcomment SET cbcomment = #{cbCommentUpdate} WHERE NO = #{no}
+	</update>
+	
+	<delete id="deleteCbComment" parameterType="int">
+		delete from cbcomment where no = #{cbCommentNo}
+	</delete>
 </mapper>

@@ -11,7 +11,8 @@
 		<typeAlias alias="ImageDto" type="com.kkj.product.dto.ImageDto"/>
 		<typeAlias alias="CbCommentDto" type="com.kkj.cbcomment.dto.CbCommentDto"/>
 		<typeAlias alias="CbReplyDto" type="com.kkj.cbreply.dto.CbReplyDto"/>
-		
+		<typeAlias alias="CbReplyUpdateDto" type="com.kkj.cbreply.dto.CbReplyUpdateDto"/>
+		<typeAlias alias="CbLikeDto" type="com.kkj.cblike.dto.CbLikeDto"/>
 	</typeAliases>
 	<environments default="development">
 		<environment id="development">
@@ -31,6 +32,7 @@
 		<mapper resource="com/kkj/mybatis/product.xml" />
 		<mapper resource="com/kkj/mybatis/cbcomment.xml" />
 		<mapper resource="com/kkj/mybatis/cbreply.xml" />
+		<mapper resource="com/kkj/mybatis/cblike.xml" />
 	</mappers>
 </configuration>
 
