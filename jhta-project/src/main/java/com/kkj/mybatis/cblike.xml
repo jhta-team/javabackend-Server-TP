@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="org.mybatis.example.BlogMapper">
+	<insert id="insertCbLike" parameterType="CbLikeDto">
+		insert into cblike values(seq_cbLike.nextval, 1, #{cbNo}, #{userID})
+	</insert>
+	
+	<select id="findCount" resultType="int" parameterType="int">
+		select count(*) from cblike where cbNo = #{cbNo}
+	</select>
+	
+	<select id="findOneLike" resultType="CbLikeDto" parameterType="CbLikeDto">
+		select * from cblike where cbNo = #{cbNo} and userID = #{userID}
+	</select>
+	
+	<delete id="deleteLike" parameterType="CbLikeDto">
+		delete from cblike where cbNo = #{cbNo} and userID = #{userID}
+	</delete>
+</mapper>

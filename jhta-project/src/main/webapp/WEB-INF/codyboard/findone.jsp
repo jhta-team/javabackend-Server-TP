@@ -75,9 +75,9 @@
 					<!-- 				목록을 눌렀을때 뒤로 가는 방법을 찾아보자 뒤에 page번호 값을 줘서 다시 돌아가는 방법이나 바로 전 페이지로 가는방법 찾아보 -->
 					<a href="../codyboard/page-nation" class="btn btn-primary">목록</a> <a
 						href="../board/reply?regroup=${viewBoard.regroup }&relevel=${viewBoard.relevel}&restep=${viewBoard.restep}"
-						class="btn btn-primary mx-1">답글달기</a> <a
-						href="../board/delete?no=${viewBoard.no }"
-						class="btn btn-primary mx-1">좋아요</a>
+						class="btn btn-primary mx-1">답글달기</a>
+						${likeCount } 
+						<button id="btncbLike">좋아요</button>
 					<!-- 여기는 로그인한 사람만 볼수있게 -->
 					<a href="../codyboard/update?no=${codyBoard.no}"
 						class="btn btn-primary mx-1">수정</a> <a
@@ -93,24 +93,39 @@
 				</div>
 				<c:forEach items="${cbComment}" var="cbComment" varStatus="status">
 					<div class="replyBox">
-						<div>
+						<div class="cbCommentBox">
 							<tr>
 								<th>${cbComment.userID }</th>
+								<th>댓글번호 ===>>> ${cbComment.no }</th>
 								<td colspan="3" class="content">${cbComment.comment }</td>
 								<td colspan="3" class="content">${cbComment.regDate }</td>
+								<input type="hidden" value="${cbComment.no }">
+								<input type="hidden">
+								<td colspan="3" class="content"><button class="btnCommentUpdate">수정하기</button></td>
+								<td colspan="3" class="content"><button class="btnCommentDelete">삭제</button></td>
+								
 							</tr>
 
 							<!-- <a class="btn btn-primary mx-3" name="btnReplyComment"  id="btnReplyComment">대댓글달기</a> -->
 
 						</div>
-						<div class="cbCommentdiv">
-							<tr>
-								<th>대댓글id</th>
-								<td colspan="3" class="content">내용</td>
-								<td colspan="3" class="content">${cbComment.no }</td>
-								
-							</tr>
-						</div>
+						<c:forEach items="${reply }" var="reply" varStatus="status">
+						<c:set var="cbCommentNo" value="${cbComment.no }"/>
+						<c:if test="${reply.cbCommentNo eq cbCommentNo }">
+							<div class="cbCommentdiv">
+								<tr>
+									<th>${reply.replyUserID }</th>
+									<td colspan="3" class="content">${reply.reply }</td>
+									<td colspan="3" class="content">${reply.regDate }</td>
+									<input type="hidden" value="${reply.no }">
+									<input type="hidden" placeholder="${reply.replyUserID }님 ${reply.reply}를 수정하시겠습니까?">
+									<td colspan="3" class="content"><button class="btnReplyUpdate">수정하기</button></td>
+									<td colspan="3" class="content"><button class="btnReplyDelete">삭제</button></td>
+									
+								</tr>
+							</div>
+						</c:if>
+						</c:forEach>
 						<input type="hidden" class="cbCommentNo" name="cbCommentNo"
 									id="cbCommentNo" value="${cbComment.no }">
 						<input type="hidden" class="cbReply" name="cbReply" id="cbReply">
@@ -160,6 +175,33 @@
 						return false;
 					})
 	//for(let i =1; i <= $("#cbReplyCount").val(); i++){
+	$(".replyBox .cbCommentBox .btnCommentUpdate").on("click", function(){
+				const cbCommentNo = $(this).prev().prev().val()
+				const cbCommentUpdate = $(this).prev().val();
+				console.log(cbCommentNo)
+				$(this).prev().prop("type", "text")
+				if(cbCommentUpdate.length>0){
+					$.ajax({
+						url:"../cbcomment/update?cbCommentNo=" + cbCommentNo + "&cbCommentUpdate=" + cbCommentUpdate
+					})
+					
+				}
+				
+				
+				return false;
+		})
+		
+	$(".replyBox .cbCommentBox .btnCommentDelete").on("click", function(){
+			const cbCommentNo = $(this).prev().prev().prev().val()
+			console.log(cbCommentNo)
+			if(cbCommentNo != null){
+				$.ajax({
+					url:"../cbcomment/delete?cbCommentNo=" + cbCommentNo		
+				
+				})
+			}
+		})
+	
 
 	$(".replyBox").each(function(idx,item) {
 		console.log(item,"===",idx);
@@ -184,6 +226,53 @@
 			return false;
 		})
 	})
+
+	
+	
+	$(".replyBox .cbCommentdiv .btnReplyUpdate").on("click", function() {
+		const replyNo = $(this).prev().prev().val()
+		const replyUpdate = $(this).prev().val();
+		$(this).prev().prop("type", "text")
+		console.log(replyUpdate)
+		console.log($(this).prev().prev().val())
+		if(replyUpdate.length > 0){
+			$.ajax({
+					url:"../cbreply/update?replyNo=" + replyNo + "&replyUpdate=" + replyUpdate
+				
+				})
+			}
+		return false
+		
+		})
+	$(".replyBox .cbCommentdiv .btnReplyDelete").on("click", function(){
+		const replyNo = $(this).prev().prev().prev().val()
+		console.log(replyNo);
+		if(replyNo != null){
+			$.ajax({
+					url:"../cbreply/delete?replyNo=" + replyNo
+					
+				})
+			
+		}
+		return false;
+		})
+		
+	
+	$("#btncbLike").on("click", function(){
+		const userID = "mok555"
+		const cbNo = ${codyBoard.no}
+		console.log(cbNo)
+		$.ajax({
+			url:"../cblike/cblike?userID=" + userID + "&cbNo=" + cbNo
+		
+			})
+			
+		return false;
+		
+		})
+	
+	
+	
 	
 </script>
 <%@ include file="../include/footer.jsp"%>

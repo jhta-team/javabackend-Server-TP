@@ -4,4 +4,16 @@
 	<insert id="insertCbReply" parameterType="CbReplyDto">
 		insert into cbreply VALUES(seq_cbreply.nextval, #{replyUserID}, #{reply}, sysdate, #{codyBoardNo}, #{cbCommentNo})
 	</insert>
+	
+	<select id="findCbReply" parameterType="int" resultType="CbReplyDto">
+		SELECT re.* FROM cbcomment co inner JOIN cbreply re ON #{codyBoardNo}  = re.CODYBOARDNO AND co.no = re.CBCOMMENTNO ORDER BY co.NO asc, re.no asc
+	</select>
+	
+	<update id="updateReply" parameterType="CbReplyUpdateDto">
+		UPDATE cbreply SET reply= #{replyUpdate} WHERE NO = #{no}
+	</update>
+	
+	<delete id="deleteReply" parameterType="int">
+		delete from cbreply where no=#{replyNo}
+	</delete>
 </mapper>

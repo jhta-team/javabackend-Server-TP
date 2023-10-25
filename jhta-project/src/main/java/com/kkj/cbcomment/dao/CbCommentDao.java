@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 
 import com.kkj.cbcomment.dto.CbCommentDto;
+import com.kkj.cbcomment.dto.CbCommentUpdateDto;
 import com.kkj.mybatis.MybatisConnectionFactory;
 
 public class CbCommentDao {
@@ -23,6 +24,22 @@ public class CbCommentDao {
 		cbCommentList = sqlSession.selectList("findAllCbComment", codyBoardNo);
 		System.out.println(cbCommentList);
 		return cbCommentList;
+	}
+
+	public int update(CbCommentUpdateDto cbCommentUpadteDto) {
+		int result = 0;
+		SqlSession sqlSession = MybatisConnectionFactory.getSqlSession();
+		result = sqlSession.update("updateCbComment", cbCommentUpadteDto);
+		return result;
+		
+	}
+
+	public int delete(int cbCommentNo) {
+		int result = 0;
+		SqlSession sqlSession = MybatisConnectionFactory.getSqlSession();
+		result = sqlSession.delete("deleteCbComment", cbCommentNo);
+		return result;
+		
 	}
 	
 }

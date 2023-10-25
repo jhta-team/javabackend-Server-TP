@@ -1,25 +1,25 @@
-package com.kkj.member.controller;
+package com.kkj.cbcomment.controller;
 
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-
 import java.io.IOException;
 
+import com.kkj.cbcomment.dao.CbCommentDao;
+import com.kkj.cbcomment.dto.CbCommentUpdateDto;
+
 /**
- * Servlet implementation class MemberInfoModify
+ * Servlet implementation class CbCommentUpdate
  */
-public class MemberInfoModify extends HttpServlet {
+public class CbCommentUpdate extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberInfoModify() {
+    public CbCommentUpdate() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,12 +28,21 @@ public class MemberInfoModify extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/member/infoModify.jsp");
-		HttpSession session = request.getSession();
-		dispatcher.forward(request, response);
-		if(session.getAttribute("modalState")!=null) {
-			session.removeAttribute("modalState");
+		System.out.println("댓글업데이트!!!");
+		int cbCommentNo = Integer.parseInt(request.getParameter("cbCommentNo"));
+		String cbCommentUpdate = request.getParameter("cbCommentUpdate");
+		
+		CbCommentUpdateDto cbCommentUpdateDto = new CbCommentUpdateDto();
+		cbCommentUpdateDto.setNo(cbCommentNo);
+		cbCommentUpdateDto.setCbCommentUpdate(cbCommentUpdate);
+		CbCommentDao cbCommentDao = new CbCommentDao();
+		int result = cbCommentDao.update(cbCommentUpdateDto);
+		if(result > 0) {
+			System.out.println("댓글 업데이트 성공");
+		}else {
+			System.out.println("댓글 업데이트 실패");
 		}
+		
 	}
 
 	/**

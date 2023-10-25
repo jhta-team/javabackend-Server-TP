@@ -11,7 +11,7 @@
   	<insert id="insertMember" parameterType="MemberDto" >
   		insert into member values(#{userID},#{userPW},#{userName},#{gender},
   		#{address},#{detailAddress},#{postCode},#{email},#{mobileTelcom},#{tel},
-  		#{profile},#{nickName},sysdate,4) 
+  		#{profile},#{nickName},sysdate,seq_member.nextval,0) 
   	</insert>
   	
   	<select id="idCheck" parameterType="String" resultType="int">
@@ -32,7 +32,7 @@
   	</select>
   	<update id="infoUpdateMember" parameterType="MemberDto">
   		update member set nickName = #{nickName}, postCode = #{postCode},address=#{address}, detailAddress=#{detailAddress},email=#{email},
-  		tel=#{tel}, profile=#{profile}, userName=#{userName} where userID=#{userID}
+  		tel=#{tel}, profile=#{profile}, userName=#{userName},mobileTelcom=#{mobileTelcom} where userID=#{userID}
   	</update>
   	<delete id="deleteMember" parameterType="HashMap">
   		delete from member where userID = #{userID} and userPW = #{userPW}

@@ -6,6 +6,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
 
 /**
@@ -29,6 +31,10 @@ public class IndexController extends HttpServlet {
 		// TODO Auto-generated method stub
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/index/index.jsp");
 		dispatcher.forward(request, response);
+		HttpSession session = request.getSession();
+		if(session.getAttribute("modalState")!=null) {
+			session.removeAttribute("modalState");
+		}
 	}
 
 	/**

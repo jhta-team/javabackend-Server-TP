@@ -1,24 +1,24 @@
-package com.kkj.member.controller;
+package com.kkj.cbcomment.controller;
 
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-
 import java.io.IOException;
 
+import com.kkj.cbcomment.dao.CbCommentDao;
+
 /**
- * Servlet implementation class MemberLogin
+ * Servlet implementation class CbCommentDelete
  */
-public class MemberLogin extends HttpServlet {
+public class CbCommentDelete extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberLogin() {
+    public CbCommentDelete() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,12 +27,15 @@ public class MemberLogin extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		if(session.getAttribute("modalState")!=null) {
-			session.removeAttribute("modalState");
+		int cbCommentNo = Integer.parseInt(request.getParameter("cbCommentNo"));
+		System.out.println(cbCommentNo);
+		CbCommentDao cbCommentDao = new CbCommentDao();
+		int result = cbCommentDao.delete(cbCommentNo);
+		if(result > 0) {
+			System.out.println("댓글 삭제 성공");
+		}else {
+			System.out.println("댓글 삭제 실패");
 		}
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/member/login.jsp");
-		dispatcher.forward(request, response);
 	}
 
 	/**

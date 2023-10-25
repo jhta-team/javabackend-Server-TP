@@ -17,6 +17,18 @@ public class MemberDto {
 	private String regdate;
 	private int no;
 
+	private String tel01;
+	private String tel02;
+	private String tel03;
+	private String adminNumber;
+	
+	public String getAdminNumber() {
+		return adminNumber;
+	}
+	public void setAdminNumber(String adminNumber) {
+		this.adminNumber = adminNumber;
+	}
+
 	public String getUserID() {
 		return userID;
 	}
@@ -100,6 +112,24 @@ public class MemberDto {
 	}
 	public void setNo(int no) {
 		this.no = no;
+	}
+	public String getTel01() {
+		return tel01;
+	}
+	public void setTel01(String tel01) {
+		this.tel01 = tel01;
+	}
+	public String getTel02() {
+		return tel02;
+	}
+	public void setTel02(String tel02) {
+		this.tel02 = tel02;
+	}
+	public String getTel03() {
+		return tel03;
+	}
+	public void setTel03(String tel03) {
+		this.tel03 = tel03;
 	}
 	
 }
