@@ -30,5 +30,9 @@
 	<update id="codyBoardHit" parameterType="int">
 		update codyboard set hit=hit + 1 where no = #{codyBoardNo}
 	</update>
+	
+	<delete id="codyBoardDelete" parameterType="int">
+		delete from codyboard where no = #{codyBaordNo}
+	</delete>
 </mapper>
 

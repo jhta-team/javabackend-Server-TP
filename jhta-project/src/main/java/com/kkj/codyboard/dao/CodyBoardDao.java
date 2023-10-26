@@ -71,4 +71,11 @@ public class CodyBoardDao {
 		return result;
 	}
 
+	public int delete(int codyBoardNo) {
+		int result = 0;
+		SqlSession sqlSession = MybatisConnectionFactory.getSqlSession();
+		result = sqlSession.delete("codyBoardDelete", codyBoardNo);
+		return result;
+	}
+
 }

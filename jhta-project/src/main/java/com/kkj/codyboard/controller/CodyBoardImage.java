@@ -50,7 +50,12 @@ public class CodyBoardImage {
 			e.printStackTrace();
 		}
 		return saveUpdateImage;
-		
-		
+	}
+	
+	public boolean delete(HttpServletRequest request, HttpServletResponse response) {
+		String image = request.getParameter("image");
+		String uploadDirectory = "/Users/junghunmok/upload";
+		File myImage = new File(uploadDirectory + File.separator + image);
+		return myImage.delete();
 	}
 }
