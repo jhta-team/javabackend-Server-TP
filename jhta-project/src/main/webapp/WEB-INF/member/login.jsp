@@ -5,7 +5,8 @@
     <h1 class="h3 mb-3 fw-normal">로그인</h1>
     <div class="form-floating">
       <input type="hidden" id="adminNumber" name="adminNumber">
-      <input type="text" class="form-control" id="userID" placeholder="ID" name="userID">
+      <input type="text" class="form-control" id="userID" placeholder="ID" name="userID" value="${cookie.cookieID.value }">
+       
       <label for="userID">ID</label>
     </div>
     <div class="form-floating">
@@ -13,7 +14,9 @@
       <label for="userPW">Password</label>
     </div>
     <div class="form-check text-start my-3">
-      <input class="form-check-input" type="checkbox" name="check" value="1" id="flexCheckDefault">
+      <input class="form-check-input" type="checkbox" name="check" value="1" id="check" 
+       <c:if test="${cookie.cookieID.value !=null}">checked</c:if>>
+       
       <label class="form-check-label" for="flexCheckDefault">
         Remember me
       </label>

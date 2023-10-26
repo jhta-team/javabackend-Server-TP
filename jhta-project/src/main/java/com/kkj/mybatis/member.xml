@@ -41,10 +41,14 @@
   		SELECT  *  FROM (SELECT rownum AS num, r.* FROM (SELECT *FROM  MEMBER ORDER BY no DESC)r)
   		where num  <![CDATA[>=]]> #{start} and num  <![CDATA[<=]]> #{end} and adminNumber <![CDATA[<=]]> 5
   	</select>
-  	<update id="blackUpdate" parameterType="int">
-  		update member set adminNumber = 6 where no = #{no}
+  	<update id="blackUpdate" parameterType="HashMap">
+  		update member set adminNumber = #{adminNumber} where no = #{no}
   	</update>
   	<update id="blackUpdateAll" parameterType="HashMap">
-  		update member set adminNumber = 6 where no = #{no}
+  		update member set adminNumber = #{adminNumber} where no = #{no}
   	</update>
+  	<select id="blackListMember" parameterType="HashMap" resultType="MemberDto">
+  		SELECT  *  FROM (SELECT rownum AS num, r.* FROM (SELECT *FROM  MEMBER ORDER BY no DESC)r)
+  		where num  <![CDATA[>=]]> #{start} and num  <![CDATA[<=]]> #{end} and adminNumber <![CDATA[=]]> 6
+  	</select>
 </mapper>

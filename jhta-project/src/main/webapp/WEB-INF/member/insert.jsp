@@ -121,7 +121,7 @@
             <div class="mb-3">
               <label for="mobile" class="form-label">통신사</label>
 				<select id="mobile" class="form-control" name="mobileTelcom">
-    				<option id="telcom"value="untitled" selected>통신사 선택</option> 
+    				<option id="telcom" value="untitled" selected>통신사 선택</option> 
     				<option id="telcom" value="LG">LGU+</option>
     				<option id="telcom" value="SKT">SKT</option>
     				<option id="telcom" value="KT" >KT</option>
@@ -454,7 +454,7 @@
     	  }
     	  const reader = new FileReader();
     	  reader.onload = function(e){
-    		  $(".preview").html(`<img src="\${e.target.result}">`);
+    		  $(".preview").html(`<img class="imgForm" src="\${e.target.result}">`);
     	  }
     	  reader.readAsDataURL(file);
       });

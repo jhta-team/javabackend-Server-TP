@@ -32,21 +32,31 @@ public class MemberBlackAll extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String idx[] = request.getParameterValues("check");
-		HashMap<String,Integer> map = new HashMap();
-		//ArrayList<HashMap<String,Integer>> list = new ArrayList();
-		MemberDao memberDao = new MemberDao();
-		
-		for(int i=0;i<idx.length;i++) {
-			map.put("no", Integer.parseInt(idx[i]));
-			int result = memberDao.blackUpdateAll(map);
+		int ad=0;
+		String strAd = request.getParameter("ad");
+		if(strAd!=null && !strAd.isEmpty()) {
+			ad=Integer.parseInt(strAd);
 		}
+		HashMap<String,Integer> map = new HashMap();
 		HashMap<String,Boolean> isMap = new HashMap();
-		isMap.put("isBalck", true);
+		MemberDao memberDao = new MemberDao();		
+		map.put("adminNumber",ad);
+		if(idx !=null && idx.length>0) {
+			for(int i=0;i<idx.length;i++) {
+				map.put("no", Integer.parseInt(idx[i]));
+				int result = memberDao.blackUpdateAll(map);
+			}			
+			isMap.put("isBalck", true);
+		} 
+		else{ 
+			isMap.put("isBlack", false); 
+		}
+			 
 		Gson gson = new Gson();
 		String json = (String)gson.toJson(isMap);
-		request.setAttribute("json", json);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/member/blackCheckAll.jsp");
-			dispatcher.forward(request, response);
+		request.setAttribute("json", json);			
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/member/blackCheckAll.jsp");
+		dispatcher.forward(request, response);
 		
 	}
 
