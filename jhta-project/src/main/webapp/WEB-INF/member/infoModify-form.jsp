@@ -138,6 +138,14 @@
     </div>
 
     <script> 
+    $("#btnSubmit").on("click", function(){
+    	const check = confirm("정보 변경하시겠습니까?")
+    	if(check){
+    		return true;
+    	}else{
+    		return false;
+    	}
+    })
     //비밀번호 변경 확인
     $("#btnPasswordCheck").on("click",function(){
     	const userpw = confirm("비밀번호를 변경하시겠습니까?")

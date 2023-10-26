@@ -1,5 +1,6 @@
 package com.kkj.member.controller;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -116,9 +117,7 @@ public class MemberInfoModifyUpdate extends HttpServlet {
 					file.delete();										
 				}
 			}
-			ModalState modalState = new ModalState("show", "정보 변경하시겠습니까?");
-		    session.setAttribute("modalState", modalState);
-			response.sendRedirect("../member/update-check?modalCheck="+modalCheck);
+			response.sendRedirect("../member/info");
 		}else {
 			ScriptWriter.alertAndBack(response, "서버오류입니다.");
 		}
