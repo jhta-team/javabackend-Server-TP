@@ -26,4 +26,12 @@ public class ProductSizeDao {
 		return productSizeDto;
 	}
 
+	public int updateProductSize(ProductSizeDto productSizeDto) {
+		int result = 0;
+		SqlSession sqlSession = MybatisConnectionFactory.getSqlSession();
+		result = sqlSession.update("updateProductSize", productSizeDto);
+		sqlSession.close();
+		return result;
+	}
+
 }

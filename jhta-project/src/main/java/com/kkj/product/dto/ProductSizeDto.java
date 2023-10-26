@@ -2,10 +2,21 @@ package com.kkj.product.dto;
 
 public class ProductSizeDto {
 
+	int pdtId;
 	int pdtCountS;
 	int pdtCountM;
 	int pdtCountL;
 	int pdtCountXL;
+
+	
+	
+	public int getPdtId() {
+		return pdtId;
+	}
+
+	public void setPdtId(int pdtId) {
+		this.pdtId = pdtId;
+	}
 
 	public int getPdtCountS() {
 		return pdtCountS;

@@ -3,6 +3,20 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="com.kkj.mybatis">	
+ <update id="updateProductSize" parameterType="ProductSizeDto">
+ 	  <![CDATA[
+    UPDATE PDT_size
+    SET pdtcount =
+      CASE
+        WHEN sizeid = 1 THEN #{pdtCountS}
+        WHEN sizeid = 2 THEN #{pdtCountM}
+        WHEN sizeid = 3 THEN #{pdtCountL}
+        WHEN sizeid = 4 THEN #{pdtCountXL}
+      END
+    WHERE pdtid = #{pdtId}
+      AND sizeid IN (1, 2, 3, 4)
+  ]]>
+</update>
  <insert id="insertProductSize" parameterType="ProductSizeDto">
 	INSERT ALL
 	INTO PDT_SIZE (pdt_size_id, sizeid, pdtid, pdtcount) VALUES (seq_pdt_size.nextval, 1, seq_product.currval, #{pdtCountS})

@@ -16,8 +16,10 @@ import java.util.Date;
 
 import com.kkj.product.dao.ImageDao;
 import com.kkj.product.dao.ProductDao;
+import com.kkj.product.dao.ProductSizeDao;
 import com.kkj.product.dto.ImageDto;
 import com.kkj.product.dto.ProductDto;
+import com.kkj.product.dto.ProductSizeDto;
 import com.kkj.product.util.FileManager;
 import com.kkj.product.util.ScriptWriter;
 
@@ -44,6 +46,19 @@ public class ProductModifyProcess extends HttpServlet {
 		String pdtContent = request.getParameter("pdtContent");
 		//String strCount = request.getParameter("pdtPrice");
 		//int pdtCount = Integer.parseInt(strCount.replaceFirst("^0+(?!$)", ""));
+		
+		int pdtCountS = Integer.parseInt(request.getParameter("pdtCountS"));
+		System.out.println(pdtCountS);
+		int pdtCountM = Integer.parseInt(request.getParameter("pdtCountM"));
+		System.out.println(pdtCountM);
+		int pdtCountL = Integer.parseInt(request.getParameter("pdtCountS"));
+		System.out.println(pdtCountL);
+		int pdtCountXL = Integer.parseInt(request.getParameter("pdtCountXL"));
+		System.out.println(pdtCountXL);
+		
+		
+		
+		
 		Collection<Part> parts = request.getParts();
 		String strState = request.getParameter("pdtState");
 		int pdtState = Integer.parseInt(strState);
@@ -70,9 +85,8 @@ public class ProductModifyProcess extends HttpServlet {
 		String img2 = "";
 		String img3 = "";
 
-		ImageDao imageDao = new ImageDao();
-		ImageDto imageDto = new ImageDto();
-		int resultImage = 0;
+
+
 		int partIndex = 1;
 		for (Part part : parts) {
 			if (part.getName().startsWith("pdtImage") && part.getSubmittedFileName().isEmpty()) {
@@ -101,11 +115,14 @@ public class ProductModifyProcess extends HttpServlet {
 				pdtThum = folderName + "/" + fileManager.changeFileName(part, dir, strNow);
 			}
 		}
+		//상품 추가 이미지 관련
+		ImageDao imageDao = new ImageDao();
+		ImageDto imageDto = new ImageDto();
 		imageDto.setPdtId(pdtId);
 		imageDto.setImg1(img1);
 		imageDto.setImg2(img2);
 		imageDto.setImg3(img3);
-		resultImage = imageDao.updateImg(imageDto);
+		int resultImage = imageDao.updateImg(imageDto);
 		
 		//상품테이블 관련
 		ProductDto productDto = new ProductDto();
@@ -119,6 +136,16 @@ public class ProductModifyProcess extends HttpServlet {
 		productDto.setPdtThum(pdtThum);
 		productDto.setPdtState(pdtState);
 		int resultProduct = productDao.updateProduct(productDto);
+		
+		//상품사이즈 관련
+		ProductSizeDao productSizeDao = new ProductSizeDao();
+		ProductSizeDto productSizeDto = new ProductSizeDto();
+		productSizeDto.setPdtId(pdtId);
+		productSizeDto.setPdtCountS(pdtCountS);
+		productSizeDto.setPdtCountM(pdtCountM);
+		productSizeDto.setPdtCountL(pdtCountL);
+		productSizeDto.setPdtCountXL(pdtCountXL);
+		productSizeDao.updateProductSize(productSizeDto);
 
 
 		// 결과값 처리
