@@ -60,8 +60,8 @@ public class FileManager {
 		ImageDao imgDao = new ImageDao();
 		ImageDto imgDto = imgDao.selectOneImg(pdtId);
 		File file1  = new File(uploadDirectory + imgDto.getImg1());
-		File file2  = new File(uploadDirectory + imgDto.getImg1());
-		File file3  = new File(uploadDirectory + imgDto.getImg1());
+		File file2  = new File(uploadDirectory + imgDto.getImg2());
+		File file3  = new File(uploadDirectory + imgDto.getImg3());
 		if(file1.exists()) {file1.delete();}
 		if(file1.exists()) {file2.delete();}
 		if(file1.exists()) {file3.delete();}		

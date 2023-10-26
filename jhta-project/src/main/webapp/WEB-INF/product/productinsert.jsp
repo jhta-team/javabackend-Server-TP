@@ -97,7 +97,7 @@
 		</div>
 	</form>
 </div>
-
+<script src="https://cdn.ckeditor.com/ckeditor5/39.0.2/classic/ckeditor.js"></script>
 <script>
 	/* 썸네일 미리보기 */
 	$("#pdtThum")
@@ -125,26 +125,26 @@
 					});
 
 	/* 파일 이미지 여러개 추가 실시간 */
+
 	$("#pdtImage").on("change", function(e){
 		const input = document.getElementById('pdtImage');
 		const files = input.files;
 		console.log(files.length);
-		if (files.length >= 0 && files.length < 4 ) {
-	        //input.setCustomValidity(""); // 유효성 메시지를 지웁니다.
-	        $(input).removeClass("is-invalid");
-
+		if (files.length < 4 ) {
+	        input.setCustomValidity(""); // 유효성 메시지를 지웁니다.
+	        $(input).removeClass("is-invalid");  
 		}else {
-			//input.setCustomValidity("이미지는 최대 4개까지 선택할 수 있습니다.");
-	        $(input).addClass("is-invalid");
+	        $(input).addClass('is-invalid');
+	        
 		} 
 	});
-	
+
 	
 	function uploadFiles() {
 		const input = document.getElementById('pdtImage');
 		const files = input.files;
 		console.log(files.length);
-		if (files.length >= 0 && files.length < 4 ) {
+		if (files.length > 0 && files.length < 4 ) {
 			const formData = new FormData();
 			for (let i = 0; i < files.length; i++) {
 				formData.append(i, files[i]);
@@ -161,7 +161,27 @@
 			return false;
 		}
 	}
+	//ckeditor
+	ClassicEditor
+	.create( document.querySelector( "#pdtContent" ),{
+		ckfinder:{
+			uploadUrl:"../product/imgupload",success:function(response){
+				console.log(response)
+			}
+		}, 
+	})
+	.catch( error => {
+	    console.error( error );
+	});
+
+
+	$.ajax({url:"../product/imgupload",success:function(response) {
+		console.log(response)
+	}})
 	
+	
+	
+	//validation 
 	const forms = document.querySelectorAll('.needs-validation')
 
 	  // Loop over them and prevent submission
@@ -175,8 +195,5 @@
 	      form.classList.add('was-validated')
 	    }, false)
 	  })
-
-
-
 </script>
 <%@ include file="../include/footer.jsp"%>
