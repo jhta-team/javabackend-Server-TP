@@ -1,7 +1,9 @@
 package com.kkj.member.dao;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -61,6 +63,24 @@ public class MemberDao {
 		int result=0;
 		SqlSession sqlSession = MybatisConnectionFactory.getSqlSession();
 		result = sqlSession.delete("deleteMember", deleteMap);
+		return result;
+	}
+	public List<MemberDto> listMember(HashMap<String,Integer> map){
+		List<MemberDto> memberList = null;
+		SqlSession sqlSession = MybatisConnectionFactory.getSqlSession();
+		memberList =sqlSession.selectList("listMember", map);
+		return memberList;
+	}
+	public int blackUpdate(int no) {
+		int result=0;
+		SqlSession sqlSession = MybatisConnectionFactory.getSqlSession();
+		result = sqlSession.update("blackUpdate", no);
+		return result;
+	}
+	public int blackUpdateAll(HashMap<String,Integer> map) {
+		int result=0;
+		SqlSession sqlSession = MybatisConnectionFactory.getSqlSession();
+		result = sqlSession.update("blackUpdateAll", map);
 		return result;
 	}
 }

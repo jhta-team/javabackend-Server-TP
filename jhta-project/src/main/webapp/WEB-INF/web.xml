@@ -388,5 +388,32 @@
   <servlet-mapping>
     <servlet-name>ImageUpload</servlet-name>
     <url-pattern>/product/imgupload</url-pattern>
+    <display-name>MemberList</display-name>
+    <servlet-name>MemberList</servlet-name>
+    <servlet-class>com.kkj.member.controller.MemberList</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MemberList</servlet-name>
+    <url-pattern>/member/list</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>MemberBlack</display-name>
+    <servlet-name>MemberBlack</servlet-name>
+    <servlet-class>com.kkj.member.controller.MemberBlack</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MemberBlack</servlet-name>
+    <url-pattern>/member/black</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>MemberBlackAll</display-name>
+    <servlet-name>MemberBlackAll</servlet-name>
+    <servlet-class>com.kkj.member.controller.MemberBlackAll</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MemberBlackAll</servlet-name>
+    <url-pattern>/member/blackAll</url-pattern>
   </servlet-mapping>
 </web-app>
