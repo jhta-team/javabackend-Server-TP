@@ -7,33 +7,33 @@
 			<p>썸네일</p>
 			<img src="${pageContext.request.contextPath }/upload/${detailDto.pdtThum }" width="100%">
 			<div class="image_box d-flex">
-			<c:choose>
-				<c:when test="${!imageDto.img1.equals('null')}">
-					<div class="image_detail p-2">
-						<img class="image1" width="100" src="${pageContext.request.contextPath}/upload/${imageDto.img1}">
-						<p>상품 이미지1: ${imageDto.img1}</p>
-					</div>
-				</c:when>
-			</c:choose>
+				<c:choose>
+					<c:when test="${!imageDto.img1.equals('null')}">
+						<div class="image_detail p-2">
+							<img class="image1" width="100" src="${pageContext.request.contextPath}/upload/${imageDto.img1}">
+							<p>상품 이미지1: ${imageDto.img1}</p>
+						</div>
+					</c:when>
+				</c:choose>
 
-			<c:choose>
-				<c:when test="${!imageDto.img2.equals('null')}">
-					<div class="image_detail p-2">
-						<img class="image2" width="100" src="${pageContext.request.contextPath}/upload/${imageDto.img2}">
-						<p>상품 이미지2: ${imageDto.img2}</p>
-					</div>
-				</c:when>
-			</c:choose>
+				<c:choose>
+					<c:when test="${!imageDto.img2.equals('null')}">
+						<div class="image_detail p-2">
+							<img class="image2" width="100" src="${pageContext.request.contextPath}/upload/${imageDto.img2}">
+							<p>상품 이미지2: ${imageDto.img2}</p>
+						</div>
+					</c:when>
+				</c:choose>
 
-			<c:choose>
-				<c:when test="${!imageDto.img3.equals('null')}">
-					<div class="image_detail p-2">
-						<img class="image3" width="100" src="${pageContext.request.contextPath}/upload/${imageDto.img3}">
-						<p>상품 이미지3: ${imageDto.img3}</p>
-					</div>
-				</c:when>
-			</c:choose>
-		</div>
+				<c:choose>
+					<c:when test="${!imageDto.img3.equals('null')}">
+						<div class="image_detail p-2">
+							<img class="image3" width="100" src="${pageContext.request.contextPath}/upload/${imageDto.img3}">
+							<p>상품 이미지3: ${imageDto.img3}</p>
+						</div>
+					</c:when>
+				</c:choose>
+			</div>
 		</div>
 		<div class="top right p-2">
 			<div class="detail_info">
@@ -53,6 +53,34 @@
 					<option value="yellow">노랑</option>
 				</select>
 			</div>
+			<div class="row d-flex justify-content-left mb-2">
+				<div class="col-10">
+					<label for="pdtSize" class="form-label">상품사이즈</label> <select class="form-select" aria-label="Default select example" name="pdtSize" required="required">
+						<option value="">사이즈를 선택하세요</option>
+						<c:choose>
+							<c:when test="${productSizeDto.pdtCountS ne 0 }">
+								<option value="1">S : ${productSizeDto.pdtCountS }</option>
+							</c:when>
+						</c:choose>
+						<c:choose>
+							<c:when test="${productSizeDto.pdtCountM ne 0 }">
+								<option value="2">M : ${productSizeDto.pdtCountM }</option>
+							</c:when>
+						</c:choose>
+						<c:choose>
+							<c:when test="${productSizeDto.pdtCountL ne 0 }">
+								<option value="3">L : ${productSizeDto.pdtCountL }</option>
+							</c:when>
+						</c:choose>
+						<c:choose>
+							<c:when test="${productSizeDto.pdtCountXL ne 0 }">
+								<option value="4">XL : ${productSizeDto.pdtCountXL }</option>
+							</c:when>
+						</c:choose>
+					</select>
+					<div class="invalid-feedback">사이즈 선택은 필수</div>
+				</div>
+			</div>
 			<div class="buttons pb-3">
 				<button>주문하기</button>
 				<button>장바구니</button>
@@ -61,7 +89,7 @@
 	</div>
 	<div class="main-img pt-3">
 		<h2 class="pb-2 border-bottom">상품 내용</h2>
-		<p>${detailDto.pdtContent }</p>		
+		<p>${detailDto.pdtContent }</p>
 	</div>
 </div>
 <%@ include file="../include/footer.jsp"%>

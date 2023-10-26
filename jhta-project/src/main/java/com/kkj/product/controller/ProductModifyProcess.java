@@ -42,14 +42,14 @@ public class ProductModifyProcess extends HttpServlet {
 		int pdtPrice = Integer.parseInt(strPrice.replaceFirst("^0+(?!$)", ""));
 		String pdtColor = request.getParameter("pdtColor");
 		String pdtContent = request.getParameter("pdtContent");
-		String strCount = request.getParameter("pdtPrice");
-		int pdtCount = Integer.parseInt(strCount.replaceFirst("^0+(?!$)", ""));
+		//String strCount = request.getParameter("pdtPrice");
+		//int pdtCount = Integer.parseInt(strCount.replaceFirst("^0+(?!$)", ""));
 		Collection<Part> parts = request.getParts();
 		String strState = request.getParameter("pdtState");
 		int pdtState = Integer.parseInt(strState);
-		if (pdtCount == 0) {
-			pdtState = 0;
-		}
+		//if (pdtCount == 0) {
+		//	pdtState = 0;
+		//}
 
 		// 파일 저장 관련 변수들
 		String uploadDirectory = "C:\\upload";
@@ -114,7 +114,6 @@ public class ProductModifyProcess extends HttpServlet {
 		productDto.setPdtName(pdtName);
 		productDto.setPdtCty(pdtCty);
 		productDto.setPdtPrice(pdtPrice);
-		productDto.setPdtCount(pdtCount);
 		productDto.setPdtColor(pdtColor);
 		productDto.setPdtContent(pdtContent);
 		productDto.setPdtThum(pdtThum);

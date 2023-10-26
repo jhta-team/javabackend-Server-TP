@@ -7,11 +7,15 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.kkj.product.dao.ImageDao;
 import com.kkj.product.dao.ProductDao;
+import com.kkj.product.dao.ProductSizeDao;
 import com.kkj.product.dto.ImageDto;
 import com.kkj.product.dto.ProductDto;
+import com.kkj.product.dto.ProductSizeDto;
 
 public class ProductDetail extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -33,6 +37,17 @@ public class ProductDetail extends HttpServlet {
 		ImageDto imageDto = new ImageDto();
 		imageDto = imageDao.selectOneImg(pdtId);
 		request.setAttribute("imageDto", imageDto);
+		
+		ProductSizeDto productSizeDto = new ProductSizeDto();
+		ProductSizeDao productSizeDao = new ProductSizeDao();
+		productSizeDto = productSizeDao.selectProductSize(pdtId);
+		System.out.println(productSizeDto.getPdtCountS());
+		System.out.println(productSizeDto.getPdtCountM());
+		System.out.println(productSizeDto.getPdtCountL());
+		System.out.println(productSizeDto.getPdtCountXL());
+		request.setAttribute("productSizeDto", productSizeDto);
+		
+
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/product/productdetail.jsp");
 		dispatcher.forward(request, response);

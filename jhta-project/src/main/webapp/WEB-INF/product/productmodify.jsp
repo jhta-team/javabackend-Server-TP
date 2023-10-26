@@ -51,17 +51,24 @@
 				</div>
 								
 				<div class="row d-flex justify-content-left mb-2">
-					<div class="col-10">
-						<label for="pdtCount" class="form-label">상품수량</label> <input type="number" min="0" class="form-control" id="pdtCount" placeholder="" name="pdtCount" required="required"
-						value="${Product.pdtCount }" />
-						<div class="invalid-feedback">숫자만 쓸 수 있습니다</div>
+					<label for="pdtCount" class="form-label">상품 수량 입력</label><br>
+					<div class="col-10 d-flex" >						
+						<label for="pdtCount" class="form-label">S</label>
+						<input type="number" min="0" class="form-control" id="pdtCountS" placeholder="" name="pdtCountS" required="required" value="${productSizeDto.pdtCountS }" />
+						<label for="pdtCount" class="form-label">M</label>
+						<input type="number" min="0" class="form-control" id="pdtCountM" placeholder="" name="pdtCountM" required="required" value="${productSizeDto.pdtCountM }"/>
+						<label for="pdtCount" class="form-label">L</label>
+						<input type="number" min="0" class="form-control" id="pdtCountL" placeholder="" name="pdtCountL" required="required" value="${productSizeDto.pdtCountL }" />
+						<label for="pdtCount" class="form-label">XL</label>
+						<input type="number" min="0" class="form-control" id="pdtCountXL" placeholder="" name="pdtCountXL" required="required" value="${productSizeDto.pdtCountXL }"/>
 					</div>
+					<div class="invalid-feedback">숫자만 쓸 수 있습니다</div>
 				</div>
 				
 				<div class="row d-flex justify-content-left mb-2">
 					<div class="col-10">
-						<label for="pdtState" class="form-label">상품상태(1:진열),(0:매진)</label> <input type="number" min="0" max="1" class="form-control" id="pdtState" placeholder="" name="pdtState" required="required"
-						value="${Product.pdtState }" />
+						<label for="pdtState" class="form-label">상품상태(1:진열),(0:매진)</label> 
+						<input type="number" min="0" max="1" class="form-control" id="pdtState" placeholder="" name="pdtState" required="required" value="${Product.pdtState }" />
 						<div class="invalid-feedback">숫자만 쓸 수 있습니다</div>
 					</div>
 				</div>

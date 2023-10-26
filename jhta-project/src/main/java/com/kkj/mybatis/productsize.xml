@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="com.kkj.mybatis">	
+ <insert id="insertProductSize" parameterType="ProductSizeDto">
+	INSERT ALL
+	INTO PDT_SIZE (pdt_size_id, sizeid, pdtid, pdtcount) VALUES (seq_pdt_size.nextval, 1, seq_product.currval, #{pdtCountS})
+	INTO PDT_SIZE (pdt_size_id, sizeid, pdtid, pdtcount) VALUES (seq_pdt_size.nextval+1, 2, seq_product.currval, #{pdtCountM})
+	INTO PDT_SIZE (pdt_size_id, sizeid, pdtid, pdtcount) VALUES (seq_pdt_size.nextval+2, 3, seq_product.currval, #{pdtCountL})
+	INTO PDT_SIZE (pdt_size_id, sizeid, pdtid, pdtcount) VALUES (seq_pdt_size.nextval+3, 4, seq_product.currval, #{pdtCountXL})
+	SELECT * FROM DUAL
+ </insert>
+ 
+ <select id="selectProductCount" parameterType="int" resultType="ProductSizeDto">
+SELECT
+    pdt1.pdtcount AS pdtcounts,
+    pdt2.pdtcount AS pdtcountm,
+    pdt3.pdtcount AS pdtcountl,
+    pdt4.pdtcount AS pdtcountxl
+FROM
+    (SELECT pdtcount FROM PDT_SIZE WHERE pdtid = #{pdtId} AND sizeid = 1) pdt1
+CROSS JOIN
+    (SELECT pdtcount FROM PDT_SIZE WHERE pdtid = #{pdtId} AND sizeid = 2) pdt2
+CROSS JOIN
+    (SELECT pdtcount FROM PDT_SIZE WHERE pdtid = #{pdtId} AND sizeid = 3) pdt3
+CROSS JOIN
+    (SELECT pdtcount FROM PDT_SIZE WHERE pdtid = #{pdtId} AND sizeid = 4) pdt4
+ </select>
+</mapper>
