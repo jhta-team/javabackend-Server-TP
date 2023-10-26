@@ -321,6 +321,16 @@
   </servlet-mapping>
   <servlet>
     <description></description>
+    <display-name>MemberUpdateCheck</display-name>
+    <servlet-name>MemberUpdateCheck</servlet-name>
+    <servlet-class>com.kkj.member.controller.MemberUpdateCheck</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MemberUpdateCheck</servlet-name>
+    <url-pattern>/member/update-check</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
     <display-name>CbReplyUpdate</display-name>
     <servlet-name>CbReplyUpdate</servlet-name>
     <servlet-class>com.kkj.cbreply.controller.CbReplyUpdate</servlet-class>
@@ -371,6 +381,13 @@
   </servlet-mapping>
   <servlet>
     <description></description>
+    <display-name>ImageUpload</display-name>
+    <servlet-name>ImageUpload</servlet-name>
+    <servlet-class>com.kkj.product.controller.ImageUpload</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ImageUpload</servlet-name>
+    <url-pattern>/product/imgupload</url-pattern>
     <display-name>MemberList</display-name>
     <servlet-name>MemberList</servlet-name>
     <servlet-class>com.kkj.member.controller.MemberList</servlet-class>
