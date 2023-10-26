@@ -30,8 +30,7 @@ public class ProductModify extends HttpServlet {
 		ProductSizeDao productSizeDao = new ProductSizeDao();
 		ProductSizeDto productSizeDto = new ProductSizeDto();
 		productSizeDto = productSizeDao.selectProductSize(pdtId);
-		request.setAttribute("productSizeDto", productSizeDto);
-		System.out.println("이거" + productSizeDto.getPdtCountL());
+		request.setAttribute("productSizeDto", productSizeDto);		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/product/productmodify.jsp");
 		dispatcher.forward(request, response);
 	}
