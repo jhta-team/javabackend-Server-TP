@@ -7,7 +7,9 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
+import com.google.gson.Gson;
 import com.kkj.cbreply.dao.CbReplyDao;
 import com.kkj.cbreply.dto.CbReplyDto;
 
@@ -39,17 +41,17 @@ public class CbReplyInsert extends HttpServlet {
 		cbReplyDto.setReply(reply);
 		cbReplyDto.setCbCommentNo(cbCommentNo);
 		cbReplyDto.setCodyBoardNo(codyBoardNo);
-		System.out.println(replyUserID);
-		System.out.println(reply);
-		System.out.println(codyBoardNo);
-		System.out.println(cbCommentNo);
-		
+
 		CbReplyDao cbReplyDao = new CbReplyDao();
 	
 		int result = cbReplyDao.insert(cbReplyDto);
 		if(result > 0) {
 			System.out.println("등록성");
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/codyboard/findone?no=" + request.getParameter("codyBoardNo"));
+			Gson gson = new Gson();
+			String cbReply = (String)gson.toJson(cbReplyDto);
+			System.out.println(cbReply);
+			request.setAttribute("reply", cbReply);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/cbreply/reply.jsp");
 			dispatcher.forward(request, response);
 		}else {
 			System.out.println("등록실패@@");

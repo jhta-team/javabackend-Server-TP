@@ -1,12 +1,18 @@
 package com.kkj.cblike.controller;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+import com.google.gson.Gson;
 import com.kkj.cblike.dao.CbLikeDao;
 import com.kkj.cblike.dto.CbLikeDto;
 
@@ -36,10 +42,10 @@ public class cbLike extends HttpServlet {
 		cbLikeDto.setCbNo(cbNo);
 		cbLikeDto.setUserID(userID);
 		int findOne = cbLikeDao.findOne(cbLikeDto);
+		Map<String, Integer> cbLikeCount = new HashMap<String, Integer>();
 		if(findOne >0) {
 			int result = cbLikeDao.insetLike(cbLikeDto);
 			if(result > 0) {
-				System.out.println("좋아요 올라간다.");
 			}else {
 				System.out.println("이건 몰라요... 오류에요...");
 			}			
@@ -47,8 +53,17 @@ public class cbLike extends HttpServlet {
 			int result = cbLikeDao.delete(cbLikeDto);
 			if(result > 0) {
 				System.out.println("좋아요 취소!!");
+//				PrintWriter out = response.getWriter();
+//				out.append("1");
 			}
 		}
+		int count = cbLikeDao.findCount(cbNo);
+		cbLikeCount.put("count", count);
+		Gson gson = new Gson();
+		String json = (String)gson.toJson(cbLikeCount);
+		request.setAttribute("json", json);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/cblike/cblikecount.jsp");
+		dispatcher.forward(request, response);
 	}
 
 	/**
