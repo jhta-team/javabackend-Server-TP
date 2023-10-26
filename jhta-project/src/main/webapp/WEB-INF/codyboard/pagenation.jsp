@@ -46,7 +46,7 @@
 		</div>
 			
 		<div class="d-flex justify-content-center mt-3 mb-3">
-			<a href="../board/write" class="btn btn-primary">글쓰기</a>
+			<a href="../codyboard/insert" class="btn btn-primary">글쓰기</a>
 		</div>
 	</div>
 	

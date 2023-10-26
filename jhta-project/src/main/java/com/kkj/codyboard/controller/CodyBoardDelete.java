@@ -1,5 +1,6 @@
-package com.kkj.cbcomment.controller;
+package com.kkj.codyboard.controller;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -7,19 +8,18 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import com.kkj.cbcomment.dao.CbCommentDao;
-import com.kkj.cbcomment.dto.CbCommentUpdateDto;
+import com.kkj.codyboard.dao.CodyBoardDao;
 
 /**
- * Servlet implementation class CbCommentUpdate
+ * Servlet implementation class CodyBoardDelete
  */
-public class CbCommentUpdate extends HttpServlet {
+public class CodyBoardDelete extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CbCommentUpdate() {
+    public CodyBoardDelete() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,22 +28,20 @@ public class CbCommentUpdate extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("댓글업데이트!!!");
-		int cbCommentNo = Integer.parseInt(request.getParameter("cbCommentNo"));
-		String cbCommentUpdate = request.getParameter("cbCommentUpdate");
+		int codyBoardNo = Integer.parseInt(request.getParameter("no"));
+		System.out.println(codyBoardNo);
+		CodyBoardImage codyBoardImage = new CodyBoardImage();	
+		CodyBoardDao codyBoardDao = new CodyBoardDao();
+		int result = codyBoardDao.delete(codyBoardNo);
 		
-		CbCommentUpdateDto cbCommentUpdateDto = new CbCommentUpdateDto();
-		cbCommentUpdateDto.setNo(cbCommentNo);
-		cbCommentUpdateDto.setCbCommentUpdate(cbCommentUpdate);
-		CbCommentDao cbCommentDao = new CbCommentDao();
-		int result = cbCommentDao.update(cbCommentUpdateDto);
 		if(result > 0) {
-			System.out.println("댓글 업데이트 성공");
-			
-		}else {
-			System.out.println("댓글 업데이트 실패");
+			if(codyBoardImage.delete(request,response)) {
+				System.out.println("삭제성공");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/codyboard/page-nation");
+				dispatcher.forward(request, response);
+				
+			}
 		}
-		
 	}
 
 	/**

@@ -40,12 +40,13 @@ public class CodyBoardFindOne extends HttpServlet {
 		CbCommentDao cbCommentDao = new CbCommentDao();
 		CbReplyDao cbReplyDao = new CbReplyDao();
 		CbLikeDao cbLikeDao = new CbLikeDao();
-		
+		CodyBoardHitCookie codyBoardHitCookie = new CodyBoardHitCookie();
 		
 		
 		int codyBoardNo = Integer.parseInt(request.getParameter("no"));
 		int likeCount = cbLikeDao.findCount(codyBoardNo);
 		codyBoardDto = codyBoardDao.findOne(codyBoardNo);
+		codyBoardHitCookie.hitCount(request, response, codyBoardNo);
 		List<CbCommentDto> cbCommentList = cbCommentDao.findAll(codyBoardNo);
 		List<CbReplyDto> cbReplyList = cbReplyDao.find(codyBoardNo);
 		request.setAttribute("codyBoard", codyBoardDto);
@@ -54,7 +55,6 @@ public class CodyBoardFindOne extends HttpServlet {
 		request.setAttribute("likeCount", likeCount);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/codyboard/findone.jsp");
 		dispatcher.forward(request, response);
-		
 		
 	}
 

@@ -81,7 +81,7 @@
 					<!-- 여기는 로그인한 사람만 볼수있게 -->
 					<a href="../codyboard/update?no=${codyBoard.no}"
 						class="btn btn-primary mx-1">수정</a> <a
-						href="../codyboard/delete?no=${codyBoard.no}"
+						href="../codyboard/delete?no=${codyBoard.no}&image=${codyBoard.images}"
 						class="btn btn-danger mx-1">삭제</a>
 				</div>
 
@@ -234,11 +234,15 @@
 		const replyUpdate = $(this).prev().val();
 		$(this).prev().prop("type", "text")
 		console.log(replyUpdate)
-		console.log($(this).prev().prev().val())
+		console.log($(this).prev().prev().val());
+		$(".replyBox").append("<H1>TJDRHD</H1>")
 		if(replyUpdate.length > 0){
 			$.ajax({
-					url:"../cbreply/update?replyNo=" + replyNo + "&replyUpdate=" + replyUpdate
-				
+					url:"../cbreply/update?replyNo=" + replyNo + "&replyUpdate=" + replyUpdate,
+					success:function(response){
+						
+					}
+				 
 				})
 			}
 		return false
@@ -249,8 +253,7 @@
 		console.log(replyNo);
 		if(replyNo != null){
 			$.ajax({
-					url:"../cbreply/delete?replyNo=" + replyNo
-					
+					url:"../cbreply/delete?replyNo=" + replyNo,success: function(data, textStatus) {
 				})
 			
 		}
@@ -264,7 +267,6 @@
 		console.log(cbNo)
 		$.ajax({
 			url:"../cblike/cblike?userID=" + userID + "&cbNo=" + cbNo
-		
 			})
 			
 		return false;

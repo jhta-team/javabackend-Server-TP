@@ -381,6 +381,13 @@
   </servlet-mapping>
   <servlet>
     <description></description>
+    <display-name>CodyBoardDelete</display-name>
+    <servlet-name>CodyBoardDelete</servlet-name>
+    <servlet-class>com.kkj.codyboard.controller.CodyBoardDelete</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CodyBoardDelete</servlet-name>
+    <url-pattern>/codyboard/delete</url-pattern>
     <display-name>ImageUpload</display-name>
     <servlet-name>ImageUpload</servlet-name>
     <servlet-class>com.kkj.product.controller.ImageUpload</servlet-class>
