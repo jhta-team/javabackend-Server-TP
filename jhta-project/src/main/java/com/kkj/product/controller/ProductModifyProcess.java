@@ -72,23 +72,27 @@ public class ProductModifyProcess extends HttpServlet {
 
 		ImageDao imageDao = new ImageDao();
 		ImageDto imageDto = new ImageDto();
-		
+		int resultImage = 0;
+		int partIndex = 1;
 		for (Part part : parts) {
 			if (part.getName().startsWith("pdtImage") && part.getSubmittedFileName().isEmpty()) {
-				//이미지 왜안날아가 샹
+				//상품 이미지 수정 안할경우
+				continue;
 				
 			} else if (part.getName().startsWith("pdtImage") && !part.getSubmittedFileName().isEmpty()) {
 				// 추가 이미지
 				// content-type 이 pdtImage이고 추가 이미지 파일이 있는 경우
 				FileManager fileManager = new FileManager();
-				fileManager.deleteImageFile(pdtId);
-
+				System.out.println(partIndex);
+				fileManager.deleteImageFile(pdtId, partIndex);				
+				partIndex++;
+				
 				newFileName = fileManager.changeFileName(part, dir, strNow);
 				imgNameArray.add(newFileName);
 				img1 = (imgNameArray.size() >= 1) ? folderName + "/" + imgNameArray.get(0) : "null"; // 추가 이미지 1개일 경우
 				img2 = (imgNameArray.size() >= 2) ? folderName + "/" + imgNameArray.get(1) : "null"; // 추가 이미지 2개일 경우
 				img3 = (imgNameArray.size() >= 3) ? folderName + "/" + imgNameArray.get(2) : "null"; // 추가 이미지 3개일 경우
-
+				
 			} else if (part.getName().startsWith("pdtThum") && !part.getSubmittedFileName().isEmpty()) {
 				// 썸네일
 				// content-type 이 pdtThum이고 썸네일을 업로드 했다면
@@ -97,7 +101,13 @@ public class ProductModifyProcess extends HttpServlet {
 				pdtThum = folderName + "/" + fileManager.changeFileName(part, dir, strNow);
 			}
 		}
-
+		imageDto.setPdtId(pdtId);
+		imageDto.setImg1(img1);
+		imageDto.setImg2(img2);
+		imageDto.setImg3(img3);
+		resultImage = imageDao.updateImg(imageDto);
+		
+		//상품테이블 관련
 		ProductDto productDto = new ProductDto();
 		ProductDao productDao = new ProductDao();
 		productDto.setPdtId(pdtId);
@@ -109,20 +119,12 @@ public class ProductModifyProcess extends HttpServlet {
 		productDto.setPdtContent(pdtContent);
 		productDto.setPdtThum(pdtThum);
 		productDto.setPdtState(pdtState);
-
 		int resultProduct = productDao.updateProduct(productDto);
 
 
-		imageDto.setPdtId(pdtId);
-		imageDto.setImg1(img1);
-		imageDto.setImg2(img2);
-		imageDto.setImg3(img3);
-
-		int resultImage = imageDao.updateImg(imageDto);
-
 		// 결과값 처리
 
-		if (resultProduct > 0 && resultImage > 0) {
+		if (resultProduct > 0) {
 			ScriptWriter.alertAndNext(response, "상품수정 완료", "../product/list");
 		} else {
 			ScriptWriter.alertAndBack(response, "수정 오류");
