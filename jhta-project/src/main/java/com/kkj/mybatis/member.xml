@@ -37,4 +37,14 @@
   	<delete id="deleteMember" parameterType="HashMap">
   		delete from member where userID = #{userID} and userPW = #{userPW}
   	</delete>
+  	<select id="listMember" parameterType="HashMap" resultType="MemberDto">
+  		SELECT  *  FROM (SELECT rownum AS num, r.* FROM (SELECT *FROM  MEMBER ORDER BY no DESC)r)
+  		where num  <![CDATA[>=]]> #{start} and num  <![CDATA[<=]]> #{end} and adminNumber <![CDATA[<=]]> 5
+  	</select>
+  	<update id="blackUpdate" parameterType="int">
+  		update member set adminNumber = 6 where no = #{no}
+  	</update>
+  	<update id="blackUpdateAll" parameterType="HashMap">
+  		update member set adminNumber = 6 where no = #{no}
+  	</update>
 </mapper>
