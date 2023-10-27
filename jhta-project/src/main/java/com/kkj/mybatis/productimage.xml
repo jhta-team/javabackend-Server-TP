@@ -21,7 +21,7 @@
 			#{img1},
 			#{img2},
 			#{img3},
-			seq_product.nextval-1
+			seq_product.currval
 			)
 	</insert>
 	

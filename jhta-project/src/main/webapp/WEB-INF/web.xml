@@ -379,7 +379,7 @@
     <servlet-name>cbLike</servlet-name>
     <url-pattern>/cblike/cblike</url-pattern>
   </servlet-mapping>
-  <servlet>
+ <servlet>
     <description></description>
     <display-name>CodyBoardDelete</display-name>
     <servlet-name>CodyBoardDelete</servlet-name>
@@ -389,8 +389,10 @@
     <servlet-name>CodyBoardDelete</servlet-name>
     <url-pattern>/codyboard/delete</url-pattern>
   </servlet-mapping>
+
   <servlet>
     <description></description>
+
     <display-name>ImageUpload</display-name>
     <servlet-name>ImageUpload</servlet-name>
     <servlet-class>com.kkj.product.controller.ImageUpload</servlet-class>
@@ -399,8 +401,10 @@
     <servlet-name>ImageUpload</servlet-name>
     <url-pattern>/product/imgupload</url-pattern>
   </servlet-mapping>
+
   <servlet>
     <description></description>
+
     <display-name>MemberList</display-name>
     <servlet-name>MemberList</servlet-name>
     <servlet-class>com.kkj.member.controller.MemberList</servlet-class>
