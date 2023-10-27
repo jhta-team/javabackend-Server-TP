@@ -6,8 +6,6 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -16,15 +14,15 @@ import com.kkj.member.dao.MemberDao;
 import com.kkj.member.dto.MemberDto;
 
 /**
- * Servlet implementation class MemberBalckList
+ * Servlet implementation class MemberSearchList
  */
-public class MemberBlackList extends HttpServlet {
+public class MemberSearchList extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberBlackList() {
+    public MemberSearchList() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,18 +31,17 @@ public class MemberBlackList extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
+		String search = request.getParameter("search"); //카테고리
+		String searchword = request.getParameter("searchword");
 		MemberDao memberDao = new MemberDao();
-		HashMap<String, Integer> map = new HashMap();
-		map.put("start", 1);
-		map.put("end", 10);
-		List<MemberDto> blackList = memberDao.blackListMember(map);
-		request.setAttribute("blackList", blackList);
-		RequestDispatcher dispatcher =request.getRequestDispatcher("/WEB-INF/member/blackList.jsp");
+		HashMap<String,String> map = new HashMap();
+		map.put("search", search);
+		map.put("searchword", searchword);
+		List<MemberDto> memberList = memberDao.searhMember(map);
+		request.setAttribute("memberList", memberList);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/member/memberList.jsp");
 		dispatcher.forward(request, response);
-		if(session.getAttribute("modalState")!=null) {
-			session.removeAttribute("modalState");
-		}
+		
 	}
 
 	/**

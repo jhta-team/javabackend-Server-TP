@@ -13,15 +13,15 @@ import com.google.gson.Gson;
 import com.kkj.member.dao.MemberDao;
 
 /**
- * Servlet implementation class MemberLevel
+ * Servlet implementation class MemberLevelAll
  */
-public class MemberLevel extends HttpServlet {
+public class MemberLevelAll extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberLevel() {
+    public MemberLevelAll() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,48 +30,41 @@ public class MemberLevel extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String level = request.getParameter("level");
-		
-		String noList[] =level.split(",");
-		String realLevel=noList[0];
-
-		String strNo =  level.substring(3);
-		System.out.println(strNo);
-		System.out.println(realLevel);
 		int no=0;
-		int ad =0;
-		if(strNo!=null && !strNo.isEmpty()) {
-			no=Integer.parseInt(strNo);
-		}
-		if(realLevel!=null && !realLevel.isEmpty()) {
-			
-			if(realLevel.equals("si")) {
-				ad=2;
-			}else if(realLevel.equals("go")) {
-				ad=3;
-			}else if(realLevel.equals("pl")) {
-				ad=4;
-			}else if(realLevel.equals("di")){
-				ad=5;
-			}else if(realLevel.equals("ad")) {
-				ad=1;
-			}
-		}
-		MemberDao memberDao = new MemberDao();
+		int ad=0;
+		String strNo[] = request.getParameterValues("no");
+		String level = request.getParameter("level");
 		HashMap<String,Integer> map = new HashMap();
 		HashMap<String,Boolean> ismap = new HashMap();
-		map.put("adminNumber", ad);
-		map.put("no", no);
-		int result =memberDao.blackUpdate(map);
-		if(result>0) {
-			ismap.put("isLevel", true);
-			Gson gson = new Gson();
-			String json = (String)gson.toJson(ismap);
-			request.setAttribute("json", json);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/member/levelCheck.jsp");
-			dispatcher.forward(request, response);
+		MemberDao memberDao = new MemberDao();
+		if(level.equals("silver")) {
+			ad=2;
+		}else if(level.equals("gold")){
+			ad=3;
+		}else if(level.equals("ple")){
+			ad=4;
+		}else if(level.equals("diamond")){
+			ad=5;
+		}else if(level.equals("admin")) {
+			ad=1;
+		}else {
+			ad=0;
 		}
-		
+		map.put("adminNumber", ad);
+		if(strNo !=null && strNo.length>0) {
+			for(int i=0;i<strNo.length;i++) {
+				map.put("no", Integer.parseInt(strNo[i]));
+				int result = memberDao.blackUpdateAll(map);
+			}
+			ismap.put("isLevel", true);	
+		}else {
+			ismap.put("isLevel", false);	
+		}
+		Gson gson = new Gson();
+		String json = (String)gson.toJson(ismap);
+		request.setAttribute("json", json);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/member/levelCheck.jsp");
+		dispatcher.forward(request, response);
 	}
 
 	/**

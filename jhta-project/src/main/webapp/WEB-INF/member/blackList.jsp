@@ -2,7 +2,7 @@
 <%@include file="../include/header.jsp" %>
 <div class="container-fluid">
 <button class="btn btn-primary btnBalckList" onclick="location.href='../member/list'">일반회원관리</button>
-<form action="../member/delete-all">
+<form action="../member/deleteAll">
 <table class="table">
   <thead>
     <tr>
@@ -15,7 +15,7 @@
       <th scope="col">이메일</th>
       <th scope="col">가입날짜</th>
       <th scope="col">구매한 금액</th>
-      <th scope="col">수정</th>
+      <th scope="col">등급</th>
       <th scope="col">블랙</th>
       <th scope="col">삭제</th>
       <th scope="col"><input type="checkbox" id="checkAll" ></th>
@@ -46,7 +46,7 @@
       <td>${member.redate}</td>
       <td>0</td>
       <td>
-      <select class="form-control level" >
+      <select class="form-control level" disabled>
       <option value="unlevel">회원등급</option>
       <option value="silver">실버</option>
       <option value="gold">골드</option>
@@ -65,18 +65,37 @@
   </tbody>
 </table>
 <button class="btn btn-primary btnBlackAll" id="btnBlackAll">해제</button>
- <select class="btn btn-secondary level" >
+ <select class="btn btn-secondary level" disabled>
       <option value="unlevel" selected>회원등급</option>
       <option value="silver">실버</option>
       <option value="gold">골드</option>
       <option value="ple">플레티넘</option>
       <option value="diamond">다이아</option>
       </select> 
-<button class="btn btn-danger" id="btnall">삭제</button>
+<button class="btn btn-danger" id="btnall" name="delete" value="black">삭제</button>
 </form>
 <button class="btn btn-primary btnBalckList" onclick="location.href='../member/list'">일반회원관리</button>
 </div>
 <script>
+//삭제기능
+$(".btnDelete").on("click",function(){
+	$.ajax({
+		url:"../member/delete-process02",
+		data:{no:$(this).data("no")},
+		success:function(data){
+				console.log(data);
+				if(data.isDelete){
+					alert("삭제되었습니다.")
+					location.reload();
+				}else{
+					alert("오류입니다.")
+				}
+			},
+			fail:function(){	
+			}	
+	})
+	return false;
+})
 //전체 선택 후 블랙  ajax 처리
 $(".btnBlackAll").on("click",function(){
 	let arrayCheck = [];
@@ -125,6 +144,14 @@ $(".btnBlack").on("click",function(){
 		});
 		return false;
 	});
-
+	
+//체크박스 전체 선택 및 해체 기능
+$("#checkAll").on("change",function(){
+	if($("#checkAll").is(":checked")){
+	 $(".check").prop("checked",true)	;		
+	}else{
+     $(".check").prop("checked",false);
+	}
+})
 </script>
 <%@ include file="../include/footer.jsp" %>

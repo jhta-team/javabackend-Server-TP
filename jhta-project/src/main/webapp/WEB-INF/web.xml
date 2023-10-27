@@ -379,7 +379,7 @@
     <servlet-name>cbLike</servlet-name>
     <url-pattern>/cblike/cblike</url-pattern>
   </servlet-mapping>
- <servlet>
+  <servlet>
     <description></description>
     <display-name>CodyBoardDelete</display-name>
     <servlet-name>CodyBoardDelete</servlet-name>
@@ -389,10 +389,8 @@
     <servlet-name>CodyBoardDelete</servlet-name>
     <url-pattern>/codyboard/delete</url-pattern>
   </servlet-mapping>
-
   <servlet>
     <description></description>
-
     <display-name>ImageUpload</display-name>
     <servlet-name>ImageUpload</servlet-name>
     <servlet-class>com.kkj.product.controller.ImageUpload</servlet-class>
@@ -401,10 +399,8 @@
     <servlet-name>ImageUpload</servlet-name>
     <url-pattern>/product/imgupload</url-pattern>
   </servlet-mapping>
-
   <servlet>
     <description></description>
-
     <display-name>MemberList</display-name>
     <servlet-name>MemberList</servlet-name>
     <servlet-class>com.kkj.member.controller.MemberList</servlet-class>
@@ -452,5 +448,45 @@
   <servlet-mapping>
     <servlet-name>MemberLevel</servlet-name>
     <url-pattern>/member/level</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>MemberLevelAll</display-name>
+    <servlet-name>MemberLevelAll</servlet-name>
+    <servlet-class>com.kkj.member.controller.MemberLevelAll</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MemberLevelAll</servlet-name>
+    <url-pattern>/member/levelAll</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>MemberDeleteProcess02</display-name>
+    <servlet-name>MemberDeleteProcess02</servlet-name>
+    <servlet-class>com.kkj.member.controller.MemberDeleteProcess02</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MemberDeleteProcess02</servlet-name>
+    <url-pattern>/member/delete-process02</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>MemberDeleteAll</display-name>
+    <servlet-name>MemberDeleteAll</servlet-name>
+    <servlet-class>com.kkj.member.controller.MemberDeleteAll</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MemberDeleteAll</servlet-name>
+    <url-pattern>/member/deleteAll</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>MemberSearchList</display-name>
+    <servlet-name>MemberSearchList</servlet-name>
+    <servlet-class>com.kkj.member.controller.MemberSearchList</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MemberSearchList</servlet-name>
+    <url-pattern>/member/searchList</url-pattern>
   </servlet-mapping>
 </web-app>
