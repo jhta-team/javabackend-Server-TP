@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Part;
+import net.coobird.thumbnailator.Thumbnails;
 
 import java.io.File;
 import java.io.IOException;
@@ -91,6 +92,7 @@ public class MemberInsertProcess extends HttpServlet {
 			newFileName = firstFileName+strNow+ext;
 			File oldFile = new File(uploadPath+File.separator+fileName);
 			File newFile = new File(uploadPath+File.separator+newFileName);
+			Thumbnails.of(oldFile).forceSize(100, 100).toFile(newFile);
 			oldFile.renameTo(newFile);
 		}
 		memberInsert.setUserID(userID);

@@ -12,7 +12,7 @@
               placeholder="png jpg" name="profile" value="${infoModifyMember.profile }" />     
             </div>
              	 <div class="preview">
-             	 <img  src="/javabackend-Server-TP${pageContext.request.contextPath}/upload/${infoModifyMember.profile}">
+             	 <img class="imgForm" src="/javabackend-Server-TP${pageContext.request.contextPath}/upload/${infoModifyMember.profile}">
              	 </div>
           		</div>
           </div>
@@ -245,7 +245,7 @@
     	  }
     	  const reader = new FileReader();
     	  reader.onload = function(e){
-    		  $(".preview").html(`<img src="\${e.target.result}">`);
+    		  $(".preview").html(`<img class="imgForm" src="\${e.target.result}">`);
     	  }
     	  reader.readAsDataURL(file);
       });

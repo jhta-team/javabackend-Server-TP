@@ -7,22 +7,22 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
-import com.google.gson.Gson;
 import com.kkj.member.dao.MemberDao;
+import com.kkj.member.dto.MemberDto;
 
 /**
- * Servlet implementation class MemberBlack
+ * Servlet implementation class MemberBalckList
  */
-public class MemberBlack extends HttpServlet {
+public class MemberBlackList extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberBlack() {
+    public MemberBlackList() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,32 +32,13 @@ public class MemberBlack extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		MemberDao memberDao = new MemberDao();
-		int no=0;
-		int ad=0;
-		String strNo = request.getParameter("no");
-		if(strNo!=null && !strNo.isEmpty()) {
-			no=Integer.parseInt(strNo);
-		}
-		String strAd = request.getParameter("ad");
-		if(strAd!=null && !strAd.isEmpty()) {
-			ad=Integer.parseInt(strAd);
-		}
-		HashMap<String,Integer> updateMap = new HashMap();
-		updateMap.put("adminNumber", ad);
-		updateMap.put("no", no);
-		int result = memberDao.blackUpdate(updateMap);
-		
-		HashMap<String,Boolean> map = new HashMap();
-		if(result>0) {
-			map.put("isBalck", true);
-			Gson gson = new Gson();
-			String json = (String)gson.toJson(map);
-			request.setAttribute("json", json);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/member/blackCheck.jsp");
-			dispatcher.forward(request, response);
-		}else {
-			
-		}
+		HashMap<String, Integer> map = new HashMap();
+		map.put("start", 1);
+		map.put("end", 10);
+		List<MemberDto> blackList = memberDao.blackListMember(map);
+		request.setAttribute("blackList", blackList);
+		RequestDispatcher dispatcher =request.getRequestDispatcher("/WEB-INF/member/blackList.jsp");
+		dispatcher.forward(request, response);
 	}
 
 	/**

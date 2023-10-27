@@ -71,10 +71,16 @@ public class MemberDao {
 		memberList =sqlSession.selectList("listMember", map);
 		return memberList;
 	}
-	public int blackUpdate(int no) {
+	public List<MemberDto> blackListMember(HashMap<String,Integer> map){
+		List<MemberDto> blackList = null;
+		SqlSession sqlSession = MybatisConnectionFactory.getSqlSession();
+		blackList =sqlSession.selectList("blackListMember", map);
+		return blackList;
+	}
+	public int blackUpdate(HashMap<String,Integer> map) {
 		int result=0;
 		SqlSession sqlSession = MybatisConnectionFactory.getSqlSession();
-		result = sqlSession.update("blackUpdate", no);
+		result = sqlSession.update("blackUpdate", map);
 		return result;
 	}
 	public int blackUpdateAll(HashMap<String,Integer> map) {

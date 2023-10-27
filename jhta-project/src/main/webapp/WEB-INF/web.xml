@@ -389,7 +389,10 @@
     <servlet-name>CodyBoardDelete</servlet-name>
     <url-pattern>/codyboard/delete</url-pattern>
   </servlet-mapping>
-  <servlet>  
+
+  <servlet>
+    <description></description>
+
     <display-name>ImageUpload</display-name>
     <servlet-name>ImageUpload</servlet-name>
     <servlet-class>com.kkj.product.controller.ImageUpload</servlet-class>
@@ -398,7 +401,10 @@
     <servlet-name>ImageUpload</servlet-name>
     <url-pattern>/product/imgupload</url-pattern>
   </servlet-mapping>
-  <servlet> 
+
+  <servlet>
+    <description></description>
+
     <display-name>MemberList</display-name>
     <servlet-name>MemberList</servlet-name>
     <servlet-class>com.kkj.member.controller.MemberList</servlet-class>
@@ -426,5 +432,25 @@
   <servlet-mapping>
     <servlet-name>MemberBlackAll</servlet-name>
     <url-pattern>/member/blackAll</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>MemberBlackList</display-name>
+    <servlet-name>MemberBlackList</servlet-name>
+    <servlet-class>com.kkj.member.controller.MemberBlackList</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MemberBlackList</servlet-name>
+    <url-pattern>/member/blackList</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>MemberLevel</display-name>
+    <servlet-name>MemberLevel</servlet-name>
+    <servlet-class>com.kkj.member.controller.MemberLevel</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MemberLevel</servlet-name>
+    <url-pattern>/member/level</url-pattern>
   </servlet-mapping>
 </web-app>

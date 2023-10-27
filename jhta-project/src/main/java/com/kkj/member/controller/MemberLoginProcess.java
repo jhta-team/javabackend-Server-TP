@@ -47,28 +47,29 @@ public class MemberLoginProcess extends HttpServlet {
 		loginMap.put("userID", userID);
 		loginMap.put("userPW", userPW);
 		loginMember = memberDao.loginMember(loginMap);
-		if(loginMember.getAdminNumber()==6) {
-			ModalState modalState = new ModalState("show","블랙입니다. 관리자에게 문의하세요");
-			session.setAttribute("modalState", modalState);
-			response.sendRedirect("../member/login");
-		}
-		else if(loginMember !=null) {
-			String loggedName = loginMember.getUserName();
-			session.setAttribute("loggedID", userID);
-			session.setAttribute("loggedName",loggedName);
-			session.setAttribute("loggedMember", loginMember);
-			ModalState modalState = new ModalState("show","로그인 성공");
-			session.setAttribute("modalState", modalState);				
-			if(check !=null) {
-				CookieManager.createCookie(response, "cookieID", userID, 60*60*24);
-				String cookieID = CookieManager.readCookie(request, "cookieID");
-				request.setAttribute("cookieID", cookieID);
+	
+		if(loginMember !=null) {
+			if(loginMember.getAdminNumber()==6) {
+				ModalState modalState = new ModalState("show","블랙입니다. 관리자에게 문의하세요");
+				session.setAttribute("modalState", modalState);
+				response.sendRedirect("../member/login");
 			}else {
-				CookieManager.deleteCookie(response, "cookieID");
+				String loggedName = loginMember.getUserName();
+				session.setAttribute("loggedID", userID);
+				session.setAttribute("loggedName",loggedName);
+				session.setAttribute("loggedMember", loginMember);
+				ModalState modalState = new ModalState("show","로그인 성공");
+				session.setAttribute("modalState", modalState);				
+				if(check !=null) {
+					CookieManager.createCookie(response, "cookieID", userID, 60*60*24);
+					String cookieID = CookieManager.readCookie(request, "cookieID");
+					request.setAttribute("cookieID", cookieID);
+				}else {
+					CookieManager.deleteCookie(response, "cookieID");
+				}			
+				response.sendRedirect("../index/index");				
 			}
-			
-			response.sendRedirect("../index/index");
-		}else {
+		}else{
 			ScriptWriter.alertAndBack(response, "아이디와 비밀번호를 확인해주세요");
 		}
 		
