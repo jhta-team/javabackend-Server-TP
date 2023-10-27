@@ -16,8 +16,10 @@ import java.util.List;
 
 import com.kkj.product.dao.ImageDao;
 import com.kkj.product.dao.ProductDao;
+import com.kkj.product.dao.ProductSizeDao;
 import com.kkj.product.dto.ImageDto;
 import com.kkj.product.dto.ProductDto;
+import com.kkj.product.dto.ProductSizeDto;
 import com.kkj.product.util.FileManager;
 import com.kkj.product.util.ScriptWriter;
 
@@ -39,7 +41,19 @@ public class ProductInsertProcess extends HttpServlet {
 		int pdtPrice = Integer.parseInt(request.getParameter("pdtPrice"));
 		String pdtColor = request.getParameter("pdtColor");
 		String pdtContent = request.getParameter("pdtContent");
-		int pdtCount = Integer.parseInt(request.getParameter("pdtCount"));
+		//int pdtCount = Integer.parseInt(request.getParameter("pdtCount"));
+		int pdtCountS = Integer.parseInt(request.getParameter("pdtCountS"));
+		System.out.println(pdtCountS);
+		int pdtCountM = Integer.parseInt(request.getParameter("pdtCountM"));
+		System.out.println(pdtCountM);
+		int pdtCountL = Integer.parseInt(request.getParameter("pdtCountS"));
+		System.out.println(pdtCountL);
+		int pdtCountXL = Integer.parseInt(request.getParameter("pdtCountXL"));
+		System.out.println(pdtCountXL);
+		
+		
+
+		
 		Collection<Part> parts = request.getParts();
 		
 		//파일 저장 관련 변수들
@@ -90,7 +104,6 @@ public class ProductInsertProcess extends HttpServlet {
 		productDto.setPdtName(pdtName);
 		productDto.setPdtCty(pdtCty);
 		productDto.setPdtPrice(pdtPrice);
-		productDto.setPdtCount(pdtCount);
 		productDto.setPdtColor(pdtColor);
 		productDto.setPdtContent(pdtContent);
 		productDto.setPdtThum(pdtThum);		
@@ -105,6 +118,15 @@ public class ProductInsertProcess extends HttpServlet {
 		imageDto.setImg3(img3);
 		int resultImage = imageDao.insertImg(imageDto);
 		
+		//사이즈 저장 dao,dto
+		ProductSizeDto productSizeDto = new ProductSizeDto();
+		productSizeDto.setPdtCountS(pdtCountS);
+		productSizeDto.setPdtCountM(pdtCountM);
+		productSizeDto.setPdtCountL(pdtCountL);
+		productSizeDto.setPdtCountXL(pdtCountXL);		
+		ProductSizeDao productSizeDao = new ProductSizeDao();
+		productSizeDao.insertProductSize(productSizeDto);		
+		
 		//결과값 처리
 
 		if(resultProduct > 0) {
@@ -115,8 +137,6 @@ public class ProductInsertProcess extends HttpServlet {
 		} else {
 			ScriptWriter.alertAndBack(response, "등록 오류");
 		}
-
-
 	}
 
 }

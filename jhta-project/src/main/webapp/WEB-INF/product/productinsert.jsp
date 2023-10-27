@@ -50,11 +50,22 @@
 
 
 				<div class="row d-flex justify-content-left mb-2">
-					<div class="col-10">
-						<label for="pdtCount" class="form-label">상품수량</label> <input type="number" min="0" class="form-control" id="pdtCount" placeholder="" name="pdtCount" required="required" />
-						<div class="invalid-feedback">숫자만 쓸 수 있습니다</div>
+					<label for="pdtCount" class="form-label">상품 수량 입력</label><br>
+					<div class="col-10 d-flex" >						
+						<label for="pdtCount" class="form-label">S</label>
+						<input type="number" min="0" class="form-control" id="pdtCountS" placeholder="" name="pdtCountS" required="required" />
+						<label for="pdtCount" class="form-label">M</label>
+						<input type="number" min="0" class="form-control" id="pdtCountM" placeholder="" name="pdtCountM" required="required" />
+						<label for="pdtCount" class="form-label">L</label>
+						<input type="number" min="0" class="form-control" id="pdtCountL" placeholder="" name="pdtCountL" required="required" />
+						<label for="pdtCount" class="form-label">XL</label>
+						<input type="number" min="0" class="form-control" id="pdtCountXL" placeholder="" name="pdtCountXL" required="required" />
 					</div>
+					<div class="invalid-feedback">숫자만 쓸 수 있습니다</div>
 				</div>
+				
+
+
 
 				<div class="row d-flex justify-content-left mb-2">
 					<div class="col-10">

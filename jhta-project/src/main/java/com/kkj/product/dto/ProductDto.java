@@ -6,14 +6,20 @@ public class ProductDto {
 	String pdtCty;
 	String pdtContent;
 	int pdtPrice;
-	int pdtCount;
 	int pdtState;
 	String pdtDate;
 	String pdtModDate;
 	String pdtThum;
 	String pdtColor;
+	int pdtSize;
 	
 	
+	public int getPdtSize() {
+		return pdtSize;
+	}
+	public void setPdtSize(int pdtSize) {
+		this.pdtSize = pdtSize;
+	}
 	public int getPdtId() {
 		return pdtId;
 	}
@@ -44,12 +50,7 @@ public class ProductDto {
 	public void setPdtPrice(int pdtPrice) {
 		this.pdtPrice = pdtPrice;
 	}
-	public int getPdtCount() {
-		return pdtCount;
-	}
-	public void setPdtCount(int pdtCount) {
-		this.pdtCount = pdtCount;
-	}
+
 	public int getPdtState() {
 		return pdtState;
 	}
@@ -86,7 +87,7 @@ public class ProductDto {
 	@Override
 	public String toString() {
 		return "ProductDto [pdtId=" + pdtId + ", pdtName=" + pdtName + ", pdtCty=" + pdtCty + ", pdtContent="
-				+ pdtContent + ", pdtPrice=" + pdtPrice + ", pdtCount=" + pdtCount + ", pdtState=" + pdtState
+				+ pdtContent + ", pdtPrice=" + pdtPrice + ", pdtState=" + pdtState
 				+ ", pdtDate=" + pdtDate + ", pdtModDate=" + pdtModDate + ", pdtThum=" + pdtThum + ", pdtColor="
 				+ pdtColor + "]";
 	}		
