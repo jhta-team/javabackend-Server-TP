@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import com.google.gson.Gson;
 import com.kkj.cbcomment.dao.CbCommentDao;
 import com.kkj.cbcomment.dto.CbCommentDto;
 
@@ -38,16 +39,19 @@ public class CbcommentInsert extends HttpServlet {
 		cbCommentDto.setUserID(userID);
 		cbCommentDto.setComment(comment);
 		cbCommentDto.setCodyBoardNo(codyBoardNo);
-		cbCommentDao.findAll(codyBoardNo);
 		
 		int result = cbCommentDao.insert(cbCommentDto);
 		if(result > 0) {
 			System.out.println("등록성공!!!");
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/codyboard/findone?no="+ request.getParameter("codyBoardNo"));
+			Gson gson = new Gson();
+			String commentData = (String)gson.toJson(cbCommentDto);
+			request.setAttribute("commentData", commentData);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/cbcomment/cbcommentdata.jsp");
 			dispatcher.forward(request, response);
 		}else {
 			System.out.println("등록실패!!!");
 		}
+		
 	}
 
 	/**

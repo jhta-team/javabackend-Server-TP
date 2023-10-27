@@ -24,7 +24,6 @@
 						<tr>
 							<th>글쓴이</th>
 							<td colspan="3">${codyBoard.userID }</td>
-							<th>좋아요</th>
 
 						</tr>
 						<tr>
@@ -76,7 +75,7 @@
 					<a href="../codyboard/page-nation" class="btn btn-primary">목록</a> <a
 						href="../board/reply?regroup=${viewBoard.regroup }&relevel=${viewBoard.relevel}&restep=${viewBoard.restep}"
 						class="btn btn-primary mx-1">답글달기</a>
-						${likeCount } 
+						<span id="likeCount">${likeCount }</span>
 						<button id="btncbLike">좋아요</button>
 					<!-- 여기는 로그인한 사람만 볼수있게 -->
 					<a href="../codyboard/update?no=${codyBoard.no}"
@@ -96,7 +95,6 @@
 						<div class="cbCommentBox">
 							<tr>
 								<th>${cbComment.userID }</th>
-								<th>댓글번호 ===>>> ${cbComment.no }</th>
 								<td colspan="3" class="content">${cbComment.comment }</td>
 								<td colspan="3" class="content">${cbComment.regDate }</td>
 								<input type="hidden" value="${cbComment.no }">
@@ -135,6 +133,8 @@
 							${status.count }</button>
 					</div>
 				</c:forEach>
+				<div id="here">
+				</div>
 
 
 			</div>
@@ -158,14 +158,11 @@
 										userID:${codyBoard.userID},
 										comment:cbCommentValue,
 										codyBoardNo:${codyBoard.no}					
-									}, */
-									/* success:function(response) {
-										console.log("리스폰스 ==>" + response);
-										console.log("리스폰스오케 =>>> " + response.isOk);
-										if(response.isOk) {
-											
+									},*/
+											success:function(data){
+											 $("#here").append("<tr><th>"+ data.userID +"</th><td>"+ data.cbComment +"</td><td></td><td><button>수정하기</button></td><td><button>삭제</button></td></tr>")
+											/* $(this).parent().append("<h1>emfdjrkdTffds</h1>") */
 										}
-									} */
 									})
 						} else {
 							alert("공란입니다 입려해주세요");
@@ -186,8 +183,6 @@
 					})
 					
 				}
-				
-				
 				return false;
 		})
 		
@@ -207,7 +202,6 @@
 		console.log(item,"===",idx);
 		$(item).find("#btnSubmit").on("click",function() {
 			console.log($(this).prev().val());			
-			/* console.log("댓글번호" + $(".replyBox .cbCommentdiv").siblings(".cbCommentNo").val()) */
 			console.log("댓글번호" + $(this).prev().prev().prev().val());
 			
 			$(this).siblings($(".cbReply")).prop("type", "");
@@ -216,12 +210,21 @@
 			const reply = $(this).prev().prev().val();
 			const cbCommentNo =  $(this).prev().prev().prev().val();
 			console.log(${codyBoard.no} + "123123123");
-			/* $(this).parent().append("<h1>emfdjrkdTffds</h1>") */
+			let aaa = ""
+			const insertComment = $(this).parent()
 			if(reply.length > 0){
 			$.ajax({
-				url: "../cbreply/insert?replyUserID=mok111&reply=" + reply + "&codyBoardNo=${codyBoard.no}&cbCommentNo=" + 	cbCommentNo
+				url: "../cbreply/insert?replyUserID=mok111&reply=" + reply + "&codyBoardNo=${codyBoard.no}&cbCommentNo=" + 	cbCommentNo,
+				success:function(data){
+					insertComment.append("<tr><th>" + data.replyUserID + "</th><td>"+ data.reply +"</td><td><button>수정하기</button></td><td><button>삭제</button></td></tr>")
+					$(this).parent().append("<h1>emfdjrkdTffds</h1>")
+				}
+				
 			})
 			}
+			console.log("asdasdsa")
+			console.log(aaa)
+			console.log("asdasdsa")
 			
 			return false;
 		})
@@ -235,7 +238,6 @@
 		$(this).prev().prop("type", "text")
 		console.log(replyUpdate)
 		console.log($(this).prev().prev().val());
-		$(".replyBox").append("<H1>TJDRHD</H1>")
 		if(replyUpdate.length > 0){
 			$.ajax({
 					url:"../cbreply/update?replyNo=" + replyNo + "&replyUpdate=" + replyUpdate,
@@ -253,7 +255,7 @@
 		console.log(replyNo);
 		if(replyNo != null){
 			$.ajax({
-					url:"../cbreply/delete?replyNo=" + replyNo,success: function(data, textStatus) {
+					url:"../cbreply/delete?replyNo=" + replyNo
 				})
 			
 		}
@@ -266,7 +268,15 @@
 		const cbNo = ${codyBoard.no}
 		console.log(cbNo)
 		$.ajax({
-			url:"../cblike/cblike?userID=" + userID + "&cbNo=" + cbNo
+			url:"../cblike/cblike",
+			data:{
+				userID : userID,
+				cbNo : cbNo
+			},
+		    success : function(data) {
+		          $("#likeCount").text(data.count)
+		        }
+				
 			})
 			
 		return false;
