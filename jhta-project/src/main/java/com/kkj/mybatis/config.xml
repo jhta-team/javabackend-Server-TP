@@ -14,6 +14,9 @@
 		<typeAlias alias="CbReplyUpdateDto" type="com.kkj.cbreply.dto.CbReplyUpdateDto"/>
 		<typeAlias alias="CbLikeDto" type="com.kkj.cblike.dto.CbLikeDto"/>
 		<typeAlias alias="ProductSizeDto" type="com.kkj.product.dto.ProductSizeDto"/>
+		<typeAlias alias="SubscribeDto" type="com.kkj.subscribe.dto.SubscribeDto"/>
+		<typeAlias alias="SubscribePaymentDto" type="com.kkj.subscribe.dto.SubscribePaymentDto"/>
+		<typeAlias alias="UpdateSubscribeDto" type="com.kkj.subscribe.dto.UpdateSubscribeDto"/>
 	</typeAliases>
 	<environments default="development">
 		<environment id="development">
@@ -36,6 +39,8 @@
 		<mapper resource="com/kkj/mybatis/cbreply.xml" />
 		<mapper resource="com/kkj/mybatis/cblike.xml" />
 		<mapper resource="com/kkj/mybatis/productsize.xml" />
+		<mapper resource="com/kkj/mybatis/subscribe.xml" />
+		<mapper resource="com/kkj/mybatis/subscribepayment.xml" />
 	</mappers>
 </configuration>
 
