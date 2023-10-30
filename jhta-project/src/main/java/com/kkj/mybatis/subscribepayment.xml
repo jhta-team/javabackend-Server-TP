@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="org.mybatis.example.BlogMapper">
+	<insert id="insertSubscribePayment" parameterType="SubscribePaymentDto">
+		INSERT INTO subscribepayment values(seq_subscribepayment.nextval, #{userID}, #{price}, #{imp_uid}, #{product}, #{status})
+	</insert>
+	
+	<select id="paymentCheck" parameterType="String" resultType="int">
+		select count(*) from subscribepayment where imp_uid = #{imp_uid}
+	</select>
+	
+	<update id="updateMemberSubscribe" parameterType="UpdateSubscribeDto">
+		update member set subscribeend = #{subscribeEnd} WHERE id = #{userID}
+	</update>
+	
+	<select id="subscribeDayFind" parameterType="String" resultType="String">
+		select subscribeend from member where id = #{userID}
+	</select>
+</mapper>

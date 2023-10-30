@@ -8,12 +8,18 @@
   		select * from member where userID= #{userID} and userPW = #{userPW}
   	</select>
   	
+  	
   	<insert id="insertMember" parameterType="MemberDto" >
   		insert into member values(#{userID},#{userPW},#{userName},#{gender},
   		#{address},#{detailAddress},#{postCode},#{email},#{mobileTelcom},#{tel},
   		#{profile},#{nickName},sysdate,seq_member.nextval,0) 
   	</insert>
-  	
+  	<select id="insertCount" resultType="int">
+  		select count(*) count from member where TO_DATE(redate,'YYYY-mm-dd') =TO_DATE(sysdate,'YYYY-mm-dd') 
+  	</select>
+  	<select id="memberCount" resultType="int">
+  		select count(*) count from member 
+  	</select>
   	<select id="idCheck" parameterType="String" resultType="int">
   		select count(*) as count from member where userID=#{userID}
   	</select>
@@ -50,5 +56,32 @@
   	<select id="blackListMember" parameterType="HashMap" resultType="MemberDto">
   		SELECT  *  FROM (SELECT rownum AS num, r.* FROM (SELECT *FROM  MEMBER ORDER BY no DESC)r)
   		where num  <![CDATA[>=]]> #{start} and num  <![CDATA[<=]]> #{end} and adminNumber <![CDATA[=]]> 6
+  	</select>
+  	<delete id="deleteAdminMember" parameterType="int">
+  		delete from member where no = #{no} 
+  	</delete>
+  	<select id="searhMember" parameterType="HashMap" resultType="MemberDto">
+  		select * from member where 
+  		<choose>
+  		<when test="search=='userName'">
+  			userName Like '%'||#{searchword}||'%'
+  		</when>
+  		<when test="search=='nickName'">
+  			nickName Like '%'||#{searchword}||'%'
+  		</when>
+  		<when test="search=='userID'">
+  			userID Like '%'||#{searchword}||'%'
+  		</when>
+  		<when test="search=='level'">
+  			adminNumber Like '%'||#{searchword}||'%'
+  		</when>
+  		<when test="search=='all'">
+  			(adminNumber Like '%'||#{searchword}||'%') or
+  			(userID Like '%'||#{searchword}||'%') or
+  			(nickName Like '%'||#{searchword}||'%') or
+  			(userName Like '%'||#{searchword}||'%')
+  		</when>
+  		
+  		</choose>
   	</select>
 </mapper>

@@ -1,4 +1,4 @@
-package com.kkj.member.controller;
+package com.kkj.subscribe.controller;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -6,25 +6,18 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-
-import com.kkj.member.dao.MemberDao;
-import com.kkj.member.dto.MemberDto;
 
 /**
- * Servlet implementation class MemberBalckList
+ * Servlet implementation class SubscribeTokenTest
  */
-public class MemberBlackList extends HttpServlet {
+public class SubscribeTokenTest extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberBlackList() {
+    public SubscribeTokenTest() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,18 +26,9 @@ public class MemberBlackList extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		MemberDao memberDao = new MemberDao();
-		HashMap<String, Integer> map = new HashMap();
-		map.put("start", 1);
-		map.put("end", 10);
-		List<MemberDto> blackList = memberDao.blackListMember(map);
-		request.setAttribute("blackList", blackList);
-		RequestDispatcher dispatcher =request.getRequestDispatcher("/WEB-INF/member/blackList.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/subscribe/paymentgettoken.jsp");
 		dispatcher.forward(request, response);
-		if(session.getAttribute("modalState")!=null) {
-			session.removeAttribute("modalState");
-		}
+				
 	}
 
 	/**

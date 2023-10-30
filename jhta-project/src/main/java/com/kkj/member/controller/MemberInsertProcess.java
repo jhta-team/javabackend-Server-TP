@@ -16,6 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import com.kkj.member.dao.MemberDao;
+import com.kkj.member.dao.MemberDateDao;
 import com.kkj.member.dto.MemberDto;
 import com.kkj.member.dto.ModalState;
 
@@ -47,6 +48,7 @@ public class MemberInsertProcess extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		MemberDto memberInsert = new MemberDto();
 		MemberDao memberDao = new MemberDao();
+		MemberDateDao memberDateDao = new MemberDateDao();
 		int result =0;
 		String userID = request.getParameter("userID");
 		String userPW = request.getParameter("userPW");
@@ -113,6 +115,7 @@ public class MemberInsertProcess extends HttpServlet {
 		memberInsert.setNo(no);
 		
 		result=memberDao.insertMember(memberInsert);
+		memberDateDao.insertDate(userID);
 		if(result>0) {
 			HttpSession session = request.getSession();
 			ModalState modalState = new ModalState("show", "회원가입 되었습니다.");

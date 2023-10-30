@@ -5,6 +5,7 @@
 <configuration>
 	<typeAliases>
 		<typeAlias alias="MemberDto" type="com.kkj.member.dto.MemberDto"/>
+		<typeAlias alias="MemberDateDto" type="com.kkj.member.dto.MemberDateDto"/>
 		<typeAlias alias="CodyBoardDto"   type="com.kkj.codyboard.dto.CodyBoardDto" />
 		<typeAlias alias="CodyBoardUpdateDto" type="com.kkj.codyboard.dto.CodyBoardUpdateDto"/>
 		<typeAlias alias="ProductDto" type="com.kkj.product.dto.ProductDto"/>
@@ -15,6 +16,9 @@
 		<typeAlias alias="CbLikeDto" type="com.kkj.cblike.dto.CbLikeDto"/>
 		<typeAlias alias="ProductSizeDto" type="com.kkj.product.dto.ProductSizeDto"/>
 		<typeAlias alias="CartProductDto" type="com.kkj.cart.dto.CartProductDto"/>
+		<typeAlias alias="SubscribeDto" type="com.kkj.subscribe.dto.SubscribeDto"/>
+		<typeAlias alias="SubscribePaymentDto" type="com.kkj.subscribe.dto.SubscribePaymentDto"/>
+		<typeAlias alias="UpdateSubscribeDto" type="com.kkj.subscribe.dto.UpdateSubscribeDto"/>
 	</typeAliases>
 	<environments default="development">
 		<environment id="development">
@@ -30,6 +34,7 @@
 	</environments>
 	<mappers>
 		<mapper resource="com/kkj/mybatis/member.xml"/>
+		<mapper resource="com/kkj/mybatis/memberDate.xml"/>
 		<mapper resource="com/kkj/mybatis/codyboard.xml" />
 		<mapper resource="com/kkj/mybatis/product.xml" />
 		<mapper resource="com/kkj/mybatis/productimage.xml" />
@@ -38,6 +43,8 @@
 		<mapper resource="com/kkj/mybatis/cblike.xml" />
 		<mapper resource="com/kkj/mybatis/productsize.xml" />
 		<mapper resource="com/kkj/mybatis/cartproduct.xml" />
+		<mapper resource="com/kkj/mybatis/subscribe.xml" />
+		<mapper resource="com/kkj/mybatis/subscribepayment.xml" />
 	</mappers>
 </configuration>
 
