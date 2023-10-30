@@ -1,7 +1,8 @@
 package com.kkj.product.dto;
 
 public class ProductSizeDto {
-
+	
+	int pdtSizeId;
 	int pdtId;
 	int pdtCountS;
 	int pdtCountM;
@@ -9,7 +10,14 @@ public class ProductSizeDto {
 	int pdtCountXL;
 
 	
-	
+	public int getPdtSizeId() {
+		return pdtSizeId;
+	}
+
+	public void setPdtSizeId(int pdtSizeId) {
+		this.pdtSizeId = pdtSizeId;
+	}
+
 	public int getPdtId() {
 		return pdtId;
 	}
@@ -49,6 +57,7 @@ public class ProductSizeDto {
 	public void setPdtCountXL(int pdtCountXL) {
 		this.pdtCountXL = pdtCountXL;
 	}
+
 
 	public ProductSizeDto() {
 		super();

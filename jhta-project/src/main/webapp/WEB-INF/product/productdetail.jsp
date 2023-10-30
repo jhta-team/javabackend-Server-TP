@@ -2,6 +2,8 @@
 <%@ include file="../include/header.jsp"%>
 <div class="container">
 	<h2 class="pb-2 border-bottom">상품 상세</h2>
+	<form class="" action="../cart/insert" method="post">
+	<input type="hidden" value="${detailDto.pdtId }" name="pdtId"/>
 	<div class="top d-flex">
 		<div class="top left p-2">
 			<p>썸네일</p>
@@ -55,41 +57,63 @@
 			</div>
 			<div class="row d-flex justify-content-left mb-2">
 				<div class="col-10">
-					<label for="pdtSize" class="form-label">상품사이즈</label> <select class="form-select" aria-label="Default select example" name="pdtSize" required="required">
+					<label for="pdtSize" class="form-label">상품사이즈</label> <select class="form-select" id="pdtSize" aria-label="Default select example" name="pdtSize" required="required">
 						<option value="">사이즈를 선택하세요</option>
 						<c:choose>
 							<c:when test="${productSizeDto.pdtCountS ne 0 }">
-								<option value="1">S : ${productSizeDto.pdtCountS }</option>
+								<option value="S">S : ${productSizeDto.pdtCountS }</option>
 							</c:when>
 						</c:choose>
 						<c:choose>
 							<c:when test="${productSizeDto.pdtCountM ne 0 }">
-								<option value="2">M : ${productSizeDto.pdtCountM }</option>
+								<option value="M">M : ${productSizeDto.pdtCountM }</option>
 							</c:when>
 						</c:choose>
 						<c:choose>
 							<c:when test="${productSizeDto.pdtCountL ne 0 }">
-								<option value="3">L : ${productSizeDto.pdtCountL }</option>
+								<option value="L">L : ${productSizeDto.pdtCountL }</option>
 							</c:when>
 						</c:choose>
 						<c:choose>
 							<c:when test="${productSizeDto.pdtCountXL ne 0 }">
-								<option value="4">XL : ${productSizeDto.pdtCountXL }</option>
+								<option value="XL">XL : ${productSizeDto.pdtCountXL }</option>
 							</c:when>
 						</c:choose>
 					</select>
 					<div class="invalid-feedback">사이즈 선택은 필수</div>
 				</div>
 			</div>
+			<div class="row d-flex justify-content-left mb-2">
+				<div class="col-10">
+					<label for="quantity" class="form-label">상품수량</label> <input type="number" min="0" class="form-control" id="quantity" placeholder="" name="quantity" required="required" />
+					<div class="invalid-feedback">숫자만 쓸 수 있습니다</div>
+				</div>
+			</div>
 			<div class="buttons pb-3">
-				<button>주문하기</button>
-				<button>장바구니</button>
+				<button type="submit" id="btnSubmit">장바구니 담기</button>
 			</div>
 		</div>
 	</div>
+	</form>
 	<div class="main-img pt-3">
 		<h2 class="pb-2 border-bottom">상품 내용</h2>
 		<p>${detailDto.pdtContent }</p>
 	</div>
 </div>
+<script>
+	function addToCart() {
+		const quantity = document.getElementById("quantity").value;
+		const inventory = document.getElementById("pdtSize").value;
+		console.log(inventory);
+		const productID = "${Product.pdtId}";
+		console.log(productID);
+		if (quantity <= inventory) {
+			const url = "../cart/list?pdtId=" + productID + "&quantity="
+					+ quantity;
+			window.location.href = url;
+		} else {
+			alert("사이즈 최대 수량을 넘었습니다");
+		}
+	}
+</script>
 <%@ include file="../include/footer.jsp"%>

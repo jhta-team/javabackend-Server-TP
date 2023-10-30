@@ -34,7 +34,7 @@
           <li><a href="../product/insert" class="nav-link px-2 text-white">상품등록(성민이형)</a></li>
           </c:otherwise>
           </c:choose>
-
+		  <li><a href="../cart/list" class="nav-link px-2 text-white">장바구니</a></li> 
           <li><a href="../codyboard/insert" class="nav-link px-2 text-white">코디등록</a></li>
           <li><a href="../codyboard/page-nation" class="nav-link px-2 text-white">코디게시판보기</a></li>
           <li><a href="#" class="nav-link px-2 text-white">About</a></li>
