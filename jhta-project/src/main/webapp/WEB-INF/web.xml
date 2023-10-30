@@ -488,5 +488,34 @@
   <servlet-mapping>
     <servlet-name>MemberSearchList</servlet-name>
     <url-pattern>/member/searchList</url-pattern>
+    <servlet>
+    <description></description>
+    <display-name>SubscribePayment</display-name>
+    <servlet-name>SubscribePayment</servlet-name>
+    <servlet-class>com.kkj.subscribe.controller.SubscribePayment</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SubscribePayment</servlet-name>
+    <url-pattern>/subscribe/payment</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SubcribePaymentProcess</display-name>
+    <servlet-name>SubcribePaymentProcess</servlet-name>
+    <servlet-class>com.kkj.subscribe.controller.SubcribePaymentProcess</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SubcribePaymentProcess</servlet-name>
+    <url-pattern>/subcribe/payment-process</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SubscribeTokenTest</display-name>
+    <servlet-name>SubscribeTokenTest</servlet-name>
+    <servlet-class>com.kkj.subscribe.controller.SubscribeTokenTest</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SubscribeTokenTest</servlet-name>
+    <url-pattern>/subscribe/token-test</url-pattern>
   </servlet-mapping>
 </web-app>
