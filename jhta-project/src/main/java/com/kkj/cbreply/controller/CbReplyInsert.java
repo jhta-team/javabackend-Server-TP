@@ -1,4 +1,4 @@
-package com.kkj.cbreply.controller;
+ package com.kkj.cbreply.controller;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
