@@ -25,8 +25,8 @@
 					<td>${Dto.cartItemId }</td>
 					<td><img width="400" height="300" src="${pageContext.request.contextPath }/upload/${Dto.pdtThum}"></td>
 					<td>${Dto.pdtName }</td>
-					<td>${Dto.pickSize}</td>
-					<td>${Dto.pdtPrice}</td>
+					<td >${Dto.pickSize}</td>
+					<td class="pdtPrice">${Dto.pdtPrice}</td>
 					<td><input type="number" min="1" class="form-control quantity" id="quantity" value="${Dto.quantity}" name="quantity" required="required" /></td>
 					<td><button onclick="deleteItem(${Dto.cartItemId})">삭제</button></td>
 				</tr>
@@ -99,31 +99,25 @@ $('.quantity').on('input', function() {
 
 
 function calculateTotal() {
-    // "pdtPrice" 및 "quantity" 클래스를 가진 모든 요소를 가져와서 총 금액 계산
-    const pdtPriceElements = document.querySelectorAll('.pdtPrice');
-    const quantityElements = document.querySelectorAll('.quantity');
-
-    // 총 금액을 저장할 변수 초기화
+    // Initialize totalAmount to 0
     let totalAmount = 0;
 
-    // 각 "pdtPrice" 및 "quantity" 요소를 순회하며 각 항목의 가격과 수량을 곱해서 총 금액에 추가
-    pdtPriceElements.forEach(function (element, index) {
-        // 비숫자 문자를 제거하고 숫자로 변환
-        const price = parseFloat(element.textContent.replace(/[^0-9.-]+/g, ""));
-        console.log(price);
-        const quantity = parseInt(quantityElements[index].value.replace(/[^0-9.-]+/g, ""), 10); // 수량을 정수로 변환
-		console.log(quantity);
-        // 가격과 수량을 곱한 값을 총 금액에 추가
-        totalAmount += price * quantity;
+    // Iterate through all elements with class "pdtPrice" and "quantity"
+    $('.pdtPrice').each(function (index) {
+        const price = parseFloat($(this).text().replace(/[^0-9.-]+/g, ""));
+        const quantity = parseInt($('.quantity').eq(index).val(), 10);
+
+        // Calculate the total amount for this row and add it to totalAmount
+        const rowTotal = price * quantity;
+        totalAmount += rowTotal;
     });
 
-    // "sum" 클래스를 가진 요소의 내용을 업데이트하여 총 금액을 표시
-    document.querySelector('.sum').textContent = '총 금액: ' + totalAmount;
+    // Update the element with class "sum" to display the total amount
+    $('.sum').text('총 금액: ' + totalAmount);
 }
 
-// 페이지 로드시 총 금액을 계산하도록 호출
-
-
 </script>
+
+
 
 <%@ include file="../include/footer.jsp"%>
