@@ -74,7 +74,50 @@
       </select> 
 <button class="btn btn-danger" id="btnall" name="delete" value="black">삭제</button>
 </form>
-<button class="btn btn-primary btnBalckList" onclick="location.href='../member/list'">일반회원관리</button>
+<form action="../member/blackSearchList">
+				<select class="btn btn-primary btnSearch" name="search" >
+					<option value="userName">이름</option>
+					<option value="nickName">닉네임</option>
+					<option value="userID">아이디</option>
+					<option value="all">전체</option>
+				</select>
+				<span class="serachLevel">
+				<input class="serachword" type="text" name="searchword">
+				<input type="hidden" name="length" value=" ${fn:length(memberList)}">
+				</span>
+				<button>검색</button>
+</form>
+<nav aria-label="Page navigation example">
+  	<ul class="pagination justify-content-center">
+     			<li class="page-item">
+     				 <a class="page-link" href="../member/blackList?page=${intpage -1 }" aria-label="Previous">
+      				  <span aria-hidden="true">&laquo;</span>
+      				</a>
+    			</li>
+    			
+    			<c:forEach var="i" begin="${startpage }" end="${endpage }">
+    			<c:choose>
+    			<c:when test="${i==intpage }">
+    			<li class="page-item">
+    			<a class="page-link active" href="../member/blackList?page=${i }">${i }</a>
+    			</li>    
+    			</c:when>
+    			<c:otherwise>
+    			<li class="page-item">
+    			<a class="page-link " href="../member/blackList?page=${i }">${i }</a>
+    			</li>    
+    			</c:otherwise>
+    			</c:choose>
+    						
+    			</c:forEach>
+    			
+    			<li class="page-item">
+      			<a class="page-link" href="../member/blackList?page=${intpage +1 }" aria-label="Next">
+        		<span aria-hidden="true">&raquo;</span>
+     			 </a>
+    			</li>
+  </ul>
+</nav>
 </div>
 <script>
 //삭제기능

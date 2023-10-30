@@ -94,7 +94,7 @@ public class MemberInsertProcess extends HttpServlet {
 			newFileName = firstFileName+strNow+ext;
 			File oldFile = new File(uploadPath+File.separator+fileName);
 			File newFile = new File(uploadPath+File.separator+newFileName);
-			Thumbnails.of(oldFile).forceSize(100, 100).toFile(newFile);
+			Thumbnails.of(oldFile).forceSize(50, 50).toFile(newFile);
 			oldFile.renameTo(newFile);
 		}
 		memberInsert.setUserID(userID);

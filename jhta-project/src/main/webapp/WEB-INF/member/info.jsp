@@ -3,11 +3,20 @@
 <div class="container">
 <table class="table striped">
   <tbody>
-    <tr>
+  <c:choose>
+  <c:when test="${not empty infoMember.profile || infoMember.profile!=null}">
+  	 <tr>
       <th scope="row">프로필</th>
       <td><img src="/javabackend-Server-TP${pageContext.request.contextPath}/upload/${infoMember.profile }" class="profile"></td>    			
     </tr>
-    <tr>
+  </c:when>
+  <c:otherwise>
+  	<tr>
+      <th scope="row">프로필</th>
+      <td><img src="../upload/user.png" class="profile"></td>    			
+    </tr>
+  </c:otherwise>
+  </c:choose>
       <th scope="row">아이디</th>
       <td>${infoMember.userID}</td> 
     </tr>

@@ -468,6 +468,9 @@
   <servlet-mapping>
     <servlet-name>CartProductInsert</servlet-name>
     <url-pattern>/cart/insert</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
     <display-name>MemberLevelAll</display-name>
     <servlet-name>MemberLevelAll</servlet-name>
     <servlet-class>com.kkj.member.controller.MemberLevelAll</servlet-class>
@@ -505,7 +508,8 @@
   <servlet-mapping>
     <servlet-name>MemberSearchList</servlet-name>
     <url-pattern>/member/searchList</url-pattern>
-    <servlet>
+  </servlet-mapping>
+  <servlet>
     <description></description>
     <display-name>SubscribePayment</display-name>
     <servlet-name>SubscribePayment</servlet-name>
@@ -534,5 +538,15 @@
   <servlet-mapping>
     <servlet-name>SubscribeTokenTest</servlet-name>
     <url-pattern>/subscribe/token-test</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>MemberBlackSearchList</display-name>
+    <servlet-name>MemberBlackSearchList</servlet-name>
+    <servlet-class>com.kkj.member.controller.MemberBlackSearchList</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MemberBlackSearchList</servlet-name>
+    <url-pattern>/member/blackSearchList</url-pattern>
   </servlet-mapping>
 </web-app>

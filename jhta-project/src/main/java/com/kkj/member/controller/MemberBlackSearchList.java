@@ -15,15 +15,15 @@ import com.kkj.member.dao.MemberDateDao;
 import com.kkj.member.dto.MemberDto;
 
 /**
- * Servlet implementation class MemberSearchList
+ * Servlet implementation class MemberBlackSearchList
  */
-public class MemberSearchList extends HttpServlet {
+public class MemberBlackSearchList extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberSearchList() {
+    public MemberBlackSearchList() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -40,7 +40,7 @@ public class MemberSearchList extends HttpServlet {
 		HashMap<String,Object> totalmap = new HashMap();
 		totalmap.put("search", search);
 		totalmap.put("searchword", searchword);
-		int totalCount = memberDao.searhMemberCount(totalmap);
+		int totalCount = memberDao.blackSearhMemberCount(totalmap);
 		int intpage =0;
 		int lastpage = 10;
 		int totalpage =(int)Math.ceil(totalCount/(double)lastpage);
@@ -63,7 +63,7 @@ public class MemberSearchList extends HttpServlet {
 		map.put("searchword", searchword);
 		map.put("start", (intpage-1)*10 +1);
 		map.put("end", intpage*10);
-		List<MemberDto> memberList = memberDao.searhMember(map);
+		List<MemberDto> blackList = memberDao.blackSearhMember(map);
 		int loginCount  = memberDateDao.loginCount();
 		int insertCount	= memberDao.insertCount();
 		int memberCount = memberDao.memberCount();
@@ -73,13 +73,12 @@ public class MemberSearchList extends HttpServlet {
 		request.setAttribute("startpage", startpage);
 		request.setAttribute("endpage", endpage);
 		request.setAttribute("totalCount", totalCount);
-		request.setAttribute("memberList", memberList);
+		request.setAttribute("blackList", blackList);
 		request.setAttribute("loginCount", loginCount);
 		request.setAttribute("insertCount", insertCount);
 		request.setAttribute("memberCount", memberCount);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/member/searchList.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/member/blackSearchList.jsp");
 		dispatcher.forward(request, response);
-		
 	}
 
 	/**

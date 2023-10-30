@@ -19,8 +19,8 @@
     </tr>
   </tbody>
 </table>
-<button class="btn btn-dark btnBalckList" onclick="location.href='../member/blackList'">블랙리스트관리</button>
-
+<button class="btn btn-primary btnBalckList" onclick="location.href='../member/list'">일반회원관리</button>
+<button class="btn btn-primary" onclick="location.href='../member/blackList'">전체</button>
 <form action="../member/deleteAll">
 <table class="table">
   <thead>
@@ -41,7 +41,7 @@
     </tr>
   </thead>
   <tbody>
-  		<c:forEach items="${memberList }" var="member" varStatus="status">
+  		<c:forEach items="${blackList }" var="member" varStatus="status">
     <tr>
       <th scope="row">${status.index}</th>
       <c:choose>
@@ -53,7 +53,8 @@
       <c:if test="${member.adminNumber ==2 }"><td>${member.userID}<br>(실버)</td></c:if>
       <c:if test="${member.adminNumber ==3 }"><td>${member.userID}<br>(골드)</td></c:if>
       <c:if test="${member.adminNumber ==4 }"><td>${member.userID}<br>(플레)</td></c:if>
-      <c:if test="${member.adminNumber ==5 }"><td>${member.userID}<br>(다이아)</td></c:if>     
+      <c:if test="${member.adminNumber ==5 }"><td>${member.userID}<br>(다이아)</td></c:if> 
+      <c:if test="${member.adminNumber ==6 }"><td>${member.userID}<br>(블랙회원)</td></c:if>    
       </c:otherwise>
       </c:choose>
       <td>${member.userName}(${member.nickName })</td>
@@ -64,7 +65,7 @@
       <td>${member.redate}</td>
       <td>0</td>
       <td>
-      <select class="btn btn-secondary level" name="level" >
+      <select class="btn btn-secondary level" name="level" disabled>
       <option value="un,${member.no}">회원등급</option>
       <option value="si,${member.no}">실버</option>
       <option value="go,${member.no}">골드</option>
@@ -73,7 +74,7 @@
       <option value="ad,${member.no}">관리자</option>
       </select> 
       </td>
-      <td><button class="btn btn-dark btnBlack" data-no="${member.no}">블랙</button> </td>
+      <td><button class="btn btn-dark btnBlack" data-no="${member.no}">해제</button> </td>
       <td><button class="btn btn-danger btnDelete" data-no="${member.no}">삭제</button></td>  
       												<!--data-no  사용자 지정 데이터 특성
       												    특정 클래스를 부여할 수 있음-->
@@ -83,8 +84,8 @@
     </c:forEach>
   </tbody>
 </table>
-<button class="btn btn-dark btnBlackAll" id="btnBlackAll">블랙</button>
- <select class="btn btn-secondary btnLevel" name="allLevel">
+<button class="btn btn-primary btnBlackAll" id="btnBlackAll">해제</button>
+ <select class="btn btn-secondary btnLevel" name="allLevel" disabled>
       <option value="unlevel" selected>회원등급</option>
       <option value="silver">실버</option>
       <option value="gold">골드</option>
@@ -100,11 +101,11 @@
 					<option value="userName">이름</option>
 					<option value="nickName">닉네임</option>
 					<option value="userID">아이디</option>
-					<option value="level">등급</option>
 					<option value="all">전체</option>
 				</select>
 				<span class="serachLevel">
 				<input class="serachword" type="text" name="searchword">
+				<input type="hidden" name="length" value=" ${fn:length(memberList)}">
 				</span>
 				<button>검색</button>
 </form>
@@ -112,21 +113,21 @@
 <nav aria-label="Page navigation example">
   	<ul class="pagination justify-content-center">
      			<li class="page-item">
-     				 <a class="page-link" href="../member/list?page=${intpage -1 }" aria-label="Previous">
+     				 <a class="page-link" href="../member/blackSearchList?search=${search }&searchword=${searchword }&page=${intpage -1 }" aria-label="Previous">
       				  <span aria-hidden="true">&laquo;</span>
       				</a>
     			</li>
     			
-    			<c:forEach var="i" begin="${startpage }" end="${endpage }">
+    			<c:forEach var="i" begin="${startpage }" end="${endpage }" step="1">
     			<c:choose>
     			<c:when test="${i==intpage }">
     			<li class="page-item">
-    			<a class="page-link active" href="../member/list?page=${i }">${i }</a>
+    			<a class="page-link active" href="../member/blackSearchList?search=${search }&searchword=${searchword }&page=${i }">${i }</a>
     			</li>    
     			</c:when>
     			<c:otherwise>
     			<li class="page-item">
-    			<a class="page-link " href="../member/list?page=${i }">${i }</a>
+    			<a class="page-link " href="../member/blackSearchList?search=${search }&searchword=${searchword }&page=${i}">${i }</a>
     			</li>    
     			</c:otherwise>
     			</c:choose>
@@ -134,7 +135,7 @@
     			</c:forEach>
     			
     			<li class="page-item">
-      			<a class="page-link" href="../member/list?page=${intpage +1 }" aria-label="Next">
+      			<a class="page-link" href="../member/blackSearchList?search=${search }&searchword=${searchword }&page=${intpage +1 }" aria-label="Next">
         		<span aria-hidden="true">&raquo;</span>
      			 </a>
     			</li>
@@ -143,7 +144,6 @@
 </div>
 
 <script>
-   // 검색 버튼 기능 다양화
 	$(".btnSearch").on("change",function(){
 		if($(".btnSearch").val()=="level"){
 			$(".serachword").attr("type","hidden");
@@ -223,54 +223,55 @@
 		return false;
 	})
 		//전체 선택 후 블랙  ajax 처리
-	$(".btnBlackAll").on("click",function(){
-		let arrayCheck = [];
-		$("input:checkbox[name=removecheck]:checked").each(function(){
-			arrayCheck.push($(this).val());
-		})
-		console.log(arrayCheck)	;
-		$.ajax({
-			url:"../member/blackAll",
-			traditional: true,   //ajax 배열 넘기기 옵션
-			data:{check:arrayCheck,
-				ad:"6"},
-			success:function(data){	
-				if(data.isBalck){
- 					alert("블랙입니다.")
- 					location.reload();
- 				}else{
- 					alert("오류입니다.")
- 				} 
-			},
-			fail:function(){
-				
-			}
+	//전체 선택 후 블랙  ajax 처리
+$(".btnBlackAll").on("click",function(){
+	let arrayCheck = [];
+	$("input:checkbox[name=removecheck]:checked").each(function(){
+		arrayCheck.push($(this).val());
+	})
+	console.log(arrayCheck)	;
+	$.ajax({
+		url:"../member/blackAll",
+		traditional: true,   //ajax 배열 넘기기 옵션
+		data:{check:arrayCheck,
+			  ad:"0"},
+		success:function(data){	
+			if(data.isBalck){
+					alert("블랙해제되었습니다.")
+					location.reload();
+				}else{
+					alert("오류입니다.")
+				} 
+		},
+		fail:function(){
 			
+		}
+		
+	});
+	return false;
+});
+$(".btnBlack").on("click",function(){
+		const $parent = $(this).parent().parent();
+		console.log($parent)
+		$.ajax({
+			url:"../member/black",
+			data:{no:$(this).data("no"),
+				  ad:"0"},
+			success:function(data){
+				console.log(data);
+				if(data.isBalck){
+					alert("블랙해제되었습니다..")
+					location.reload();
+				}else{
+					alert("오류입니다.")
+				}
+			},
+			fail:function(){	
+			}
 		});
 		return false;
 	});
-		
- 	$(".btnBlack").on("click",function(){
- 		const $parent = $(this).parent().parent();
- 		console.log($parent)
- 		$.ajax({
- 			url:"../member/black",
- 			data:{no:$(this).data("no"),
- 				  ad:"6"},
- 			success:function(data){
- 				console.log(data);
- 				if(data.isBalck){
- 					alert("블랙입니다.")
- 					location.reload();
- 				}else{
- 					alert("오류입니다.")
- 				}
- 			},
- 			fail:function(){	
- 			}
- 		});
- 		return false;
- 	});
+	
  	//체크박스 전체 선택 및 해체 기능
 	$("#checkAll").on("change",function(){
 		if($("#checkAll").is(":checked")){
