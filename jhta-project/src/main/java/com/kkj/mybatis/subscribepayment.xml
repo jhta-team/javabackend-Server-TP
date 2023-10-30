@@ -2,18 +2,29 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
 <mapper namespace="org.mybatis.example.BlogMapper">
 	<insert id="insertSubscribePayment" parameterType="SubscribePaymentDto">
-		INSERT INTO subscribepayment values(seq_subscribepayment.nextval, #{userID}, #{price}, #{imp_uid}, #{product}, #{status})
+		INSERT INTO subscribepayment values(seq_subscribepayment.nextval, #{userID}, #{price}, #{imp_uid}, #{product}, #{status}, sysdate)
 	</insert>
 	
+	<insert id="insertSubscribePaymentCancel" parameterType="SubscribePaymentDto">
+		INSERT INTO subscribepaymentcancle values(#{imp_uid}, #{userID}, #{price}, #{product}, #{status}, sysdate)
+	</insert>
 	<select id="paymentCheck" parameterType="String" resultType="int">
 		select count(*) from subscribepayment where imp_uid = #{imp_uid}
 	</select>
 	
 	<update id="updateMemberSubscribe" parameterType="UpdateSubscribeDto">
-		update member set subscribeend = #{subscribeEnd} WHERE id = #{userID}
+		update member set subscribeend = #{subscribeEnd} WHERE id = #{id}
 	</update>
 	
 	<select id="subscribeDayFind" parameterType="String" resultType="String">
 		select subscribeend from member where id = #{userID}
+	</select>
+	
+	<select id="findPayment" parameterType="String" resultType="SubscribePaymentDto">
+		SELECT pay.userID,pay.imp_uid,pay.product,pay.regdate,pay.STATUS  FROM subscribepaymentcancle can RIGHT OUTER JOIN subscribepayment pay ON can.imp_uid = pay.imp_uid WHERE pay.userid = #{userID} and can.imp_uid IS NULL order by no asc
+	</select>
+	
+	<select id="findeOnePayment" parameterType="String" resultType="UpdateSubscribeDto">
+		select * from member where id = #{userID}
 	</select>
 </mapper>

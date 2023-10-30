@@ -468,6 +468,9 @@
   <servlet-mapping>
     <servlet-name>CartProductInsert</servlet-name>
     <url-pattern>/cart/insert</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
     <display-name>MemberLevelAll</display-name>
     <servlet-name>MemberLevelAll</servlet-name>
     <servlet-class>com.kkj.member.controller.MemberLevelAll</servlet-class>
@@ -505,7 +508,8 @@
   <servlet-mapping>
     <servlet-name>MemberSearchList</servlet-name>
     <url-pattern>/member/searchList</url-pattern>
-    <servlet>
+  </servlet-mapping>
+  <servlet>
     <description></description>
     <display-name>SubscribePayment</display-name>
     <servlet-name>SubscribePayment</servlet-name>
@@ -519,11 +523,11 @@
     <description></description>
     <display-name>SubcribePaymentProcess</display-name>
     <servlet-name>SubcribePaymentProcess</servlet-name>
-    <servlet-class>com.kkj.subscribe.controller.SubcribePaymentProcess</servlet-class>
+    <servlet-class>com.kkj.subscribe.controller.SubscribePaymentProcess</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>SubcribePaymentProcess</servlet-name>
-    <url-pattern>/subcribe/payment-process</url-pattern>
+    <url-pattern>/subscribe/payment-process</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -534,5 +538,25 @@
   <servlet-mapping>
     <servlet-name>SubscribeTokenTest</servlet-name>
     <url-pattern>/subscribe/token-test</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SubscribeFindUser</display-name>
+    <servlet-name>SubscribeFindUser</servlet-name>
+    <servlet-class>com.kkj.subscribe.controller.SubscribeFindUser</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SubscribeFindUser</servlet-name>
+    <url-pattern>/Subscribe/find-user</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SubscribePaymentCancel</display-name>
+    <servlet-name>SubscribePaymentCancel</servlet-name>
+    <servlet-class>com.kkj.subscribe.controller.SubscribePaymentCancel</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SubscribePaymentCancel</servlet-name>
+    <url-pattern>/subscribe/payment-cancel</url-pattern>
   </servlet-mapping>
 </web-app>
