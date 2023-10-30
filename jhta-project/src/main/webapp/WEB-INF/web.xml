@@ -451,6 +451,23 @@
   </servlet-mapping>
   <servlet>
     <description></description>
+    <display-name>CartProductList</display-name>
+    <servlet-name>CartProductList</servlet-name>
+    <servlet-class>com.kkj.cart.controller.CartProductList</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CartProductList</servlet-name>
+    <url-pattern>/cart/list</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CartProductInsert</display-name>
+    <servlet-name>CartProductInsert</servlet-name>
+    <servlet-class>com.kkj.cart.controller.CartProductInsert</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CartProductInsert</servlet-name>
+    <url-pattern>/cart/insert</url-pattern>
     <display-name>MemberLevelAll</display-name>
     <servlet-name>MemberLevelAll</servlet-name>
     <servlet-class>com.kkj.member.controller.MemberLevelAll</servlet-class>

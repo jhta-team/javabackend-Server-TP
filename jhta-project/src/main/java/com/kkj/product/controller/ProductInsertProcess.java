@@ -41,7 +41,6 @@ public class ProductInsertProcess extends HttpServlet {
 		int pdtPrice = Integer.parseInt(request.getParameter("pdtPrice"));
 		String pdtColor = request.getParameter("pdtColor");
 		String pdtContent = request.getParameter("pdtContent");
-		//int pdtCount = Integer.parseInt(request.getParameter("pdtCount"));
 		int pdtCountS = Integer.parseInt(request.getParameter("pdtCountS"));
 		System.out.println(pdtCountS);
 		int pdtCountM = Integer.parseInt(request.getParameter("pdtCountM"));
@@ -119,13 +118,14 @@ public class ProductInsertProcess extends HttpServlet {
 		int resultImage = imageDao.insertImg(imageDto);
 		
 		//사이즈 저장 dao,dto
+
 		ProductSizeDto productSizeDto = new ProductSizeDto();
+		ProductSizeDao productSizeDao = new ProductSizeDao();
 		productSizeDto.setPdtCountS(pdtCountS);
 		productSizeDto.setPdtCountM(pdtCountM);
 		productSizeDto.setPdtCountL(pdtCountL);
-		productSizeDto.setPdtCountXL(pdtCountXL);		
-		ProductSizeDao productSizeDao = new ProductSizeDao();
-		productSizeDao.insertProductSize(productSizeDto);		
+		productSizeDto.setPdtCountXL(pdtCountXL);
+		productSizeDao.insertProductSize(productSizeDto);
 		
 		//결과값 처리
 
