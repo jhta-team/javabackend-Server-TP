@@ -8,13 +8,13 @@
     UPDATE PDT_size
     SET pdtcount =
       CASE
-        WHEN sizeid = 1 THEN #{pdtCountS}
-        WHEN sizeid = 2 THEN #{pdtCountM}
-        WHEN sizeid = 3 THEN #{pdtCountL}
-        WHEN sizeid = 4 THEN #{pdtCountXL}
+        WHEN sizes = 'S' THEN #{pdtCountS}
+        WHEN sizes = 'M' THEN #{pdtCountM}
+        WHEN sizes = 'L' THEN #{pdtCountL}
+        WHEN sizes = 'XL' THEN #{pdtCountXL}
       END
     WHERE pdtid = #{pdtId}
-      AND sizeid IN (1, 2, 3, 4)
+      AND sizes IN ('S', 'M', 'L', 'XL')
   ]]>
 </update>
  <insert id="insertProductSize" parameterType="ProductSizeDto">

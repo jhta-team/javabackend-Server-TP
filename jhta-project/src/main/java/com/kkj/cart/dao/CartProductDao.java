@@ -26,6 +26,7 @@ public class CartProductDao {
 		return cartProductDto;		
 	}
 	
+	/*
 	public String selectThumCart(int pdtId) {
 		String strThum = "null";		
 		SqlSession sqlSession = MybatisConnectionFactory.getSqlSession();
@@ -33,4 +34,23 @@ public class CartProductDao {
 		sqlSession.close();
 		return strThum;		
 	}
+	*/
+	
+	public int deleteCart(int cartItemId) {
+		int result = 0;
+		SqlSession sqlSession = MybatisConnectionFactory.getSqlSession();
+		result = sqlSession.update("deleteCart",cartItemId);
+		sqlSession.close();
+		return result;
+	}
+
+	public int updateCart(CartProductDto cartProductDto) {
+		int result = 0;
+		SqlSession sqlSession = MybatisConnectionFactory.getSqlSession();
+		result = sqlSession.update("updateCart",cartProductDto);
+		sqlSession.close();
+		return result;
+	}
+
+
 }
