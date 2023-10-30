@@ -17,10 +17,23 @@ public class MemberDao {
 		loginMemberDto = sqlSession.selectOne("loginMember", loginMap);
 		return loginMemberDto;
 	}
+	
 	public int insertMember(MemberDto memberDto){
 		int result=0;
 		SqlSession sqlSession = MybatisConnectionFactory.getSqlSession();
 		result = sqlSession.insert("insertMember", memberDto);
+		return result;
+	}
+	public int memberCount() {
+		int result =0;
+		SqlSession sqlSession = MybatisConnectionFactory.getSqlSession();
+		result = sqlSession.selectOne("memberCount");
+		return result;
+	}
+	public int insertCount() {
+		int result =0;
+		SqlSession sqlSession = MybatisConnectionFactory.getSqlSession();
+		result = sqlSession.selectOne("insertCount");
 		return result;
 	}
 	public int idCheckMember(String userID) {
@@ -65,6 +78,12 @@ public class MemberDao {
 		result = sqlSession.delete("deleteMember", deleteMap);
 		return result;
 	}
+	public int deleteAdminMember(int no){
+		int result=0;
+		SqlSession sqlSession = MybatisConnectionFactory.getSqlSession();
+		result = sqlSession.delete("deleteAdminMember", no);
+		return result;
+	}
 	public List<MemberDto> listMember(HashMap<String,Integer> map){
 		List<MemberDto> memberList = null;
 		SqlSession sqlSession = MybatisConnectionFactory.getSqlSession();
@@ -88,5 +107,11 @@ public class MemberDao {
 		SqlSession sqlSession = MybatisConnectionFactory.getSqlSession();
 		result = sqlSession.update("blackUpdateAll", map);
 		return result;
+	}
+	public List<MemberDto> searhMember(HashMap<String,String> map){
+		List<MemberDto> searchList = null;
+		SqlSession sqlSession = MybatisConnectionFactory.getSqlSession();
+		searchList =sqlSession.selectList("searhMember", map);
+		return searchList;
 	}
 }

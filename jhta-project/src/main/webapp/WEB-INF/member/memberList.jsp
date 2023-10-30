@@ -1,8 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="../include/header.jsp" %>
 <div class="container-fluid">
+<table class="table">
+  <thead class="table-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">신규 회원</th>
+      <th scope="col">방문회원</th>
+      <th scope="col">탙퇴회원</th>
+      <th scope="col">총회원</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>${insertCount}명</td>
+      <td>${loginNO}명</td>
+      <td>0명</td>
+      <td>${memberCount}명</td>
+    </tr>
+  </tbody>
+</table>
 <button class="btn btn-dark btnBalckList" onclick="location.href='../member/blackList'">블랙리스트관리</button>
-<form action="../member/delete-all">
+
+<form action="../member/deleteAll">
 <table class="table">
   <thead>
     <tr>
@@ -51,10 +72,11 @@
       <option value="go,${member.no}">골드</option>
       <option value="pl,${member.no}">플레티넘</option>
       <option value="di,${member.no}">다이아</option>
+      <option value="ad,${member.no}">관리자</option>
       </select> 
       </td>
       <td><button class="btn btn-dark btnBlack" data-no="${member.no}">블랙</button> </td>
-      <td><button class="btn btn-danger btnDelete" data-no="">삭제</button></td>  
+      <td><button class="btn btn-danger btnDelete" data-no="${member.no}">삭제</button></td>  
       												<!--data-no  사용자 지정 데이터 특성
       												    특정 클래스를 부여할 수 있음-->
       <td><input type="checkbox" name="removecheck" class="check" value="${member.no}"></td>
@@ -64,19 +86,68 @@
   </tbody>
 </table>
 <button class="btn btn-dark btnBlackAll" id="btnBlackAll">블랙</button>
- <select class="btn btn-secondary" >
+ <select class="btn btn-secondary btnLevel" name="allLevel">
       <option value="unlevel" selected>회원등급</option>
       <option value="silver">실버</option>
       <option value="gold">골드</option>
       <option value="ple">플레티넘</option>
       <option value="diamond">다이아</option>
+      <option value="admin">관리자</option>
       </select> 
-<button class="btn btn-danger" id="btnall">삭제</button>
+<button class="btn btn-danger" id="btnall" >삭제</button>
+
 </form>
-<button class="btn btn-dark btnBalckList" onclick="location.href='../member/blackList'">블랙리스트관리</button>
+<form action="../member/searchList">
+				<select class="btn btn-primary btnSearch" name="search" >
+					<option value="userName">이름</option>
+					<option value="nickName">닉네임</option>
+					<option value="userID">아이디</option>
+					<option value="level">등급</option>
+					<option value="all">전체</option>
+				</select>
+				<span class="serachLevel">
+				<input class="serachword" type="text" name="searchword">
+				</span>
+				<button>검색</button>
+			</form>
 </div>
 
 <script>
+	$(".btnSearch").on("change",function(){
+		if($(".btnSearch").val()=="level"){
+			$(".serachword").attr("type","hidden");
+			$(".serachLevel").html(`<select class=" btnLevel" name="searchword">
+					  <option value="0">일반</option>
+					  <option value="2">실버</option>
+				      <option value="3">골드</option>
+				      <option value="4">플레티넘</option>
+				      <option value="5">다이아</option>
+				      <option value="1">관리자</option>
+				      </select> `)
+		}else{
+			$(".serachLevel").html(`<input class="serachword" type="text" name="searchword">`)
+		}
+	})
+	// 삭제기능
+	$(".btnDelete").on("click",function(){
+		$.ajax({
+			url:"../member/delete-process02",
+			data:{no:$(this).data("no")},
+			success:function(data){
+ 				console.log(data);
+ 				if(data.isDelete){
+ 					alert("삭제되었습니다.")
+ 					location.reload();
+ 				}else{
+ 					alert("오류입니다.")
+ 				}
+ 			},
+ 			fail:function(){	
+ 			}	
+		})
+		return false;
+	})
+	// 회원등급 조정 기능
 	$(".level").on("change",function(){
 		$.ajax({
 			url:"../member/level",
@@ -93,6 +164,31 @@
  			fail:function(){	
  			}
 		});
+		return false;
+	})
+	//회원등급 일괄 처리
+	$(".btnLevel").on("change",function(){
+		let arrayLevelCheck =[];
+		$("input:checkbox[name=removecheck]:checked").each(function(){
+			arrayLevelCheck.push($(this).val());
+		})
+		$.ajax({
+			url:"../member/levelAll",
+			traditional: true,   //ajax 배열 넘기기 옵션
+			data:{no:arrayLevelCheck,
+				  level:$(this).val()},
+			success:function(data){	
+				if(data.isLevel){
+ 					alert("변경되었습니다.")
+ 					location.reload();
+ 				}else{
+ 					alert("오류입니다.")
+ 				} 
+			},
+			fail:function(){
+				
+			}
+		})
 		return false;
 	})
 		//전체 선택 후 블랙  ajax 처리
@@ -144,7 +240,7 @@
  		});
  		return false;
  	});
- 	
+ 	//체크박스 전체 선택 및 해체 기능
 	$("#checkAll").on("change",function(){
 		if($("#checkAll").is(":checked")){
 		 $(".check").prop("checked",true)	;		

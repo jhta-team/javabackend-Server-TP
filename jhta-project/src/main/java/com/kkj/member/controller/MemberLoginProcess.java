@@ -13,6 +13,7 @@ import java.util.HashMap;
 
 
 import com.kkj.member.dao.MemberDao;
+import com.kkj.member.dao.MemberDateDao;
 import com.kkj.member.dto.MemberDto;
 import com.kkj.member.dto.ModalState;
 import com.kkj.product.util.CookieManager;
@@ -42,22 +43,25 @@ public class MemberLoginProcess extends HttpServlet {
 		System.out.println(userID+"==="+userPW);
 		
 		MemberDao memberDao = new MemberDao();
+		MemberDateDao MemberDateDao = new MemberDateDao();
 		MemberDto loginMember =new MemberDto();
 		HashMap<String,String> loginMap = new HashMap();
 		loginMap.put("userID", userID);
 		loginMap.put("userPW", userPW);
 		loginMember = memberDao.loginMember(loginMap);
-	
 		if(loginMember !=null) {
+			MemberDateDao.loginDate(userID);
 			if(loginMember.getAdminNumber()==6) {
 				ModalState modalState = new ModalState("show","블랙입니다. 관리자에게 문의하세요");
 				session.setAttribute("modalState", modalState);
 				response.sendRedirect("../member/login");
 			}else {
 				String loggedName = loginMember.getUserName();
+				
 				session.setAttribute("loggedID", userID);
 				session.setAttribute("loggedName",loggedName);
 				session.setAttribute("loggedMember", loginMember);
+				
 				ModalState modalState = new ModalState("show","로그인 성공");
 				session.setAttribute("modalState", modalState);				
 				if(check !=null) {
