@@ -93,7 +93,7 @@
       <option value="admin">관리자</option>
       </select> 
 <button class="btn btn-danger" id="btnall" >삭제</button>
-
+<button class="btn btn-primary" onclick="location.href='../member/list'">전체</button>
 </form>
 <form action="../member/searchList">
 				<select class="btn btn-primary btnSearch" name="search" >
@@ -105,6 +105,7 @@
 				</select>
 				<span class="serachLevel">
 				<input class="serachword" type="text" name="searchword">
+				<input type="hidden" name="length" value=" ${fn:length(memberList)}">
 				</span>
 				<button>검색</button>
 </form>
@@ -112,21 +113,21 @@
 <nav aria-label="Page navigation example">
   	<ul class="pagination justify-content-center">
      			<li class="page-item">
-     				 <a class="page-link" href="../member/list?page=${intpage -1 }" aria-label="Previous">
+     				 <a class="page-link" href="../member/searchList?search=${search }&searchword=${searchword }&page=${intpage -1 }" aria-label="Previous">
       				  <span aria-hidden="true">&laquo;</span>
       				</a>
     			</li>
     			
-    			<c:forEach var="i" begin="${startpage }" end="${endpage }">
+    			<c:forEach var="i" begin="${startpage }" end="${endpage }" step="1">
     			<c:choose>
     			<c:when test="${i==intpage }">
     			<li class="page-item">
-    			<a class="page-link active" href="../member/list?page=${i }">${i }</a>
+    			<a class="page-link active" href="../member/searchList?search=${search }&searchword=${searchword }&page=${i }">${i }</a>
     			</li>    
     			</c:when>
     			<c:otherwise>
     			<li class="page-item">
-    			<a class="page-link " href="../member/list?page=${i }">${i }</a>
+    			<a class="page-link " href="../member/searchList?search=${search }&searchword=${searchword }&page=${i}">${i }</a>
     			</li>    
     			</c:otherwise>
     			</c:choose>
@@ -134,7 +135,7 @@
     			</c:forEach>
     			
     			<li class="page-item">
-      			<a class="page-link" href="../member/list?page=${intpage +1 }" aria-label="Next">
+      			<a class="page-link" href="../member/searchList?search=${search }&searchword=${searchword }&page=${intpage +1 }" aria-label="Next">
         		<span aria-hidden="true">&raquo;</span>
      			 </a>
     			</li>
@@ -143,7 +144,6 @@
 </div>
 
 <script>
-   // 검색 버튼 기능 다양화
 	$(".btnSearch").on("change",function(){
 		if($(".btnSearch").val()=="level"){
 			$(".serachword").attr("type","hidden");

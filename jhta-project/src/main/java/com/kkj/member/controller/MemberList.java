@@ -38,23 +38,49 @@ public class MemberList extends HttpServlet {
 		HttpSession session = request.getSession();
 		MemberDao memberDao = new MemberDao();
 		MemberDateDao memberDateDao = new MemberDateDao();
-		
 		HashMap<String, Integer> map = new HashMap();
-		map.put("start", 1);
-		map.put("end", 10);
+		String strPage = request.getParameter("page");
+		int totalCount = memberDao.noBlackMemberCount();
+		int intpage =0;
+		int lastpage = 10;
+		int totalpage =(int)Math.ceil(totalCount/(double)lastpage);
+		if(strPage==null || strPage.isEmpty()) {
+			intpage =1;
+			
+		}else {
+			intpage =  Integer.parseInt(strPage);
+		}
+		if(totalpage < intpage) {
+			intpage = totalpage;
+		}
+		int startpage = ((intpage-1)/lastpage)*lastpage+1;
+		int endpage = startpage + lastpage -1;
+		if(endpage > totalpage) {
+			endpage =totalpage;
+		}
+		map.put("start", (intpage-1)*10 +1);
+		map.put("end", intpage*10);
 		List<MemberDto> memberList = memberDao.listMember(map);
-		MemberDateDto memberDateDto  = memberDateDao.loginCount();
+		if(memberList != null) {	
+		int loginCount  = memberDateDao.loginCount();
 		int insertCount	= memberDao.insertCount();
 		int memberCount = memberDao.memberCount();
-		int loginNO = memberDateDto.getCount();
+	
+		request.setAttribute("intpage", intpage);
+		request.setAttribute("startpage", startpage);
+		request.setAttribute("endpage", endpage);
+		request.setAttribute("totalCount", totalCount);
 		request.setAttribute("memberList", memberList);
-		request.setAttribute("loginNO", loginNO);
+		request.setAttribute("loginCount", loginCount);
 		request.setAttribute("insertCount", insertCount);
 		request.setAttribute("memberCount", memberCount);
 		RequestDispatcher dispatcher =request.getRequestDispatcher("/WEB-INF/member/memberList.jsp");
 		dispatcher.forward(request, response);
 		if(session.getAttribute("modalState")!=null) {
 			session.removeAttribute("modalState");
+		}
+		}else {
+			
 		}
 			
 	}

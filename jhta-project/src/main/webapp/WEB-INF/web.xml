@@ -541,6 +541,13 @@
   </servlet-mapping>
   <servlet>
     <description></description>
+    <display-name>MemberBlackSearchList</display-name>
+    <servlet-name>MemberBlackSearchList</servlet-name>
+    <servlet-class>com.kkj.member.controller.MemberBlackSearchList</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MemberBlackSearchList</servlet-name>
+    <url-pattern>/member/blackSearchList</url-pattern>
     <display-name>CartProductDelete</display-name>
     <servlet-name>CartProductDelete</servlet-name>
     <servlet-class>com.kkj.cart.controller.CartProductDelete</servlet-class>

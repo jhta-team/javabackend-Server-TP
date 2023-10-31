@@ -18,10 +18,15 @@ public class MemberDateDao {
 		result = sqlSession.insert("insertDate",userID);
 		return result;
 	}
-	public MemberDateDto loginCount() {
-		MemberDateDto memberDateDto = null;
+	public int loginCount() {
+		int result=0;
 		SqlSession sqlSession = MybatisConnectionFactory.getSqlSession();
-		memberDateDto = sqlSession.selectOne("loginCount");
-		return memberDateDto;
+		String strResult = null;
+		if(sqlSession.selectOne("loginCount")==null) {
+			result =0;
+		}else {
+			result = sqlSession.selectOne("loginCount");
+		}		
+		return result;
 	}
 }

@@ -20,6 +20,12 @@
   	<select id="memberCount" resultType="int">
   		select count(*) count from member 
   	</select>
+  	<select id="noBlackMemberCount" resultType="int">
+  		select count(*) count from member where adminNumber NOT IN(6)
+  	</select>
+  	<select id="blackMemberCount" resultType="int">
+  		select count(*) count from member where adminNumber IN(6)
+  	</select>
   	<select id="idCheck" parameterType="String" resultType="int">
   		select count(*) as count from member where userID=#{userID}
   	</select>
@@ -44,8 +50,8 @@
   		delete from member where userID = #{userID} and userPW = #{userPW}
   	</delete>
   	<select id="listMember" parameterType="HashMap" resultType="MemberDto">
-  		SELECT  *  FROM (SELECT rownum AS num, r.* FROM (SELECT *FROM  MEMBER ORDER BY no DESC)r)
-  		where num  <![CDATA[>=]]> #{start} and num  <![CDATA[<=]]> #{end} and adminNumber <![CDATA[<=]]> 5
+  		SELECT  userID, userPW, userName, nickName, address, postCode, tel, email, redate, adminNumber,no  FROM (SELECT rownum AS num, r.* FROM (SELECT *FROM  MEMBER where adminNumber <![CDATA[<=]]> 5 ORDER BY no DESC)r)
+  		where num  <![CDATA[>=]]> #{start} and num  <![CDATA[<=]]> #{end}
   	</select>
   	<update id="blackUpdate" parameterType="HashMap">
   		update member set adminNumber = #{adminNumber} where no = #{no}
@@ -54,20 +60,45 @@
   		update member set adminNumber = #{adminNumber} where no = #{no}
   	</update>
   	<select id="blackListMember" parameterType="HashMap" resultType="MemberDto">
-  		SELECT  *  FROM (SELECT rownum AS num, r.* FROM (SELECT *FROM  MEMBER ORDER BY no DESC)r)
-  		where num  <![CDATA[>=]]> #{start} and num  <![CDATA[<=]]> #{end} and adminNumber <![CDATA[=]]> 6
+  		SELECT  userID, userPW, userName, nickName, address, postCode, tel, email, redate, adminNumber,no  FROM (SELECT rownum AS num, r.* FROM (SELECT *FROM  MEMBER where adminNumber = 6 ORDER BY no DESC)r)
+  		where num  <![CDATA[>=]]> #{start} and num  <![CDATA[<=]]> #{end} 
   	</select>
   	<delete id="deleteAdminMember" parameterType="int">
   		delete from member where no = #{no} 
   	</delete>
   	<select id="searhMember" parameterType="HashMap" resultType="MemberDto">
-  		select * from member where 
+  		SELECT  userID, userPW, userName, nickName, address, postCode, tel, email, redate, adminNumber,no  FROM (SELECT rownum AS num, r.* FROM (SELECT *FROM  MEMBER where adminNumber <![CDATA[<=]]> 5 and 
   		<choose>
   		<when test="search=='userName'">
-  			userName Like '%'||#{searchword}||'%'
+  			userName Like '%'||#{searchword}||'%'  
   		</when>
   		<when test="search=='nickName'">
-  			nickName Like '%'||#{searchword}||'%'
+  			nickName Like '%'||#{searchword}||'%' 
+  		</when>
+  		<when test="search=='userID'">
+  			userID Like '%'||#{searchword}||'%' 
+  		</when>
+  		<when test="search=='level'">
+  			adminNumber Like '%'||#{searchword}||'%' 
+  		</when>
+  		<when test="search=='all'">
+  			(adminNumber Like '%'||#{searchword}||'%') or
+  			(userID Like '%'||#{searchword}||'%') or
+  			(nickName Like '%'||#{searchword}||'%') or
+  			(userName Like '%'||#{searchword}||'%')  
+  		</when>
+  		</choose>
+  		 ORDER BY no DESC)r) where  num  <![CDATA[>=]]> #{start} and num  <![CDATA[<=]]> #{end}
+  	</select>
+  	
+  	 <select id="searhMemberCount" parameterType="HashMap"  resultType="int">
+  		SELECT  count(*) as count  FROM MEMBER where adminNumber <![CDATA[<=]]> 5 and
+  		<choose>
+  		<when test="search=='userName'">
+  			userName Like '%'||#{searchword}||'%' 
+  		</when>
+  		<when test="search=='nickName'">
+  			nickName Like '%'||#{searchword}||'%' 
   		</when>
   		<when test="search=='userID'">
   			userID Like '%'||#{searchword}||'%'
@@ -79,7 +110,47 @@
   			(adminNumber Like '%'||#{searchword}||'%') or
   			(userID Like '%'||#{searchword}||'%') or
   			(nickName Like '%'||#{searchword}||'%') or
-  			(userName Like '%'||#{searchword}||'%')
+  			(userName Like '%'||#{searchword}||'%') 
+  		</when>
+  		</choose>
+  	</select>
+  	
+  	  	<select id="blackSearhMember" parameterType="HashMap" resultType="MemberDto">
+  		SELECT  userID, userPW, userName, nickName, address, postCode, tel, email, redate, adminNumber,no  FROM (SELECT rownum AS num, r.* FROM (SELECT *FROM  MEMBER where adminNumber <![CDATA[=]]> 6 and 
+  		<choose>
+  		<when test="search=='userName'">
+  			userName Like '%'||#{searchword}||'%'  
+  		</when>
+  		<when test="search=='nickName'">
+  			nickName Like '%'||#{searchword}||'%' 
+  		</when>
+  		<when test="search=='userID'">
+  			userID Like '%'||#{searchword}||'%' 
+  		</when>
+  		<when test="search=='all'">
+  			(userID Like '%'||#{searchword}||'%') or
+  			(nickName Like '%'||#{searchword}||'%') or
+  			(userName Like '%'||#{searchword}||'%')  
+  		</when>
+  		</choose>
+  		 ORDER BY no DESC)r) where  num  <![CDATA[>=]]> #{start} and num  <![CDATA[<=]]> #{end}
+  	</select>
+  	 <select id="blackSearhMemberCount" parameterType="HashMap"  resultType="int">
+  		SELECT  count(*) as count FROM Member where adminNumber = 6 and
+  		<choose>
+  		<when test="search=='userName'">
+  			userName Like '%'||#{searchword}||'%' 
+  		</when>
+  		<when test="search=='nickName'">
+  			nickName Like '%'||#{searchword}||'%' 
+  		</when>
+  		<when test="search=='userID'">
+  			userID Like '%'||#{searchword}||'%'
+  		</when>
+  		<when test="search=='all'">
+  			(userID Like '%'||#{searchword}||'%') or
+  			(nickName Like '%'||#{searchword}||'%') or
+  			(userName Like '%'||#{searchword}||'%') 
   		</when>
   		
   		</choose>

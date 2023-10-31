@@ -30,6 +30,18 @@ public class MemberDao {
 		result = sqlSession.selectOne("memberCount");
 		return result;
 	}
+	public int noBlackMemberCount() {
+		int result =0;
+		SqlSession sqlSession = MybatisConnectionFactory.getSqlSession();
+		result = sqlSession.selectOne("noBlackMemberCount");
+		return result;
+	}
+	public int blackMemberCount() {
+		int result =0;
+		SqlSession sqlSession = MybatisConnectionFactory.getSqlSession();
+		result = sqlSession.selectOne("blackMemberCount");
+		return result;
+	}
 	public int insertCount() {
 		int result =0;
 		SqlSession sqlSession = MybatisConnectionFactory.getSqlSession();
@@ -108,10 +120,28 @@ public class MemberDao {
 		result = sqlSession.update("blackUpdateAll", map);
 		return result;
 	}
-	public List<MemberDto> searhMember(HashMap<String,String> map){
+	public List<MemberDto> searhMember(HashMap<String,Object> map){
 		List<MemberDto> searchList = null;
 		SqlSession sqlSession = MybatisConnectionFactory.getSqlSession();
 		searchList =sqlSession.selectList("searhMember", map);
 		return searchList;
+	}
+	public int searhMemberCount(HashMap<String,Object> map) {
+		int result =0;
+		SqlSession sqlSession = MybatisConnectionFactory.getSqlSession();
+		result = sqlSession.selectOne("searhMemberCount",map);
+		return result;
+	}
+	public List<MemberDto> blackSearhMember(HashMap<String,Object> map){
+		List<MemberDto> searchList = null;
+		SqlSession sqlSession = MybatisConnectionFactory.getSqlSession();
+		searchList =sqlSession.selectList("blackSearhMember", map);
+		return searchList;
+	}
+	public int blackSearhMemberCount(HashMap<String,Object> map) {
+		int result =0;
+		SqlSession sqlSession = MybatisConnectionFactory.getSqlSession();
+		result = sqlSession.selectOne("blackSearhMemberCount",map);
+		return result;
 	}
 }
