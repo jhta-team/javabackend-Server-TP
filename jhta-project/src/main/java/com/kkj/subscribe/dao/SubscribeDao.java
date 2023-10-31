@@ -85,4 +85,11 @@ public class SubscribeDao {
 		return cal1.compareTo(cal2);  // cal1 > cal2 1  cal < cal2  -1  cal = cal2 0
 	}
 
+	public List<SubscribePaymentDto> find(String userID) {
+		SqlSession sqlSession = MybatisConnectionFactory.getSqlSession();
+		List<SubscribePaymentDto> subscribePaymentList= sqlSession.selectList("findPayment", userID);
+		return subscribePaymentList;
+		
+	}
+
 }
