@@ -6,11 +6,15 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.kkj.cart.dao.CartDao;
 import com.kkj.cart.dao.CartProductDao;
+import com.kkj.cart.dto.CartDto;
 import com.kkj.cart.dto.CartProductDto;
 import com.kkj.product.dao.ImageDao;
 import com.kkj.product.dao.ProductDao;
@@ -27,9 +31,15 @@ public class CartProductList extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<CartProductDto> cartProductDto = new ArrayList<CartProductDto>();
+		HttpSession session = request.getSession();
+		String userId = (String)session.getAttribute("loggedID");
+		CartDao cartDao = new CartDao();
+		CartDto cartDto = cartDao.findUserCart(userId);	
+		int cartId = cartDto.getCartId();
+		System.out.println(cartId);
+		List<CartProductDto> cartProductDto = new ArrayList<>();		
 		CartProductDao cartProductDao = new CartProductDao();
-		cartProductDto = cartProductDao.selectListCart();
+		cartProductDto = cartProductDao.selectListCart(cartId);
 		request.setAttribute("CartProductDto", cartProductDto);		
 	
 		

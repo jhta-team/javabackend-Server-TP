@@ -25,17 +25,15 @@
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
           <li><a href="../index/index" class="nav-link px-2 text-secondary">Home</a></li>
           <li><a href="../product/list" class="nav-link px-2 text-white">상품게시판</a></li>
-		  <li><a href="../product/insert" class="nav-link px-2 text-white">상품등록</a></li>    
-
           <c:choose>
           <c:when test="${loggedMember.adminNumber eq 1}">
           <li><a href="../product/insert" class="nav-link px-2 text-white">상품등록</a></li>
           </c:when>
           <c:otherwise>
-          <li><a href="../product/insert" class="nav-link px-2 text-white">상품등록(성민이형)</a></li>
+		  <li><a href="../cart/list" class="nav-link px-2 text-white">장바구니</a></li> 
           </c:otherwise>
           </c:choose>
-		  <li><a href="../cart/list" class="nav-link px-2 text-white">장바구니</a></li> 
+
           <li><a href="../codyboard/insert" class="nav-link px-2 text-white">코디등록</a></li>
           <li><a href="../codyboard/page-nation" class="nav-link px-2 text-white">코디게시판보기</a></li>
           <li><a href="#" class="nav-link px-2 text-white">About</a></li>

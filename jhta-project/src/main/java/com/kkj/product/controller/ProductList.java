@@ -29,7 +29,8 @@ public class ProductList extends HttpServlet {
 		ProductDao pdtDao = new ProductDao();
 		List<ProductDto> listDto = new ArrayList<ProductDto>();
 		listDto = pdtDao.listProduct();
-		request.setAttribute("ProductList", listDto);		
+		request.setAttribute("ProductList", listDto);
+		
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/product/productlist.jsp");
 		dispatcher.forward(request, response);
