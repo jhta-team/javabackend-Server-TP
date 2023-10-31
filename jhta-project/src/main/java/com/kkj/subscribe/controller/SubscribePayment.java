@@ -36,7 +36,6 @@ public class SubscribePayment extends HttpServlet {
 		System.out.println(subscribeKind);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/subscribe/payment.jsp");
 		dispatcher.forward(request, response);
-				
 	}
 
 	/**
