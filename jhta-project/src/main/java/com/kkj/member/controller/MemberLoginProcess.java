@@ -43,14 +43,14 @@ public class MemberLoginProcess extends HttpServlet {
 		System.out.println(userID+"==="+userPW);
 		
 		MemberDao memberDao = new MemberDao();
-		MemberDateDao MemberDateDao = new MemberDateDao();
+	//	MemberDateDao MemberDateDao = new MemberDateDao();
 		MemberDto loginMember =new MemberDto();
 		HashMap<String,String> loginMap = new HashMap();
 		loginMap.put("userID", userID);
 		loginMap.put("userPW", userPW);
 		loginMember = memberDao.loginMember(loginMap);
 		if(loginMember !=null) {
-			MemberDateDao.loginDate(userID);
+	//		MemberDateDao.loginDate(userID);
 			if(loginMember.getAdminNumber()==6) {
 				ModalState modalState = new ModalState("show","블랙입니다. 관리자에게 문의하세요");
 				session.setAttribute("modalState", modalState);

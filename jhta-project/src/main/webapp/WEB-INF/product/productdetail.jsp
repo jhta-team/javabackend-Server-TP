@@ -46,14 +46,7 @@
 				<p>진열상태: ${detailDto.pdtState}</p>
 				<p>등록날짜: ${detailDto.pdtDate}</p>
 				<p>수정날짜: ${detailDto.pdtModDate}</p>
-			</div>
-			<div class="color pb-3">
-				<label for="colorSelect">선택 가능 색상:</label> <select id="colorSelect" name="selectedColor">
-					<option value="red">빨강</option>
-					<option value="green">초록</option>
-					<option value="blue">파랑</option>
-					<option value="yellow">노랑</option>
-				</select>
+				<p>상품색상: ${detailDto.pdtColor}</p>
 			</div>
 			<div class="row d-flex justify-content-left mb-2">
 				<div class="col-10">

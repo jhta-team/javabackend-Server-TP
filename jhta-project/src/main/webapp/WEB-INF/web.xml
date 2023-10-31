@@ -541,6 +541,23 @@
   </servlet-mapping>
   <servlet>
     <description></description>
+    <display-name>CartProductDelete</display-name>
+    <servlet-name>CartProductDelete</servlet-name>
+    <servlet-class>com.kkj.cart.controller.CartProductDelete</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CartProductDelete</servlet-name>
+    <url-pattern>/cart/delete</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CartProductModify</display-name>
+    <servlet-name>CartProductModify</servlet-name>
+    <servlet-class>com.kkj.cart.controller.CartProductModify</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CartProductModify</servlet-name>
+    <url-pattern>/cart/modify</url-pattern>
     <display-name>SubscribeFindUser</display-name>
     <servlet-name>SubscribeFindUser</servlet-name>
     <servlet-class>com.kkj.subscribe.controller.SubscribeFindUser</servlet-class>

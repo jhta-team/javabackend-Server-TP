@@ -41,10 +41,6 @@ public class ProductDetail extends HttpServlet {
 		ProductSizeDto productSizeDto = new ProductSizeDto();
 		ProductSizeDao productSizeDao = new ProductSizeDao();
 		productSizeDto = productSizeDao.selectProductSize(pdtId);
-		System.out.println(productSizeDto.getPdtCountS());
-		System.out.println(productSizeDto.getPdtCountM());
-		System.out.println(productSizeDto.getPdtCountL());
-		System.out.println(productSizeDto.getPdtCountXL());
 		request.setAttribute("productSizeDto", productSizeDto);
 		
 

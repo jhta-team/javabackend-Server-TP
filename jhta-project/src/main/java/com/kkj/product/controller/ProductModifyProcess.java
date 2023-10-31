@@ -48,13 +48,13 @@ public class ProductModifyProcess extends HttpServlet {
 		//int pdtCount = Integer.parseInt(strCount.replaceFirst("^0+(?!$)", ""));
 		
 		int pdtCountS = Integer.parseInt(request.getParameter("pdtCountS"));
-		System.out.println(pdtCountS);
+		System.out.println("s : " + pdtCountS);
 		int pdtCountM = Integer.parseInt(request.getParameter("pdtCountM"));
-		System.out.println(pdtCountM);
+		System.out.println("m : " +pdtCountM);
 		int pdtCountL = Integer.parseInt(request.getParameter("pdtCountS"));
-		System.out.println(pdtCountL);
+		System.out.println("l : " +pdtCountL);
 		int pdtCountXL = Integer.parseInt(request.getParameter("pdtCountXL"));
-		System.out.println(pdtCountXL);
+		System.out.println("xl : " +pdtCountXL);
 		
 		
 		
