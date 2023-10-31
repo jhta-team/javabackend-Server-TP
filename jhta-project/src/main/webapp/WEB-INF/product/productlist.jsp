@@ -5,7 +5,7 @@
 	<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 		<c:forEach items="${ProductList }" var="Product">
 			<c:choose>
-				<c:when test="${Product.pdtState eq 1 }">
+				<c:when test="${Product.pdtState ne 2 }">
 					<div class="col">
 						<div class="card shadow-sm">
 							<a href="../product/detail?pdtId=${Product.pdtId }"> <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="${pageContext.request.contextPath }/upload/${Product.pdtThum}"></a>

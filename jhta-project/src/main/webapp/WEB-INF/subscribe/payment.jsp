@@ -51,7 +51,7 @@
     			 const imp_uid = rsp.imp_uid
         		  $.ajax({ 
         	     		 type:'post',
-        	     		 url:"https://api.iamport.kr/users/getToken",
+        	     		 url:"",
         	     		 data: {
         	     			 imp_key : "",
         	     			 imp_secret : ""
@@ -76,7 +76,7 @@
         	  						console.log("결제 내역 조회 성공!!!")
         	  						$.ajax({
 							    		  type:'post',
-							    		  url:"../subcribe/payment-process",
+							    		  url:"../subscribe/payment-process",
 							    		  data:{
 							    			  userID: res.response.buyer_name,
 							    			  price: res.response.amount,

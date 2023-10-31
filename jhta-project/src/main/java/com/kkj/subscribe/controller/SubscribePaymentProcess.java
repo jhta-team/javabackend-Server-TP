@@ -7,8 +7,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
 import com.google.gson.Gson;
 import com.kkj.subscribe.dao.SubscribeDao;
@@ -16,15 +14,15 @@ import com.kkj.subscribe.dto.SubscribePaymentDto;
 import com.kkj.subscribe.dto.UpdateSubscribeDto;
 
 /**
- * Servlet implementation class SubcribePaymentProcess
+ * Servlet implementation class SubscribePaymentProcess
  */
-public class SubcribePaymentProcess extends HttpServlet {
+public class SubscribePaymentProcess extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SubcribePaymentProcess() {
+    public SubscribePaymentProcess() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -78,7 +76,7 @@ public class SubcribePaymentProcess extends HttpServlet {
 						System.out.println("checked -1 =>>>>" +changeDay);
 					}
 					if(!changeDay.isEmpty()) {
-						updateSubscribeDto.setUserID(userID);
+						updateSubscribeDto.setId((userID));
 						updateSubscribeDto.setSubscribeEnd(changeDay);
 						int update = subscribeDao.updateSubscribeEnd(updateSubscribeDto);
 						if(update > 0) {
@@ -94,12 +92,9 @@ public class SubcribePaymentProcess extends HttpServlet {
 			String failedPayment = gson.toJson(imp_uid);
 			System.out.println(failedPayment);
 			request.setAttribute("imp_uid", failedPayment);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/subscribepaymentfailed.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/subscribe/paymentfailed.jsp");
 			dispatcher.forward(request, response);
 		}
-	
-		
-		
 	}
 
 }

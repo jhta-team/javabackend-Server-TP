@@ -523,11 +523,11 @@
     <description></description>
     <display-name>SubcribePaymentProcess</display-name>
     <servlet-name>SubcribePaymentProcess</servlet-name>
-    <servlet-class>com.kkj.subscribe.controller.SubcribePaymentProcess</servlet-class>
+    <servlet-class>com.kkj.subscribe.controller.SubscribePaymentProcess</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>SubcribePaymentProcess</servlet-name>
-    <url-pattern>/subcribe/payment-process</url-pattern>
+    <url-pattern>/subscribe/payment-process</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -548,5 +548,39 @@
   <servlet-mapping>
     <servlet-name>MemberBlackSearchList</servlet-name>
     <url-pattern>/member/blackSearchList</url-pattern>
+    <display-name>CartProductDelete</display-name>
+    <servlet-name>CartProductDelete</servlet-name>
+    <servlet-class>com.kkj.cart.controller.CartProductDelete</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CartProductDelete</servlet-name>
+    <url-pattern>/cart/delete</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CartProductModify</display-name>
+    <servlet-name>CartProductModify</servlet-name>
+    <servlet-class>com.kkj.cart.controller.CartProductModify</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CartProductModify</servlet-name>
+    <url-pattern>/cart/modify</url-pattern>
+    <display-name>SubscribeFindUser</display-name>
+    <servlet-name>SubscribeFindUser</servlet-name>
+    <servlet-class>com.kkj.subscribe.controller.SubscribeFindUser</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SubscribeFindUser</servlet-name>
+    <url-pattern>/Subscribe/find-user</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SubscribePaymentCancel</display-name>
+    <servlet-name>SubscribePaymentCancel</servlet-name>
+    <servlet-class>com.kkj.subscribe.controller.SubscribePaymentCancel</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SubscribePaymentCancel</servlet-name>
+    <url-pattern>/subscribe/payment-cancel</url-pattern>
   </servlet-mapping>
 </web-app>
