@@ -548,6 +548,9 @@
   <servlet-mapping>
     <servlet-name>MemberBlackSearchList</servlet-name>
     <url-pattern>/member/blackSearchList</url-pattern>
+   </servlet-mapping> 
+   <servlet>
+    <description></description>
     <display-name>CartProductDelete</display-name>
     <servlet-name>CartProductDelete</servlet-name>
     <servlet-class>com.kkj.cart.controller.CartProductDelete</servlet-class>
@@ -565,6 +568,9 @@
   <servlet-mapping>
     <servlet-name>CartProductModify</servlet-name>
     <url-pattern>/cart/modify</url-pattern>
+  </servlet-mapping>  
+    <servlet>
+    <description></description>
     <display-name>SubscribeFindUser</display-name>
     <servlet-name>SubscribeFindUser</servlet-name>
     <servlet-class>com.kkj.subscribe.controller.SubscribeFindUser</servlet-class>

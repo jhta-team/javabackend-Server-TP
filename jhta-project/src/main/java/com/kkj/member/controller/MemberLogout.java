@@ -30,7 +30,7 @@ public class MemberLogout extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		session.invalidate();
+		session.invalidate();	
 		response.sendRedirect("../index/index");
 	}
 

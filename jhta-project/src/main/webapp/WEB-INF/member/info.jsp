@@ -17,6 +17,17 @@
     </tr>
   </c:otherwise>
   </c:choose>
+  <tr>
+   <th scope="row">등급</th>
+      <td>
+      <c:if test="${infoMember.adminNumber ==0 }"><img src="../upload/normal.png">일반</c:if>
+      <c:if test="${infoMember.adminNumber ==2 }"><img src="../upload/silver.png">실버</c:if>
+      <c:if test="${infoMember.adminNumber ==3 }"><img src="../upload/gold.png">골드</c:if>
+      <c:if test="${infoMember.adminNumber ==4 }"><img src="../upload/platinum.png">플레티넘</c:if>
+      <c:if test="${infoMember.adminNumber ==5 }"><img src="../upload/diamond.png">다이아몬드</c:if>
+      </td> 
+    </tr>
+    <tr>
       <th scope="row">아이디</th>
       <td>${infoMember.userID}</td> 
     </tr>
