@@ -1,6 +1,9 @@
 package com.kkj.product.dao;
 
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 
 import com.kkj.mybatis.MybatisConnectionFactory;
@@ -30,5 +33,4 @@ public class ProductSizeDao {
 		sqlSession.close();
 		return result;
 	}
-
 }

@@ -19,6 +19,7 @@
 		<typeAlias alias="SubscribeDto" type="com.kkj.subscribe.dto.SubscribeDto"/>
 		<typeAlias alias="SubscribePaymentDto" type="com.kkj.subscribe.dto.SubscribePaymentDto"/>
 		<typeAlias alias="UpdateSubscribeDto" type="com.kkj.subscribe.dto.UpdateSubscribeDto"/>
+		<typeAlias alias="CartDto" type="com.kkj.cart.dto.CartDto"/>
 	</typeAliases>
 	<environments default="development">
 		<environment id="development">
@@ -45,6 +46,7 @@
 		<mapper resource="com/kkj/mybatis/cartproduct.xml" />
 		<mapper resource="com/kkj/mybatis/subscribe.xml" />
 		<mapper resource="com/kkj/mybatis/subscribepayment.xml" />
+		<mapper resource="com/kkj/mybatis/cart.xml" />
 	</mappers>
 </configuration>
 

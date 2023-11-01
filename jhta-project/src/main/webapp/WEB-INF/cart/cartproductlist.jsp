@@ -6,7 +6,7 @@
 </c:if>
 <c:if test="${not empty CartProductDto}">
 
-	<h2>장바구니 이름 : eic2021의 장바구니</h2>
+	<h2>장바구니 이름 : 의 장바구니</h2>
 	<div class="table d-flex justify-content-center">
 		<table border="1">
 			<tr>
