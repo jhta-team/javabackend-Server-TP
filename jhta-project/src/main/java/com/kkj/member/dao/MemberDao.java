@@ -144,4 +144,16 @@ public class MemberDao {
 		result = sqlSession.selectOne("blackSearhMemberCount",map);
 		return result;
 	}
+	public String findID(HashMap<String,String> map) {
+		String id =null;
+		SqlSession sqlSession = MybatisConnectionFactory.getSqlSession();
+		id = sqlSession.selectOne("findID",map);
+		return id;
+	}
+	public int findPWChange(HashMap<String,String> map) {
+		int result =0;
+		SqlSession sqlSession = MybatisConnectionFactory.getSqlSession();
+		result = sqlSession.update("findPWChange", map);
+		return result;
+	}
 }

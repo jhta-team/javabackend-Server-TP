@@ -157,4 +157,10 @@
   		
   		</choose>
   	</select>
+  	<select id="findID" parameterType="HashMap" resultType="String">
+  		select userID from member where userName = #{userName} and email = #{email}
+  	</select>
+  	<update id="findPWChange" parameterType="HashMap">
+  		update member set userPW = #{userPW} where userID=#{userID} and userName = #{userName} and email = #{email}
+  	</update>
 </mapper>
