@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="org.mybatis.example.BlogMapper">
+	<insert id="InsertFollow" parameterType="FollowDto">
+		insert into follow values(seq_follow.nextval, #{followID}, #{myID})
+	</insert>
+	
+	<select id="FindOneFollow" parameterType="FollowDto" resultType="boolean">
+		select * from follow where followID = #{followID} and myID = #{myID}
+	</select>
+  	
+  	<delete id="deleteFollow" parameterType="FollowDto">
+  		delete from follow where followID = #{followID} and myID = #{myID}
+  	</delete>
+  	
+  	<select id="countFollower" parameterType="String" resultType="int">
+  		select count(*) from follow where followID = #{userID}
+  	</select>
+  	
+  	<select id="countFollow" parameterType="String" resultType="int">
+  		select count(*) from follow where myID = #{userID}
+  	</select>
+</mapper>

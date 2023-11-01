@@ -6,7 +6,7 @@
 	</insert>
 	
 	<select id="findCbReply" parameterType="int" resultType="CbReplyDto">
-		SELECT re.* FROM cbcomment co inner JOIN cbreply re ON #{codyBoardNo}  = re.CODYBOARDNO AND co.no = re.CBCOMMENTNO ORDER BY co.NO asc, re.no asc
+		SELECT re.* FROM cbcomment co inner JOIN cbreply re ON  co.CODYBOARDNO  = re.CODYBOARDNO AND co.no = re.CBCOMMENTNO WHERE co.CODYBOARDNO = #{cbBoardNo} ORDER BY co.NO asc, re.no ASC
 	</select>
 	
 	<update id="updateReply" parameterType="CbReplyUpdateDto">

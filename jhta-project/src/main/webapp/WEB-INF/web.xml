@@ -548,9 +548,11 @@
   <servlet-mapping>
     <servlet-name>MemberBlackSearchList</servlet-name>
     <url-pattern>/member/blackSearchList</url-pattern>
+
    </servlet-mapping> 
    <servlet>
     <description></description>
+
     <display-name>CartProductDelete</display-name>
     <servlet-name>CartProductDelete</servlet-name>
     <servlet-class>com.kkj.cart.controller.CartProductDelete</servlet-class>
@@ -588,5 +590,15 @@
   <servlet-mapping>
     <servlet-name>SubscribePaymentCancel</servlet-name>
     <url-pattern>/subscribe/payment-cancel</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>FollowInsert</display-name>
+    <servlet-name>FollowInsert</servlet-name>
+    <servlet-class>com.kkj.follow.controller.FollowInsert</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FollowInsert</servlet-name>
+    <url-pattern>/follow/insert</url-pattern>
   </servlet-mapping>
 </web-app>
