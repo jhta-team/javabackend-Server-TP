@@ -1,5 +1,6 @@
 package com.kkj.follow.controller;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -7,7 +8,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 
+import com.google.gson.Gson;
 import com.kkj.follow.dao.FollowDao;
 import com.kkj.follow.dto.FollowDto;
 
@@ -47,21 +50,36 @@ public class FollowInsert extends HttpServlet {
 		
 		System.out.println(followDto.getFollowID());
 		System.out.println(followDto.getMyID());
-		
+		followDao.checked(followDto);
+		HashMap<String, Integer> resMap = new HashMap<String, Integer>();
+		int follow = 0;
+		int follower = 0;
 		if(followDao.checked(followDto)) {
-			followDao.delete(followDto);
-			System.out.println("삭제!!!");
+			resMap = followDao.delete(followDto);
+			
+			resMap.put("status", 0);
+//			resMap.put("followCount", follow);
+//			resMap.put("followerCount", follower);
 			
 		}else {
-			followDao.insert(followDto);
-			System.out.println("추가 !!!");
-			response.setContentType("text/html;charset=UTF-8");
-			PrintWriter out = response.getWriter();
-			out.append("add");
-			
-			
+			try {
+				resMap = followDao.insert(followDto);
+				System.out.println("추가 !!!");
+				follow = followDao.followCount(followDto.getMyID());
+				follower = followDao.followerCount(followDto.getFollowID());
+				resMap.put("status", 1);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+//			resMap.put("followCount", follow);
+//			resMap.put("followerCount", follower);
 		}
-		
+		Gson gson = new Gson();
+		String res = (String)gson.toJson(resMap);
+		request.setAttribute("res", res);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/follow/followjson.jsp");
+		dispatcher.forward(request, response);
 		
 	}
 

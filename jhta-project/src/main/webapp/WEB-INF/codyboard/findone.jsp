@@ -16,19 +16,20 @@
 						<col style="width: 15%">
 						<col style="width: 35%">
 					</colgroup>
-					<tbody>
+					<tbody id="tobody">
 						<tr>
 							<th>제목</th>
 							<td colspan="3"><c:out value="${codyBoard.title }"></c:out></td>
 						</tr>
-						<tr>
+						
+						<tr id="trfolow">
 							<th>글쓴이</th>
 							<td colspan="3">
 								${codyBoard.userID } 
-								 <button>팔로우</button>
-								 <span id="follwCount">${follow}</span>
+								 <button id="fffbtn">팔로우</button>
+								 <span id="followCount">${follow}</span>
 								 <button>팔로워</button>
-								 <span id="follwerCount">${follower}</span>
+								 <span id="followerCount">${follower}</span>
 							</td>
 						</tr>
 						<tr>
@@ -152,6 +153,7 @@
 			.on(
 					"click",
 					function() {
+						//
 						const cbCommentValue = $("#cbComment").val();
 						console.log(cbCommentValue);
 						if (cbCommentValue.length > 0) {
@@ -298,14 +300,20 @@
 					alert("팔로우 추가 실패!!")
 				},
 				success: function(res){
-					console.log(res)
-					if(res == "add"){						
-						/* ${"#followerCount"}.text(111) */
-						/* let count = document.getElementById("followerCount");
-						count.text(11) */
+					
+					let aa = $("#follwCount").text("vdsadsad");
+					console.log(aa.text() + "발발")
+					
+					if(res.status == 1){						
+						console.log(res)
+						console.log("성공")
+						$("#followerCount").text(res.followerCount)
 						alert("팔로우성공")
 						
 					}else{
+						console.log(res)
+					    console.log("취소")
+					    $("#followerCount").text(res.followerCount)
 						alert("팔로우취소")
 					}
 				}
@@ -313,6 +321,12 @@
 			
 			
 			})
+			
+		$("#fffbtn").on("click",function(){
+			let aaaa = $("#fffbtn").val()
+		
+		console.log(aaaa + "asdasd")
+	})
 		
 	
 	
