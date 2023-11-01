@@ -19,30 +19,40 @@
 	</update>
 	<insert id="insertProductSize" parameterType="ProductSizeDto">
 		INSERT ALL
-		INTO PDT_SIZE (pdt_size_id, sizes, pdtcount, pdtid) VALUES
+		INTO
+		PDT_SIZE (pdt_size_id, sizes, pdtcount, pdtid) VALUES
 		(seq_pdt_size.nextval, 'S', #{pdtCountS}, seq_product.currval)
-		INTO PDT_SIZE (pdt_size_id, sizes, pdtcount, pdtid) VALUES
+		INTO
+		PDT_SIZE (pdt_size_id, sizes, pdtcount, pdtid) VALUES
 		(seq_pdt_size.nextval+1, 'M', #{pdtCountM}, seq_product.currval)
-		INTO PDT_SIZE (pdt_size_id, sizes, pdtcount, pdtid) VALUES
+		INTO
+		PDT_SIZE (pdt_size_id, sizes, pdtcount, pdtid) VALUES
 		(seq_pdt_size.nextval+2, 'L', #{pdtCountL}, seq_product.currval)
-		INTO PDT_SIZE (pdt_size_id, sizes, pdtcount, pdtid) VALUES
+		INTO
+		PDT_SIZE (pdt_size_id, sizes, pdtcount, pdtid) VALUES
 		(seq_pdt_size.nextval+3, 'XL', #{pdtCountXL}, seq_product.currval)
 		SELECT * FROM DUAL
 	</insert>
+
 	<select id="selectProductSize" parameterType="int"
 		resultType="ProductSizeDto">
 		SELECT
 		pdt1.pdtcount AS pdtcounts,
-		pdt2.pdtcount AS pdtcountm,
+		pdt2.pdtcount AS
+		pdtcountm,
 		pdt3.pdtcount AS pdtcountl,
 		pdt4.pdtcount AS pdtcountxl
 		FROM
-		(SELECT pdtcount FROM PDT_SIZE WHERE pdtid = #{pdtId} AND sizes = 'S') pdt1
+		(SELECT pdtcount FROM PDT_SIZE WHERE pdtid = #{pdtId} AND sizes = 'S')
+		pdt1
 		CROSS JOIN
-		(SELECT pdtcount FROM PDT_SIZE WHERE pdtid = #{pdtId} AND sizes = 'M') pdt2
+		(SELECT pdtcount FROM PDT_SIZE WHERE pdtid = #{pdtId}
+		AND sizes = 'M') pdt2
 		CROSS JOIN
-		(SELECT pdtcount FROM PDT_SIZE WHERE pdtid = #{pdtId} AND sizes = 'L') pdt3
+		(SELECT pdtcount FROM PDT_SIZE WHERE
+		pdtid = #{pdtId} AND sizes = 'L') pdt3
 		CROSS JOIN
-		(SELECT pdtcount FROM PDT_SIZE WHERE pdtid = #{pdtId} AND sizes = 'XL') pdt4
+		(SELECT pdtcount FROM
+		PDT_SIZE WHERE pdtid = #{pdtId} AND sizes = 'XL') pdt4
 	</select>
 </mapper>

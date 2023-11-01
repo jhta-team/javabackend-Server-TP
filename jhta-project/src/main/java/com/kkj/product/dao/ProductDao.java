@@ -1,5 +1,6 @@
 package com.kkj.product.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -8,10 +9,10 @@ import com.kkj.mybatis.MybatisConnectionFactory;
 import com.kkj.product.dto.ProductDto;
 
 public class ProductDao {
-	public List<ProductDto> listProduct(){
+	public List<ProductDto> listProduct(HashMap<String, Integer> map){
 		List<ProductDto> listPdt = null;
 		SqlSession sqlSession = MybatisConnectionFactory.getSqlSession();
-		listPdt = sqlSession.selectList("listProduct");
+		listPdt = sqlSession.selectList("listProduct",map);
 		sqlSession.close();
 		return listPdt;
 	}
@@ -57,4 +58,12 @@ public class ProductDao {
 		sqlSession.close();
 		return result;
 		}
+
+	public int countProduct() {
+		int count = 0;
+		SqlSession sqlSession = MybatisConnectionFactory.getSqlSession();
+		count = sqlSession.selectOne("countProduct");
+		sqlSession.close();
+		return count;
+	}
 }

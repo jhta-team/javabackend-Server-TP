@@ -46,8 +46,8 @@ public class ProductInsertProcess extends HttpServlet {
 		int pdtCountS = Integer.parseInt(request.getParameter("pdtCountS"));
 		int pdtCountM = Integer.parseInt(request.getParameter("pdtCountM"));
 		int pdtCountL = Integer.parseInt(request.getParameter("pdtCountL"));
-		int pdtCountXL = Integer.parseInt(request.getParameter("pdtCountXL"));
-		
+		int pdtCountXL = Integer.parseInt(request.getParameter("pdtCountXL"));		
+	
 		Collection<Part> parts = request.getParts();
 		
 		//파일 저장 관련 변수들
@@ -121,6 +121,7 @@ public class ProductInsertProcess extends HttpServlet {
 		productSizeDto.setPdtCountL(pdtCountL);
 		productSizeDto.setPdtCountXL(pdtCountXL);		
 		productSizeDao.insertProductSize(productSizeDto);
+
 
 		//결과값 처리
 

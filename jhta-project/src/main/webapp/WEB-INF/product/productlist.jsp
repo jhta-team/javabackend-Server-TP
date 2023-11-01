@@ -1,5 +1,38 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp"%>
+<div>
+<nav aria-label="Page navigation example">
+  	<ul class="pagination justify-content-center">
+     			<li class="page-item">
+     				 <a class="page-link" href="../product/list?page=${intpage -1 }" aria-label="Previous">
+      				  <span aria-hidden="true">&laquo;</span>
+      				</a>
+    			</li>
+    			
+    			<c:forEach var="i" begin="${startpage }" end="${endpage }">
+    			<c:choose>
+    			<c:when test="${i==intpage }">
+    			<li class="page-item">
+    			<a class="page-link active" href="../product/list?page=${i }">${i }</a>
+    			</li>    
+    			</c:when>
+    			<c:otherwise>
+    			<li class="page-item">
+    			<a class="page-link " href="../product/list?page=${i }">${i }</a>
+    			</li>    
+    			</c:otherwise>
+    			</c:choose>
+    						
+    			</c:forEach>
+    			
+    			<li class="page-item">
+      			<a class="page-link" href="../product/list?page=${intpage +1 }" aria-label="Next">
+        		<span aria-hidden="true">&raquo;</span>
+     			 </a>
+    			</li>
+  </ul>
+</nav>
+</div>
 <c:choose>
 	<c:when test="${loggedMember.adminNumber eq 1}">
 		<div class="container">
