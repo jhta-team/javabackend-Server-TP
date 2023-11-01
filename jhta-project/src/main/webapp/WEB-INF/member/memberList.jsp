@@ -49,11 +49,18 @@
       <td>관리자</td>
       </c:when>
       <c:otherwise>
-      <c:if test="${member.adminNumber ==0 }"><td>${member.userID}<br>(일반)</td></c:if>
-      <c:if test="${member.adminNumber ==2 }"><td>${member.userID}<br>(실버)</td></c:if>
-      <c:if test="${member.adminNumber ==3 }"><td>${member.userID}<br>(골드)</td></c:if>
-      <c:if test="${member.adminNumber ==4 }"><td>${member.userID}<br>(플레)</td></c:if>
-      <c:if test="${member.adminNumber ==5 }"><td>${member.userID}<br>(다이아)</td></c:if>     
+      <td>
+      <c:if test="${member.adminNumber ==0 }">${member.userID}<br>
+      일반<br> <img src="../upload/normal.png"></c:if>
+      <c:if test="${member.adminNumber ==2 }">${member.userID}<br>
+      실버<br><img src="../upload/silver.png"> </c:if>
+      <c:if test="${member.adminNumber ==3 }">${member.userID}<br>
+      골드<br><img src="../upload/gold.png"></c:if>
+      <c:if test="${member.adminNumber ==4 }">${member.userID}<br>
+      플레<br><img src="../upload/platinum.png"></c:if>
+      <c:if test="${member.adminNumber ==5 }">${member.userID}<br>
+      다야<br><img src="../upload/diamond.png"></c:if>     
+      </td>
       </c:otherwise>
       </c:choose>
       <td>${member.userName}(${member.nickName })</td>

@@ -11,7 +11,7 @@
             <div class="mb-3">
               <label for="userID" class="form-label">ID</label>
               <input type="text" class="form-control" id="userID" placeholder="user id" name="userID" />
-              <button class="btn btn-primary" id="btnIDCheck">아이디 중복 확인</button>
+              <button class="btn btn-primary" id="btnIDCheck" disabled>아이디 중복 확인</button>
               <div class="invalid-feedback" id="invalid-feedbackID">글자 써보기</div>
             </div>
           </div>
@@ -49,7 +49,8 @@
             <div class="mb-3">
               <label for="nickName" class="form-label">NickName</label>
               <input type="text" class="form-control" id="nickName" placeholder="nick name" name="nickName" />
-			   <button class="btn btn-primary" id="btnNickNameCheck">닉네임 중복확인</button>            
+			   <button class="btn btn-primary" id="btnNickNameCheck">닉네임 중복확인</button>
+			   <div class="invalid-feedback" id="invalid-feedbackNickName">글자 써보기</div>            
             </div>
           </div>
         </div>
@@ -173,6 +174,8 @@
     	let isNickNameCheck=false;
     	let isEmailCheck=false;
     	let isPhoneCheck=false;
+    	let isPassWordCheck=false;
+    	let isNickNameFormCheck=false;
   		var emailCode = "";
   	  
     	  function emailCheck(){
@@ -229,7 +232,7 @@
           $("#invalid-feedbackID").show();
           $("#invalid-feedbackID").text("아이디를 입력해주세요");
           return false;
-        } if ($("#userPW").val().trim() === "") {
+        }else if ($("#userPW").val().trim() === "") {
           alert("password는 필수입력 사항입니다.");
           $("#userPW").val("");
           $("#userPW").focus();
@@ -244,8 +247,8 @@
           $("#invalid-feedbackPW02").text("비밀번호를 입력해주세요");
           return false;
         }else if ($("#userName").val().trim() === "") {
-            $("#userPW02").val("");
-            $("#userPW02").focus();
+            $("#userName").val("");
+            $("#userName").focus();
             $("#invalid-feedbackName").show();
             $("#invalid-feedbackName").text("이름을 입력해주세요");
             return false;          
@@ -292,22 +295,71 @@
        	 alert("핸드폰 번호 확인해주세요");
     	 return false;
     	}else if(!isEmailCheck){
-       	 alert("인증메일을 보내세요");
+       	 alert("인증번호 확인을 해주세요");
     	 return false;
     	}else if(!isIDCheck){
         	 alert("아이디 중복 체크해주세요");
         	 return false;
-        }else if(!isNickNameCheck){
+        }else if(!isPassWordCheck){
+       	 alert("비밀번호 확인해주세요");
+    	 return false;
+    }else if(!isNickNameCheck){
        	 	alert("닉네임 중복 체크해주세요");
     	 	return false;
+    }else if(!isNickNameFormCheck){
+       	 alert("닉네임 형식이 맞지 않습니다.");
+    	 return false;
     }
       });
     	    
+    	//  아이디 5자리 이상의 정규화
+   	  function IDcheck(){
+   		let IDRegex = /^[a-zA-Z][a-zA-Z0-9_.]{4,19}$/;
+   		let userid =$("#userID").val().trim();
+   		if(IDRegex.test(userid)){
+   			return true;
+   		}
+   	 		return false;
+   	  }
       $("#userID").on("keyup" , function(){
-    	  $(".invalid-feedback").hide(); 
+    	  if(IDcheck()){
+    		  $("#invalid-feedbackID").hide();
+    		  $("#btnIDCheck").attr("disabled",false);
+    	  }else{
+    		  $("#invalid-feedbackID").show(); 
+    		  $("#invalid-feedbackID").text("아이디 형식에 맞지 않습니다.");
+    		  $("#btnIDCheck").attr("disabled",true);
+    		  
+    	  }
+    	  
       })
+      $("#userID").on("click" , function(){
+    	  if(IDcheck()){
+    		  $("#invalid-feedbackID").hide(); }
+    	  else{
+    	  $("#invalid-feedbackID").show(); 
+		  $("#invalid-feedbackID").text("최소 다섯자리이상의 아이디가 필요합니다.");     		  
+    	  }
+      })
+      // 비밀번호 정규화
+       function PassWordcheck(){
+   		let PWRegex = /^(?=.*[a-z])(?=.*\d)(?=.*[@#$!%^&*?])[A-Za-z\d@#$!%^&*?]{8,}$/;
+   		//  소문자와 특수문자는 필요하고 8자리이상인 비밀번호
+   		let userpw =$("#userPW").val().trim();
+   		if(PWRegex.test(userpw)){
+   			return true;
+   		}
+   	 		return false;
+   	  }
       $("#userPW").on("keyup" , function(){
-    	  $(".invalid-feedback").hide();
+    	  if(PassWordcheck()){
+    		  $("#invalid-feedbackPW01").hide();
+    		  isPassWordCheck= true;
+    	  }else{
+    		  $("#invalid-feedbackPW01").show();
+    		  $("#invalid-feedbackPW01").text("8자리 이상이며 특수문자와 숫자가 적어도 하나 이상 포함되어야 합니다.");
+    	  }
+    	  
       })
       $("#userPW02").on("keyup", function () {    //id는 # , class는 .
         if ($("#userPW").val() !== $("#userPW02").val()) {
@@ -320,6 +372,30 @@
       $("#userName").on("keyup",function(){
     	  $(".invalid-feedback").hide();
       })
+      
+       function nickNameCheck(){
+   		let nickNameRegex = /^[가-힣]{3,6}$/;
+   		//  소문자와 특수문자는 필요하고 8자리이상인 비밀번호
+   		let nickname =$("#nickName").val().trim();
+   		if(nickNameRegex.test(nickname)){
+   			return true;
+   		}
+   	 		return false;
+   	  }
+      $("#nickName").on("keyup",function(){
+    	  BadWordFilter.Check({
+    			text : '아오 시발',
+    			language : 'ko'
+    		}); //-> true
+    	  if(nickNameCheck()){
+    		  $("#invalid-feedbackNickName").hide();
+    		  isNickNameFormCheck=true;
+    	  }else{
+    		  $("#invalid-feedbackNickName").show();
+              $("#invalid-feedbackNickName").text("닉네임은 3~5 한글만 가능합니다.");
+    	  }
+      })
+      
       $("input[name='gender']").on("change",function(){
     	  if($("input[name='gender']:checked").val()==1 || $("input[name='gender']:checked").val()==2)
     	  $(".invalid-feedback").hide();
@@ -329,6 +405,7 @@
     		  $("#invalid-feedbackEmail").hide();
     	  }
       })
+	 
       $("#mobile").on("change",function(){
     	  if($("#mobile").val()!="untitled"){
     		 $(".invalid-feedback").hide();

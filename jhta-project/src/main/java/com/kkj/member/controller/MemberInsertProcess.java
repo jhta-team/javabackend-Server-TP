@@ -120,8 +120,7 @@ public class MemberInsertProcess extends HttpServlet {
 			HttpSession session = request.getSession();
 			ModalState modalState = new ModalState("show", "회원가입 되었습니다.");
 			session.setAttribute("modalState", modalState);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/member/login.jsp");
-			dispatcher.forward(request, response);
+			response.sendRedirect("../member/login");	
 		}
 	}
 
