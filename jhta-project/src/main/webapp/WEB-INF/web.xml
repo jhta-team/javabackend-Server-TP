@@ -550,6 +550,7 @@
     <url-pattern>/member/blackSearchList</url-pattern>
   </servlet-mapping>
   <servlet>
+  	<description></description>
     <display-name>CartProductDelete</display-name>
     <servlet-name>CartProductDelete</servlet-name>
     <servlet-class>com.kkj.cart.controller.CartProductDelete</servlet-class>
