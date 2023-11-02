@@ -16,7 +16,8 @@
 	</select>
 	
 	<select id="codyBoardPageNation" resultType="CodyBoardDto" parameterType="int">
-	 	SELECT * FROM codyBoard where no >= #{start} and no <![CDATA[<=]]> #{end}
+	 	<!-- SELECT * FROM codyBoard where no >= #{start} and no <![CDATA[<=]]> #{end} -->
+	 	SELECT * FROM (SELECT rownum AS num, co.* FROM (SELECT * FROM CODYBOARD co ORDER BY NO DESC) co) where num >= #{start} and num <![CDATA[<=]]> #{end}
 	</select>
 	
 	<select id="codyBoardFindOne" resultType="CodyBoardDto" parameterType="int">

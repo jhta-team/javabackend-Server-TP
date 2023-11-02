@@ -29,19 +29,25 @@ public class CodyBoardDelete extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int codyBoardNo = Integer.parseInt(request.getParameter("no"));
-		System.out.println(codyBoardNo);
-		CodyBoardImage codyBoardImage = new CodyBoardImage();	
-		CodyBoardDao codyBoardDao = new CodyBoardDao();
-		int result = codyBoardDao.delete(codyBoardNo);
-		
-		if(result > 0) {
-			if(codyBoardImage.delete(request,response)) {
-				System.out.println("삭제성공");
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/codyboard/page-nation");
-				dispatcher.forward(request, response);
-				
-			}
-		}
+		String image = request.getParameter("image");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/codyboard/deletecheck.jsp");
+		request.setAttribute("codyBoardNo", codyBoardNo);
+		request.setAttribute("image", image);
+		dispatcher.forward(request, response);
+//		dispatcher.forward(request, response);
+//		System.out.println(codyBoardNo);
+//		CodyBoardImage codyBoardImage = new CodyBoardImage();	
+//		CodyBoardDao codyBoardDao = new CodyBoardDao();
+//		int result = codyBoardDao.delete(codyBoardNo);
+//		
+//		if(result > 0) {
+//			if(codyBoardImage.delete(request,response)) {
+//				System.out.println("삭제성공");
+//				RequestDispatcher dispatcher = request.getRequestDispatcher("/codyboard/page-nation");
+//				dispatcher.forward(request, response);
+//				
+//			}
+//		}
 	}
 
 	/**

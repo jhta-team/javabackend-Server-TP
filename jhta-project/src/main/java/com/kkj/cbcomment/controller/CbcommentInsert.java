@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.LocalDateTime;
 
 import com.google.gson.Gson;
 import com.kkj.cbcomment.dao.CbCommentDao;
@@ -39,7 +40,8 @@ public class CbcommentInsert extends HttpServlet {
 		cbCommentDto.setUserID(userID);
 		cbCommentDto.setComment(comment);
 		cbCommentDto.setCodyBoardNo(codyBoardNo);
-		
+		LocalDateTime nowTime = LocalDateTime.now();
+		System.out.println(nowTime);
 		int result = cbCommentDao.insert(cbCommentDto);
 		if(result > 0) {
 			System.out.println("등록성공!!!");

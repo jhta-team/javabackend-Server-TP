@@ -168,8 +168,11 @@
 										codyBoardNo:${codyBoard.no}					
 									},*/
 											success:function(data){
-											 $("#here").append("<tr><th>"+ data.userID +"</th><td>"+ data.cbComment +"</td><td></td><td><button>수정하기</button></td><td><button>삭제</button></td></tr>")
+												console.log(data)
+												console.log(`\${data.userID}  \${data.cbComment}`)
+											 /* $("#here").append("<tr><th>"+ data.userID +"</th><td>"+ data.cbComment +"</td><td></td><td><button>수정하기</button></td><td><button>삭제</button></td></tr>") */
 											/* $(this).parent().append("<h1>emfdjrkdTffds</h1>") */
+											$("#here").append(`<tr><th>\${data.userID }</th><td colspan="3" class="content">\${data.cbComment }</td><td colspan="3" class="content">\${data.regDate } ${data.no}</td><input type="hidden" value="\${data.codyBoardNo }"><input type="hidden"><td colspan="3" class="content"><button class="btnCommentUpdate">수정하기</button></td><td colspan="3" class="content"><button class="btnCommentDelete">삭제</button></td></tr>`)
 										}
 									})
 						} else {
@@ -322,11 +325,6 @@
 			
 			})
 			
-		$("#fffbtn").on("click",function(){
-			let aaaa = $("#fffbtn").val()
-		
-		console.log(aaaa + "asdasd")
-	})
 		
 	
 	

@@ -10,6 +10,8 @@ import com.kkj.codyboard.dto.CodyBoardUpdateDto;
 import com.kkj.codyboard.dto.PageNationDto;
 import com.kkj.mybatis.MybatisConnectionFactory;
 
+import jakarta.el.ELException;
+
 public class CodyBoardDao {
 
 	public int insert(CodyBoardDto codyBoardDto) {
@@ -75,6 +77,9 @@ public class CodyBoardDao {
 		int result = 0;
 		SqlSession sqlSession = MybatisConnectionFactory.getSqlSession();
 		result = sqlSession.delete("codyBoardDelete", codyBoardNo);
+		if(result == 0) {
+			throw new ELException("삭제실패");
+		}
 		return result;
 	}
 

@@ -9,6 +9,7 @@
 				게시판 글쓰기</label> <input type="" class="form-control" id="codyBoardTitle"
 				placeholder="제목을 작성해주세요." name="codyBoardTitle">
 		</div>
+		<input type="" name="mok" value="mok">
 		<div class="mb-3">
 			<label for="disabledSelect" class="form-label">스타일 종류 선택</label> <select
 				id="disabledSelect" class="form-select" name="codyCategory">
@@ -26,7 +27,7 @@
 
 		
 			<label for="formFileDisabled" class="form-label">코디사진</label>
-				<input multiple="multiple"class="form-control" type="file" id="codyImage" name="codyImage" placeholder="png,jpg" accept="image/gif, image/jpeg, image/png, image/jpg">
+				<input class="form-control" type="file" id="codyImage" name="codyImage" placeholder="png,jpg" accept="image/gif, image/jpeg, image/png, image/jpg">
 			</div>
 		
 

@@ -41,22 +41,30 @@ public class CodyBoardInsertProcess extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("여기??드러옴???");
 		String codyTitle = request.getParameter("codyBoardTitle");
-		int codyCategory = Integer.parseInt(request.getParameter("codyCategory"));
+//		int codyCategory = Integer.parseInt(request.getParameter("codyCategory"));
 		String codyContent = request.getParameter("codyBoardContent");
-		
 		CodyBoardImage codyBoardImage = new CodyBoardImage();
+//		Part part = request.getPart("codyImage");
+//		System.out.println(part);
 		Part codyImage = request.getPart("codyImage");
-		String codyImageHeader = codyImage.getHeader("Content-disposition");
-		String codyImageArray[] = codyImageHeader.split("filename=");
+		System.out.println("여기뭐들어옴??=====>???? " + codyImage);
+//		String codyImageHeader = codyImage.getHeader("Content-disposition");
+//		String codyImageArray[] = codyImageHeader.split("filename=");
+//		
+		String mok = request.getParameter("mok");
+		System.out.println("?? ===>> " + mok);
 		
-
+		System.out.println(codyTitle);
+		System.out.println(request.getParameter("codyCategory"));
+		System.out.println(codyContent);
 		
-		String uploadCodyImage = codyImageArray[1].trim().replace("\"", "");
-		String newCodyImage = codyBoardImage.upload(request,response, uploadCodyImage);
-		
-		System.out.println(codyImageHeader);
-		System.out.println(codyImageArray[1]);
+//		String uploadCodyImage = codyImageArray[1].trim().replace("\"", "");
+//		String newCodyImage = codyBoardImage.upload(request,response, uploadCodyImage);
+//		
+//		System.out.println(codyImageHeader);
+//		System.out.println(codyImageArray[1]);
 		
 
 		
@@ -64,21 +72,21 @@ public class CodyBoardInsertProcess extends HttpServlet {
 		CodyBoardDto codyBoardDto = new CodyBoardDto();
 		CodyBoardDao codyBoardDao = new CodyBoardDao();
 		codyBoardDto.setTitle(codyTitle);
-		codyBoardDto.setCategoryID(codyCategory);
-		codyBoardDto.setContent(codyContent);
-		codyBoardDto.setImages(newCodyImage);
+//		codyBoardDto.setCategoryID(codyCategory);
+//		codyBoardDto.setContent(codyContent);
+		//codyBoardDto.setImages(newCodyImage);
 		codyBoardDto.setUserID("mok119");
 		
 	
-		int result = codyBoardDao.insert(codyBoardDto);
-		if(result > 0) {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/codyboard/pagenation.jsp");
-			dispatcher.forward(request, response);
-			
-			System.out.println("성공하였습니다.");
-		}else {
-			System.out.println("실패하였습니다.");
-		}
+//		int result = codyBoardDao.insert(codyBoardDto);
+//		if(result > 0) {
+//			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/codyboard/pagenation.jsp");
+//			dispatcher.forward(request, response);
+//			
+//			System.out.println("성공하였습니다.");
+//		}else {
+//			System.out.println("실패하였습니다.");
+//		}
 		
 
 		
