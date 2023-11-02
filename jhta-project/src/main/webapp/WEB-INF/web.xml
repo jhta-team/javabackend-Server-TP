@@ -571,7 +571,6 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-
     <display-name>SubscribeFindUser</display-name>
     <servlet-name>SubscribeFindUser</servlet-name>
     <servlet-class>com.kkj.subscribe.controller.SubscribeFindUser</servlet-class>
@@ -600,7 +599,6 @@
     <servlet-name>FollowInsert</servlet-name>
     <url-pattern>/follow/insert</url-pattern>
   </servlet-mapping>
-
   <servlet>
     <description></description>
     <display-name>MemberFindID</display-name>
