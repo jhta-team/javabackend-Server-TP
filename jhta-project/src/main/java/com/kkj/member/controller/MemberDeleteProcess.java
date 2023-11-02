@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.util.HashMap;
 
 import com.kkj.member.dao.MemberDao;
+import com.kkj.member.dao.MemberDateDao;
 import com.kkj.member.dto.MemberDto;
 import com.kkj.product.util.ScriptWriter;
 
@@ -46,6 +47,7 @@ public class MemberDeleteProcess extends HttpServlet {
 		String userName =(String)session.getAttribute("loggedName");
 		String userPW = request.getParameter("userPW");
 		MemberDao memberDao = new MemberDao();
+		MemberDateDao memberDateDao = new MemberDateDao();
 		MemberDto deleteMembetDto = (MemberDto)session.getAttribute("loggedMember");
 		String profile = deleteMembetDto.getProfile();
 		String uplodaPath = "C:\\upload";
@@ -59,6 +61,7 @@ public class MemberDeleteProcess extends HttpServlet {
 			if(file.exists()) {
 				file.delete();
 			}
+			memberDateDao.deleteDate(userID);
 			session.invalidate();
 			 ScriptWriter.alertAndNext(response, userName+"님 회원탈퇴되었습니다", "../index/index");
 		}

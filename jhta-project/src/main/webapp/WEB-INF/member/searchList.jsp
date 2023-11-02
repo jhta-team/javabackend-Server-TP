@@ -74,7 +74,7 @@
       </select> 
       </td>
       <td><button class="btn btn-dark btnBlack" data-no="${member.no}">블랙</button> </td>
-      <td><button class="btn btn-danger btnDelete" data-no="${member.no}">삭제</button></td>  
+      <td><button class="btn btn-danger btnDelete" data-no="${member.no}" value="${member.userID}">삭제</button></td>  
       												<!--data-no  사용자 지정 데이터 특성
       												    특정 클래스를 부여할 수 있음-->
       <td><input type="checkbox" name="removecheck" class="check" value="${member.no}"></td>
@@ -163,7 +163,8 @@
 	$(".btnDelete").on("click",function(){
 		$.ajax({
 			url:"../member/delete-process02",
-			data:{no:$(this).data("no")},
+			data:{no:$(this).data("no"),
+				userID:$(this).val()},
 			success:function(data){
  				console.log(data);
  				if(data.isDelete){

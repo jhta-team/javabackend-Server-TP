@@ -641,4 +641,14 @@
     <servlet-name>MemberFindPWProcess</servlet-name>
     <url-pattern>/member/findPW-process</url-pattern>
   </servlet-mapping>
+    <servlet>
+    <description></description>
+    <display-name>MemberInsertForm</display-name>
+    <servlet-name>MemberInsertForm</servlet-name>
+    <servlet-class>com.kkj.member.controller.MemberInsertForm</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MemberInsertForm</servlet-name>
+    <url-pattern>/member/insert-form</url-pattern>
+  </servlet-mapping>
 </web-app>

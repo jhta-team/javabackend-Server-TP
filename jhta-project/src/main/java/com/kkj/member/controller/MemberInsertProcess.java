@@ -21,6 +21,7 @@ import com.kkj.member.dao.MemberDao;
 import com.kkj.member.dao.MemberDateDao;
 import com.kkj.member.dto.MemberDto;
 import com.kkj.member.dto.ModalState;
+import com.kkj.product.util.ScriptWriter;
 
 /**
  * Servlet implementation class MemberInsertProcess
@@ -129,6 +130,8 @@ public class MemberInsertProcess extends HttpServlet {
 			ModalState modalState = new ModalState("show", "회원가입 되었습니다.");
 			session.setAttribute("modalState", modalState);
 			response.sendRedirect("../member/login");	
+		}else {
+			ScriptWriter.alertAndBack(response, "오류입니다.");
 		}
 	}
 

@@ -9,8 +9,10 @@
 <script src="../js/jquery-3.7.1.min.js"></script>
 <script src="../js/bootstrap.bundle.min.js"></script>
 <script src="../js/badWordFilter.js"></script>
+<script src="../js/checkout.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <link href="../css/bootstrap.min.css" rel="stylesheet" />
+<link href="../css/checkout.css" rel="stylesheet" />
 <link rel="stylesheet" href="../css/layout.css">
 </head>
 <body>
@@ -41,7 +43,8 @@
 					<li><a href="../codyboard/insert" class="nav-link px-2 text-white">코디등록</a></li>
 					<li><a href="../codyboard/page-nation" class="nav-link px-2 text-white">코디게시판보기</a></li>
 					<li><a href="#" class="nav-link px-2 text-white">About</a></li>
-					<li><a href="../member/list" class="nav-link px-2 text-white">회원관리</a></li>
+					<c:if test="${loggedMember.adminNumber eq 1}">
+					<li><a href="../member/list" class="nav-link px-2 text-white">회원관리</a></li></c:if>
 				</ul>
 
 				<form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">

@@ -7,8 +7,9 @@
 	<select id="loginMember" parameterType="HashMap" resultType="MemberDto">
   		select * from member where userID= #{userID} and userPW = #{userPW}
   	</select>
-  	
-  	
+  	<select id="imageMember" parameterType="int" resultType="String">
+  		select profile from member where no=#{no}
+  	</select>
   	<insert id="insertMember" parameterType="MemberDto" >
   		insert into member values(#{userID},#{userPW},#{userName},#{gender},
   		#{address},#{detailAddress},#{postCode},#{email},#{mobileTelcom},#{tel},
@@ -68,6 +69,9 @@
   	<delete id="deleteAdminMember" parameterType="int">
   		delete from member where no = #{no} 
   	</delete>
+  	<select id="idCheckDelete" parameterType="int" resultType="String">
+  		select userID from member where no = #{no} 	
+  	</select>
   	<select id="searhMember" parameterType="HashMap" resultType="MemberDto">
   		SELECT  userID, userPW, userName, nickName, address, postCode, tel, email, redate, adminNumber,no  FROM (SELECT rownum AS num, r.* FROM (SELECT *FROM  MEMBER where adminNumber <![CDATA[<=]]> 5 and 
   		<choose>

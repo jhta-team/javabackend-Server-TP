@@ -12,4 +12,11 @@
   	<select id="loginCount" resultType="int">
   		select sum(datNo) as count from controlDate where TO_DATE(loginDate,'YYYY-mm-dd') = TO_DATE(sysdate,'YYYY-mm-dd')
   	</select>
+  	<update id="datnoReset">
+  		UPDATE CONTROLDATE SET datno = 0 WHERE not to_date(LOGINDATE,'yyyy-mm-dd') IN (to_date(SYSDATE,'yyyy-mm-dd'))
+  	</update>
+  	
+  	<delete id="deleteDate" parameterType="String">
+  		delete from CONTROLDATE where userID = #{userID}
+  	</delete>
 </mapper>
