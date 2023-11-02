@@ -36,8 +36,6 @@ public class MemberLevel extends HttpServlet {
 		String realLevel=noList[0];
 
 		String strNo =  level.substring(3);
-		System.out.println(strNo);
-		System.out.println(realLevel);
 		int no=0;
 		int ad =0;
 		if(strNo!=null && !strNo.isEmpty()) {

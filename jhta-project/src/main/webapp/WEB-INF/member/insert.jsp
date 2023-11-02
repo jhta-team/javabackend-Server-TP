@@ -11,7 +11,7 @@
             <div class="mb-3">
               <label for="userID" class="form-label">ID</label>
               <input type="text" class="form-control" id="userID" placeholder="user id" name="userID" />
-              <button class="btn btn-primary" id="btnIDCheck">아이디 중복 확인</button>
+              <button class="btn btn-primary" id="btnIDCheck" disabled>아이디 중복 확인</button>
               <div class="invalid-feedback" id="invalid-feedbackID">글자 써보기</div>
             </div>
           </div>
@@ -39,7 +39,8 @@
           <div class="col-6">
             <div class="mb-3">
               	<label for="userName" class="form-label">Name</label>
-              	<input type="text" class="form-control" id="userName" placeholder="user name" name="userName" />
+              	<input type="text" class="form-control" id="userName" 
+              	maxlength="4" placeholder="user name" name="userName" />
 			  	<div class="invalid-feedback" id="invalid-feedbackName">글자 써보기</div>            
             </div>
           </div>
@@ -48,19 +49,21 @@
           <div class="col-6">
             <div class="mb-3">
               <label for="nickName" class="form-label">NickName</label>
-              <input type="text" class="form-control" id="nickName" placeholder="nick name" name="nickName" />
-			   <button class="btn btn-primary" id="btnNickNameCheck">닉네임 중복확인</button>            
+              <input type="text" class="form-control" id="nickName" 
+              placeholder="nick name" maxlength="5" name="nickName" />
+			   <button class="btn btn-primary" id="btnNickNameCheck">닉네임 중복확인</button>
+			   <div class="invalid-feedback" id="invalid-feedbackNickName">글자 써보기</div>            
             </div>
           </div>
         </div>
         <div class="row d-flex justify-content-center">
           <div class="col-6">
             <div class="mb-3">
-              <label for="userName" class="form-label">Gender</label>
+              <label for="gender" class="form-label">Gender</label>
               <div class="" >
-               <label for="userName" class="form-label">남자</label>
+               <label for="gender" class="form-label">남자</label>
                <input type="radio" name="gender" class="gender" id="gender" value="1"/>
-               <label for="userName" class="form-label">여자</label>
+               <label for="gender" class="form-label">여자</label>
                <input type="radio" name="gender" class="gender" id="gender" value="2"/>
                <div class="invalid-feedback" id="invalid-feedbackGender">글자 써보기</div>
               </div>             
@@ -111,10 +114,11 @@
             <input type="text" id="checkNum" class="form-control" placeholder="인증번호" name="checkNum" 
             disabled>
             <button id="btnCheck" class="btn btn-primary mt-3 btnCheck">인증번호 확인</button>
+            <div class="invalid-feedback" id="invalid-feedbackcheckNum">글자 써보기</div>
             </div>
           </div>
         </div>
-        
+       
         
          <div class="row d-flex justify-content-center">
           <div class="col-6">
@@ -173,6 +177,8 @@
     	let isNickNameCheck=false;
     	let isEmailCheck=false;
     	let isPhoneCheck=false;
+    	let isPassWordCheck=false;
+    	let isNickNameFormCheck=false;
   		var emailCode = "";
   	  
     	  function emailCheck(){
@@ -190,7 +196,6 @@
     	    		alert("이메일 형식에 맞지않습니다.")
     	    		return false;
     	    	}
-    	    	console.log("dsa");
     	    $.ajax({
     	    	url:"../member/sendEmail",
     	    	type:"POST",
@@ -229,7 +234,7 @@
           $("#invalid-feedbackID").show();
           $("#invalid-feedbackID").text("아이디를 입력해주세요");
           return false;
-        } if ($("#userPW").val().trim() === "") {
+        }else if ($("#userPW").val().trim() === "") {
           alert("password는 필수입력 사항입니다.");
           $("#userPW").val("");
           $("#userPW").focus();
@@ -244,10 +249,16 @@
           $("#invalid-feedbackPW02").text("비밀번호를 입력해주세요");
           return false;
         }else if ($("#userName").val().trim() === "") {
-            $("#userPW02").val("");
-            $("#userPW02").focus();
+            $("#userName").val("");
+            $("#userName").focus();
             $("#invalid-feedbackName").show();
             $("#invalid-feedbackName").text("이름을 입력해주세요");
+            return false;          
+        }else if ($("#nickName").val().trim() === "") {
+            $("#nickName").val("");
+            $("#nickName").focus();
+            $("#invalid-feedbackNickName").show();
+            $("#invalid-feedbackNickName").text("닉네임을 입력해주세요");
             return false;          
         }else if($("input[name='gender']:checked").val()!= 1 && $("input[name='gender']:checked").val()!= 2 ){
         	$("#gender").focus();
@@ -283,6 +294,12 @@
             $("#invalid-feedbackEmail").show();
             $("#invalid-feedbackEmail").text("이메일을 입력해주세요");
             return false;
+        }else if ($("#checkNum").val().trim() === "") {
+            $("#checkNum").val("");
+            $("#checkNum").focus();
+            $("#invalid-feedbackcheckNum").show();
+            $("#invalid-feedbackcheckNum").text("인증번호를 입력해주세요");
+            return false;          
         }else if ($("#mobile").val().trim() == "untitled") {
             $("#mobile").focus();
             $("#invalid-feedbackMobile").show();
@@ -292,22 +309,72 @@
        	 alert("핸드폰 번호 확인해주세요");
     	 return false;
     	}else if(!isEmailCheck){
-       	 alert("인증메일을 보내세요");
+       	 alert("인증번호 확인을 해주세요");
     	 return false;
     	}else if(!isIDCheck){
         	 alert("아이디 중복 체크해주세요");
         	 return false;
-        }else if(!isNickNameCheck){
+        }else if(!isPassWordCheck){
+       	 alert("비밀번호 확인해주세요");
+    	 return false;
+    }else if(!isNickNameCheck){
        	 	alert("닉네임 중복 체크해주세요");
     	 	return false;
+    }else if(!isNickNameFormCheck){
+       	 alert("닉네임 형식이 맞지 않습니다.");
+    	 return false;
     }
       });
     	    
+    	//  아이디 5자리 이상의 정규화
+   	  function IDcheck(){
+   		let IDRegex = /^[a-z][a-z0-9_.]{4,19}$/;
+   		let userid =$("#userID").val().trim();
+   		if(IDRegex.test(userid)){
+   			return true;
+   		}
+   	 		return false;
+   	  }
       $("#userID").on("keyup" , function(){
-    	  $(".invalid-feedback").hide(); 
+    	  if(IDcheck()){
+    		  $("#invalid-feedbackID").hide();
+    		  $("#btnIDCheck").attr("disabled",false);
+    	  }else{
+    		  $("#invalid-feedbackID").show(); 
+    		  $("#invalid-feedbackID").text("아이디 형식에 맞지 않습니다.");
+    		  $("#btnIDCheck").attr("disabled",true);
+    		  
+    	  }
+    	  
       })
+      $("#userID").on("click" , function(){
+    	  if(IDcheck()){
+    		  $("#invalid-feedbackID").hide(); }
+    	  else{
+    	  $("#invalid-feedbackID").show(); 
+		  $("#invalid-feedbackID").text("최소 다섯자리이상의 아이디가 필요합니다.");     		  
+    	  }
+    	  return false;
+      })
+      // 비밀번호 정규화
+       function PassWordcheck(){
+   		let PWRegex = /^(?=.*[a-z])(?=.*\d)(?=.*[@#$!%^&*?])[A-Za-z\d@#$!%^&*?]{8,16}$/;
+   		//  소문자와 특수문자는 필요하고 8자리이상인 비밀번호
+   		let userpw =$("#userPW").val().trim();
+   		if(PWRegex.test(userpw)){
+   			return true;
+   		}
+   	 		return false;
+   	  }
       $("#userPW").on("keyup" , function(){
-    	  $(".invalid-feedback").hide();
+    	  if(PassWordcheck()){
+    		  $("#invalid-feedbackPW01").hide();
+    		  isPassWordCheck= true;
+    	  }else{
+    		  $("#invalid-feedbackPW01").show();
+    		  $("#invalid-feedbackPW01").text("8~16자리며 특수문자와 숫자가 적어도 하나 이상 포함되어야 합니다.");
+    	  }
+    	  
       })
       $("#userPW02").on("keyup", function () {    //id는 # , class는 .
         if ($("#userPW").val() !== $("#userPW02").val()) {
@@ -318,22 +385,112 @@
         }
       });
       $("#userName").on("keyup",function(){
-    	  $(".invalid-feedback").hide();
+    	  if(userNameCheck()){
+    	  $("#invalid-feedbackName").hide();   		  
+    	  }else{
+    		  $("#invalid-feedbackName").show(); 
+    		  $("#invalid-feedbackName").text("3~6자리 한글만 작성하세요"); 
+    	  }
       })
+       //  나쁜말 체크
+      function badWordCheck(){
+    	  reset_alert_count();
+    	  let compareText = $("#nickName").val();
+    	  for(let i =0; i<swear_words_arr.length; i++){
+    		  for(let j =0;j<compareText.length; j++){
+    			  if(swear_words_arr[i] == compareText.substring(j,(j+swear_words_arr[i].length)).toLowerCase()){
+    				  swear_alert_arr[swear_alert_count] = compareText.substring(j, (j + swear_words_arr[i].length));
+    		            swear_alert_count++;
+    		            return true;
+    			  }
+    		  }
+    	  }
+    	  var alert_text = "";
+    	   for (var k = 1; k <= swear_alert_count; k++) {
+    	      alert_text += "\\n" + "(" + k + ")  " + swear_alert_arr[k - 1];
+    	   }
+    	   return false;
+      }
+      //나쁜말 "*"로 대체한다.
+      function nickNameReplace(){
+    	  let text = $("#nickName").val().trim();
+    	  let replacesub = "*";
+    	  for(let i =0;i<text.length;i++){
+    		  let sub = replacesub.repeat(text.length)
+    		  text = text.replace(text,sub)
+    	  }
+    	  return text;
+      }
+      //나쁜말 대체된 *을 포함하면 리턴값으로 true를 가진다.
+      function badWord(){
+    	  let badWordRegex = /^(?=.*[*])[가-힣@#$!%^&*?]{1,18}$/;
+    	  let nickname01 =$("#nickName").val().trim();
+    	  if(badWordRegex.test(nickname01)  ){
+     			return true;
+     		}
+     		
+     	 		return false;
+      }
+       function nickNameCheck(){
+   		let nickNameRegex = /^[가-힣]{3,6}$/;
+   		//  소문자와 특수문자는 필요하고 8자리이상인 비밀번호
+   		
+   		let nickname =$("#nickName").val().trim();
+   		if(nickNameRegex.test(nickname)  ){
+   			return true;
+   		}
+   		
+   	 		return false;
+   	  }
+       function userNameCheck(){
+      		let userNameRegex = /^[가-힣]{3,6}$/;
+      		//  소문자와 특수문자는 필요하고 8자리이상인 비밀번호
+      		
+      		let username =$("#userName").val().trim();
+      		if(userNameRegex.test(username)  ){
+      			return true;
+      		}
+      		
+      	 		return false;
+      	  }
+      $("#nickName").on("keyup",function(){
+    	 if(badWordCheck()){
+             $("#nickName").val(nickNameReplace())
+    	 }else{
+    		 if(badWord()){
+      			  $("#invalid-feedbackNickName").show();
+      	          $("#invalid-feedbackNickName").text("비속어는 안됩니다.");
+    		 }else{		 
+    	  			if(nickNameCheck()){
+    		  		$("#invalid-feedbackNickName").hide();
+    		  		isNickNameFormCheck=true;
+    	  			}else{
+    		  		$("#invalid-feedbackNickName").show();
+              		$("#invalid-feedbackNickName").text("닉네임은 3~5 한글만 가능합니다.");  
+    	  			}
+    		 	}
+    	 	}
+      })
+      
       $("input[name='gender']").on("change",function(){
     	  if($("input[name='gender']:checked").val()==1 || $("input[name='gender']:checked").val()==2)
     	  $(".invalid-feedback").hide();
+      })
+      $("#detailAddress").on("keyup",function(){
+    	  $("#invalid-feedbackDetail").hide();
       })
       $("#email").on("keyup",function(){
     	  if(emailCheck()){
     		  $("#invalid-feedbackEmail").hide();
     	  }
       })
+	 
       $("#mobile").on("change",function(){
     	  if($("#mobile").val()!="untitled"){
     		 $(".invalid-feedback").hide();
     	  }
       })
+     
       //핸드폰 정규식을 이용한 형식체크
       function phoneCheck(){
     	  let phonRegex01 = /^01([0|1|6|7|8|9])$/;
@@ -391,6 +548,7 @@
         						  const useID = confirm("쓸 수 있는 아이디입니다. 사용하시겠습니까?");        							  
         						  if(useID){
           					  		$("#userID").attr("readonly",false);
+          					  		$("#btnIDCheck").attr("disabled",true);
           					  		isIDCheck = true;
           					  		}
         						  }else{
@@ -416,11 +574,24 @@
     				  $("#nickName").focus();
     			  }else{
     				  if($("#nickName").val()!=""){
-    				  const nickName = confirm("사용가능한 닉네입니다.")
-    				  if(nickName){
-    					  $("#nickName").attr("readonly",false);
-    					  isNickNameCheck = true;
-    				  }
+    					  if(badWordCheck()){
+    						  alert("비속어입니다. 이쁜말해주세요");
+    						  $("#nickName").focus();
+    						  $("#nickName").val("");
+    					  }else{
+    						  if(!nickNameCheck()){
+    							  alert("닉네임 형식에 맞춰주세요");
+        						  $("#nickName").focus();
+        						  $("#nickName").val("");
+    						  }else{  
+    				  		const nickName = confirm("사용가능한 닉네입니다.")
+    				 		 if(nickName){
+    					     $("#nickName").attr("readonly",false);
+    					     isNickNameCheck = true;
+    				  			}
+    						 }
+    						  
+    					  }
     			  		}else{
 					  		alert("공란입니다 입려해주세요");
 					  		$("#nickName").focus();
@@ -480,10 +651,20 @@
         return false;
       });
       $("#postCode").on("click",function(){
+    	  $("#invalid-feedbackPost").hide();
     	  postcode();
           return false; 
       })
-      
+       $("#address").on("click",function(){
+    	  postcode();
+          return false; 
+      })
+     $(".form-control").on("keyup", function() { 
+    	 if (event.getModifierState("CapsLock")) {
+    		 alert("Caps Lock이 켜져있습니다."); 
+    		 $(this).val("");
+    		  }
+     });
      /*  $("#btnSubmitAjax").on("click",function(){
       	$.ajax({
       		url:"../member/insert-member-process.jsp",

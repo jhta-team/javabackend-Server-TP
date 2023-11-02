@@ -16,6 +16,8 @@ import com.kkj.cbreply.dao.CbReplyDao;
 import com.kkj.cbreply.dto.CbReplyDto;
 import com.kkj.codyboard.dao.CodyBoardDao;
 import com.kkj.codyboard.dto.CodyBoardDto;
+import com.kkj.follow.dao.FollowDao;
+import com.kkj.follow.dto.FollowDto;
 
 /**
  * Servlet implementation class CodyBoardFindOne
@@ -41,18 +43,27 @@ public class CodyBoardFindOne extends HttpServlet {
 		CbReplyDao cbReplyDao = new CbReplyDao();
 		CbLikeDao cbLikeDao = new CbLikeDao();
 		CodyBoardHitCookie codyBoardHitCookie = new CodyBoardHitCookie();
-		
+		FollowDao followDao = new FollowDao();
 		
 		int codyBoardNo = Integer.parseInt(request.getParameter("no"));
-		int likeCount = cbLikeDao.findCount(codyBoardNo);
 		codyBoardDto = codyBoardDao.findOne(codyBoardNo);
+		
+		String userID = codyBoardDto.getUserID();
+		System.out.println(userID);
+		
+		
+		int likeCount = cbLikeDao.findCount(codyBoardNo);
 		codyBoardHitCookie.hitCount(request, response, codyBoardNo);
+		int follow = followDao.followCount(userID);
+		int follower = followDao.followerCount(userID);
 		List<CbCommentDto> cbCommentList = cbCommentDao.findAll(codyBoardNo);
 		List<CbReplyDto> cbReplyList = cbReplyDao.find(codyBoardNo);
 		request.setAttribute("codyBoard", codyBoardDto);
 		request.setAttribute("cbComment", cbCommentList);
 		request.setAttribute("reply", cbReplyList);
 		request.setAttribute("likeCount", likeCount);
+		request.setAttribute("follow",follow );
+		request.setAttribute("follower", follower);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/codyboard/findone.jsp");
 		dispatcher.forward(request, response);
 		

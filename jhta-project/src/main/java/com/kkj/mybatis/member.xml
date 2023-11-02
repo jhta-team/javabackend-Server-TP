@@ -18,20 +18,20 @@
   		select count(*) count from member where TO_DATE(redate,'YYYY-mm-dd') =TO_DATE(sysdate,'YYYY-mm-dd') 
   	</select>
   	<select id="memberCount" resultType="int">
-  		select count(*) count from member 
+  		select count(no) count from member 
   	</select>
   	<select id="noBlackMemberCount" resultType="int">
-  		select count(*) count from member where adminNumber NOT IN(6)
+  		select count(no) count from member where adminNumber <![CDATA[<=]]> 5
   	</select>
   	<select id="blackMemberCount" resultType="int">
-  		select count(*) count from member where adminNumber IN(6)
+  		select count(no) count from member where adminNumber = 6
   	</select>
   	<select id="idCheck" parameterType="String" resultType="int">
-  		select count(*) as count from member where userID=#{userID}
+  		select count(no) as count from member where userID=#{userID}
   	</select>
   	
   	<select id="nickNameCheck" parameterType="String" resultType="int">
-  		select count(*) as count from member where nickName=#{nickName}
+  		select count(no) as count from member where nickName=#{nickName}
   	</select>
   	<select id="infoMember" parameterType="String" resultType="MemberDto">
   		select * from member where userID=#{userID}
@@ -50,8 +50,10 @@
   		delete from member where userID = #{userID} and userPW = #{userPW}
   	</delete>
   	<select id="listMember" parameterType="HashMap" resultType="MemberDto">
-  		SELECT  userID, userPW, userName, nickName, address, postCode, tel, email, redate, adminNumber,no  FROM (SELECT rownum AS num, r.* FROM (SELECT *FROM  MEMBER where adminNumber <![CDATA[<=]]> 5 ORDER BY no DESC)r)
-  		where num  <![CDATA[>=]]> #{start} and num  <![CDATA[<=]]> #{end}
+  			SELECT userID, userPW, userName, nickName, address, postCode, tel, email, redate, adminNumber,no FROM 
+			(SELECT  ROW_NUMBER() over(ORDER BY r.NO desc) as num , userID, userPW, userName, nickName, address, postCode, tel, email, redate, adminNumber,no 
+			FROM MEMBER r WHERE adminNumber <![CDATA[<=]]> 5)r 
+			WHERE num <![CDATA[>=]]> #{start} AND num <![CDATA[<=]]> #{end}
   	</select>
   	<update id="blackUpdate" parameterType="HashMap">
   		update member set adminNumber = #{adminNumber} where no = #{no}
@@ -155,4 +157,10 @@
   		
   		</choose>
   	</select>
+  	<select id="findID" parameterType="HashMap" resultType="String">
+  		select userID from member where userName = #{userName} and email = #{email}
+  	</select>
+  	<update id="findPWChange" parameterType="HashMap">
+  		update member set userPW = #{userPW} where userID=#{userID} and userName = #{userName} and email = #{email}
+  	</update>
 </mapper>

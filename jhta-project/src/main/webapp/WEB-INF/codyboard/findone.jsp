@@ -23,8 +23,16 @@
 						</tr>
 						<tr>
 							<th>글쓴이</th>
-							<td colspan="3">${codyBoard.userID }</td>
-
+							<td colspan="3">
+								${codyBoard.userID } 
+								 <button>팔로우</button>
+								 <span id="follwCount">${follow}</span>
+								 <button>팔로워</button>
+								 <span id="follwerCount">${follower}</span>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="3"><button class="btn btn-primary mx-1" id="follow">팔로우하기</button></td>
 						</tr>
 						<tr>
 							<th>날짜</th>
@@ -72,9 +80,7 @@
 				<div class="d-flex justify-content-center mt-5">
 					<!-- loggedID null 이 아니고 loggedID 랑 board.id랑 같으면 -->
 					<!-- 				목록을 눌렀을때 뒤로 가는 방법을 찾아보자 뒤에 page번호 값을 줘서 다시 돌아가는 방법이나 바로 전 페이지로 가는방법 찾아보 -->
-					<a href="../codyboard/page-nation" class="btn btn-primary">목록</a> <a
-						href="../board/reply?regroup=${viewBoard.regroup }&relevel=${viewBoard.relevel}&restep=${viewBoard.restep}"
-						class="btn btn-primary mx-1">답글달기</a>
+					<a href="../codyboard/page-nation" class="btn btn-primary">목록</a>
 						<span id="likeCount">${likeCount }</span>
 						<button id="btncbLike">좋아요</button>
 					<!-- 여기는 로그인한 사람만 볼수있게 -->
@@ -222,10 +228,6 @@
 				
 			})
 			}
-			console.log("asdasdsa")
-			console.log(aaa)
-			console.log("asdasdsa")
-			
 			return false;
 		})
 	})
@@ -282,6 +284,36 @@
 		return false;
 		
 		})
+		
+		$("#follow").on("click", function(){
+			const userID = "${codyBoard.userID }"
+			$.ajax({
+				type:'post',
+				url: "../follow/insert",
+				data:{
+					followID: userID,
+					myID: "mok123"
+				},
+				error: function(e){
+					alert("팔로우 추가 실패!!")
+				},
+				success: function(res){
+					console.log(res)
+					if(res == "add"){						
+						/* ${"#followerCount"}.text(111) */
+						/* let count = document.getElementById("followerCount");
+						count.text(11) */
+						alert("팔로우성공")
+						
+					}else{
+						alert("팔로우취소")
+					}
+				}
+				})
+			
+			
+			})
+		
 	
 	
 	
