@@ -548,7 +548,7 @@
   <servlet-mapping>
     <servlet-name>MemberBlackSearchList</servlet-name>
     <url-pattern>/member/blackSearchList</url-pattern>
-  </servlet-mapping> 
+  </servlet-mapping>
   <servlet>
     <description></description>
     <display-name>CartProductDelete</display-name>
@@ -568,8 +568,8 @@
   <servlet-mapping>
     <servlet-name>CartProductModify</servlet-name>
     <url-pattern>/cart/modify</url-pattern>
-  </servlet-mapping>  
-    <servlet>
+  </servlet-mapping>
+  <servlet>
     <description></description>
     <display-name>SubscribeFindUser</display-name>
     <servlet-name>SubscribeFindUser</servlet-name>
@@ -598,5 +598,46 @@
   <servlet-mapping>
     <servlet-name>FollowInsert</servlet-name>
     <url-pattern>/follow/insert</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <description></description>
+    <display-name>MemberFindID</display-name>
+    <servlet-name>MemberFindID</servlet-name>
+    <servlet-class>com.kkj.member.controller.MemberFindID</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MemberFindID</servlet-name>
+    <url-pattern>/member/findID</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>MemberFindIDProcess</display-name>
+    <servlet-name>MemberFindIDProcess</servlet-name>
+    <servlet-class>com.kkj.member.controller.MemberFindIDProcess</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MemberFindIDProcess</servlet-name>
+    <url-pattern>/member/findID-process</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>MemberFindPW</display-name>
+    <servlet-name>MemberFindPW</servlet-name>
+    <servlet-class>com.kkj.member.controller.MemberFindPW</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MemberFindPW</servlet-name>
+    <url-pattern>/member/findPW</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>MemberFindPWProcess</display-name>
+    <servlet-name>MemberFindPWProcess</servlet-name>
+    <servlet-class>com.kkj.member.controller.MemberFindPWProcess</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MemberFindPWProcess</servlet-name>
+    <url-pattern>/member/findPW-process</url-pattern>
   </servlet-mapping>
 </web-app>

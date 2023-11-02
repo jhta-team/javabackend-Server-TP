@@ -12,5 +12,4 @@
   	<select id="loginCount" resultType="int">
   		select sum(datNo) as count from controlDate where TO_DATE(loginDate,'YYYY-mm-dd') = TO_DATE(sysdate,'YYYY-mm-dd')
   	</select>
-  	
 </mapper>
