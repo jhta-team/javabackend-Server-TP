@@ -18,10 +18,10 @@ public class CartProductDao {
 		return result;		
 	}
 
-	public List<CartProductDto> selectListCart() {
+	public List<CartProductDto> selectListCart(int cartId) {
 		List<CartProductDto> cartProductDto = new ArrayList<>();
 		SqlSession sqlSession = MybatisConnectionFactory.getSqlSession();
-		cartProductDto = sqlSession.selectList("selectListCart");
+		cartProductDto = sqlSession.selectList("selectListCart",cartId);
 		sqlSession.close();
 		return cartProductDto;		
 	}

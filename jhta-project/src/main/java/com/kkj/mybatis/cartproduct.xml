@@ -3,29 +3,34 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kkj.mybatis">
-	<select id="selectListCart" resultType="CartProductDto">
+	<select id="selectListCart" parameterType="int"
+		resultType="CartProductDto">
 		SELECT cp.cart_item_id AS cartitemid, p.PDTTHUM, p.PDTNAME , p.PDTPRICE,
-		cp.quantity, cp.picksize, p.pdtid FROM cart_pdt cp
+		cp.quantity, cp.picksize, p.pdtid, cp.cartid FROM cart_pdt cp
 		Left OUTER JOIN product P
 		ON cp.pdtid = p.pdtid
-		order by cp.cart_item_id desc
+		WHERE cp.cartid = #{cartId}
+		order by cp.cart_item_id DESC
 	</select>
 	<insert id="insertCart" parameterType="CartProductDto">
 		insert into cart_pdt
-		values (
+		values
+		(
 		seq_cart_pdt.nextval,
 		#{pdtId},
 		#{quantity},
-		1,
+		#{cartId},
 		#{pickSize}
 		)
 	</insert>
 	<delete id="deleteCart" parameterType="int">
-		DELETE FROM cart_pdt WHERE cart_item_id = ${cartItemId}
+		DELETE FROM cart_pdt WHERE
+		cart_item_id = ${cartItemId}
 	</delete>
-	
+
 	<update id="updateCart" parameterType="CartProductDto">
-		update cart_pdt set quantity = #{quantity} where cart_item_id = #{cartItemId} 
+		update cart_pdt set
+		quantity = #{quantity} where cart_item_id = #{cartItemId}
 	</update>
 
 </mapper>

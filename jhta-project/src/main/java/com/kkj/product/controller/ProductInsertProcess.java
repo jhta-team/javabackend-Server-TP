@@ -12,7 +12,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.kkj.product.dao.ImageDao;
 import com.kkj.product.dao.ProductDao;
@@ -42,17 +44,10 @@ public class ProductInsertProcess extends HttpServlet {
 		String pdtColor = request.getParameter("pdtColor");
 		String pdtContent = request.getParameter("pdtContent");
 		int pdtCountS = Integer.parseInt(request.getParameter("pdtCountS"));
-		System.out.println(pdtCountS);
 		int pdtCountM = Integer.parseInt(request.getParameter("pdtCountM"));
-		System.out.println(pdtCountM);
-		int pdtCountL = Integer.parseInt(request.getParameter("pdtCountS"));
-		System.out.println(pdtCountL);
-		int pdtCountXL = Integer.parseInt(request.getParameter("pdtCountXL"));
-		System.out.println(pdtCountXL);
-		
-		
-
-		
+		int pdtCountL = Integer.parseInt(request.getParameter("pdtCountL"));
+		int pdtCountXL = Integer.parseInt(request.getParameter("pdtCountXL"));		
+	
 		Collection<Part> parts = request.getParts();
 		
 		//파일 저장 관련 변수들
@@ -124,9 +119,10 @@ public class ProductInsertProcess extends HttpServlet {
 		productSizeDto.setPdtCountS(pdtCountS);
 		productSizeDto.setPdtCountM(pdtCountM);
 		productSizeDto.setPdtCountL(pdtCountL);
-		productSizeDto.setPdtCountXL(pdtCountXL);
+		productSizeDto.setPdtCountXL(pdtCountXL);		
 		productSizeDao.insertProductSize(productSizeDto);
-		
+
+
 		//결과값 처리
 
 		if(resultProduct > 0) {

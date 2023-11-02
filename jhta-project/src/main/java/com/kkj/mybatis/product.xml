@@ -2,48 +2,59 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
- <mapper namespace="com.kkj.mybatis">
- 
- 	<select id="listProduct" resultType="ProductDto">
-	SELECT * FROM product order by pdtId asc
+<mapper namespace="com.kkj.mybatis">
+
+	<select id="listProduct" parameterType="HashMap" resultType="ProductDto">
+		SELECT a.* FROM
+		(SELECT p.*, rownum AS rn FROM product p ORDER BY pdtid DESC) a
+		WHERE rn BETWEEN #{start} AND #{end}
 	</select>
-	
-	<select id="detailProduct" parameterType="int" resultType="ProductDto">
+
+	<select id="detailProduct" parameterType="int"
+		resultType="ProductDto">
 		SELECT * FROM product where pdtId = #{pdtId}
 	</select>
-	
-	<select id="selectOneProduct" parameterType="int" resultType="ProductDto">
+
+	<select id="selectOneProduct" parameterType="int"
+		resultType="ProductDto">
 		select * from product where pdtid = #{pdtId}
 	</select>
-	
+
 	<insert id="insertProduct" parameterType="ProductDto">
-		INSERT INTO product values(
-					seq_product.nextval,
-					#{pdtName},
-					#{pdtCty},
-					#{pdtContent},
-					#{pdtPrice},
-					default,
-					default,
-					null,
-					#{pdtThum},
-					#{pdtColor}
+		INSERT INTO product
+		values(
+		seq_product.nextval,
+		#{pdtName},
+		#{pdtCty},
+		#{pdtContent},
+		#{pdtPrice},
+		default,
+		default,
+		null,
+		#{pdtThum},
+		#{pdtColor}
 		)
 	</insert>
-	
+
 	<update id="updateProduct" parameterType="ProductDto">
-			UPDATE PRODUCT SET 		pdtname = #{pdtName},
-									pdtcty = #{pdtCty},
-									pdtcontent = #{pdtContent},
-									pdtprice = #{pdtPrice},
-									pdtstate = #{pdtState},
-									pdtmoddate = sysdate,
-									pdtthum = #{pdtThum},
-									pdtColor = #{pdtColor}
-								 	WHERE pdtId = #{pdtId}
+		UPDATE PRODUCT SET pdtname = #{pdtName},
+		pdtcty = #{pdtCty},
+		pdtcontent = #{pdtContent},
+		pdtprice = #{pdtPrice},
+		pdtstate = #{pdtState},
+		pdtmoddate = sysdate,
+		pdtthum = #{pdtThum},
+		pdtColor = #{pdtColor}
+		WHERE pdtId = #{pdtId}
 	</update>
-	
+
 	<delete id="deleteProduct" parameterType="int">
-		delete from product where pdtid=#{pdtId}
-	</delete>	
+		delete from product
+		where pdtid=#{pdtId}
+	</delete>
+
+	<select id="countProduct" resultType="int">
+		select count(*) from
+		product
+	</select>
 </mapper>

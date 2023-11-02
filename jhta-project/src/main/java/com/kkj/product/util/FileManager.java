@@ -57,7 +57,7 @@ public class FileManager {
 	public void deleteImageFile(int pdtId) {
 		String uploadDirectory = "C:\\upload\\";
 		ImageDao imgDao = new ImageDao();
-		ImageDto imgDto = imgDao.selectOneImg(pdtId);
+		ImageDto imgDto = imgDao.selectOneImg(pdtId);		
 		File file1 = new File(uploadDirectory + imgDto.getImg1());
 		File file2 = new File(uploadDirectory + imgDto.getImg2());
 		File file3 = new File(uploadDirectory + imgDto.getImg3());

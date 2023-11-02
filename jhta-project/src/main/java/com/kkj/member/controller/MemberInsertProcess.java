@@ -15,6 +15,8 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import com.kkj.cart.dao.CartDao;
+import com.kkj.cart.dto.CartDto;
 import com.kkj.member.dao.MemberDao;
 import com.kkj.member.dao.MemberDateDao;
 import com.kkj.member.dto.MemberDto;
@@ -114,8 +116,14 @@ public class MemberInsertProcess extends HttpServlet {
 		memberInsert.setNickName(nickName);
 		memberInsert.setNo(no);
 		
+		CartDto cartDto = new CartDto();
+		cartDto.setCartName(userName);
+		cartDto.setUserId(userID);
+		CartDao cartDao = new CartDao();	
+		
 		result=memberDao.insertMember(memberInsert);
 		memberDateDao.insertDate(userID);
+		int cartInsertResult = cartDao.insertCart(cartDto);	
 		if(result>0) {
 			HttpSession session = request.getSession();
 			ModalState modalState = new ModalState("show", "회원가입 되었습니다.");

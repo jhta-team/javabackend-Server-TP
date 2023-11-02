@@ -1,6 +1,9 @@
 package com.kkj.product.dao;
 
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 
 import com.kkj.mybatis.MybatisConnectionFactory;
@@ -14,7 +17,7 @@ public class ProductSizeDao {
 		sqlSession.close();
 		return result;
 	}
-
+	
 	public ProductSizeDto selectProductSize(int pdtId) { // 상품상세보기에서 선택가능 사이즈 표시하기 위한 select 메서드
 		ProductSizeDto productSizeDto = new ProductSizeDto();
 		SqlSession sqlSession = MybatisConnectionFactory.getSqlSession();
@@ -30,5 +33,4 @@ public class ProductSizeDao {
 		sqlSession.close();
 		return result;
 	}
-
 }
