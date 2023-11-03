@@ -44,19 +44,7 @@
   		<c:forEach items="${blackList }" var="member" varStatus="status">
     <tr>
       <th scope="row">${status.index}</th>
-      <c:choose>
-      <c:when test="${member.adminNumber ==1 }">
-      <td>관리자</td>
-      </c:when>
-      <c:otherwise>
-      <c:if test="${member.adminNumber ==0 }"><td>${member.userID}<br>(일반)</td></c:if>
-      <c:if test="${member.adminNumber ==2 }"><td>${member.userID}<br>(실버)</td></c:if>
-      <c:if test="${member.adminNumber ==3 }"><td>${member.userID}<br>(골드)</td></c:if>
-      <c:if test="${member.adminNumber ==4 }"><td>${member.userID}<br>(플레)</td></c:if>
-      <c:if test="${member.adminNumber ==5 }"><td>${member.userID}<br>(다이아)</td></c:if> 
-      <c:if test="${member.adminNumber ==6 }"><td>${member.userID}<br>(블랙회원)</td></c:if>    
-      </c:otherwise>
-      </c:choose>
+      <td>${member.userID}<br>(블랙회원)</td>
       <td>${member.userName}(${member.nickName })</td>
       <td>${member.userPW} </td>
       <td>${member.address} / ${member.postCode}</td>
@@ -75,7 +63,7 @@
       </select> 
       </td>
       <td><button class="btn btn-dark btnBlack" data-no="${member.no}">해제</button> </td>
-      <td><button class="btn btn-danger btnDelete" data-no="${member.no}">삭제</button></td>  
+      <td><button class="btn btn-danger btnDelete" data-no="${member.no}" value="${member.userID}">삭제</button></td>  
       												<!--data-no  사용자 지정 데이터 특성
       												    특정 클래스를 부여할 수 있음-->
       <td><input type="checkbox" name="removecheck" class="check" value="${member.no}"></td>
@@ -96,7 +84,7 @@
 <button class="btn btn-danger" id="btnall" >삭제</button>
 
 </form>
-<form action="../member/searchList">
+<form action="../member/blackSearchList">
 				<select class="btn btn-primary btnSearch" name="search" >
 					<option value="userName">이름</option>
 					<option value="nickName">닉네임</option>
@@ -163,7 +151,8 @@
 	$(".btnDelete").on("click",function(){
 		$.ajax({
 			url:"../member/delete-process02",
-			data:{no:$(this).data("no")},
+			data:{no:$(this).data("no"),
+				userID:$(this).val()},
 			success:function(data){
  				console.log(data);
  				if(data.isDelete){

@@ -12,7 +12,14 @@
               placeholder="png jpg" name="profile" value="${infoModifyMember.profile }" />     
             </div>
              	 <div class="preview">
+             	  <c:choose>
+  					<c:when test="${not empty infoMember.profile || infoModifyMember.profile!=null}">
              	 <img class="imgForm" src="/javabackend-Server-TP${pageContext.request.contextPath}/upload/${infoModifyMember.profile}">
+             	 </c:when>
+  				<c:otherwise>
+  				<img src="../upload/user.png" class="profile">
+  				</c:otherwise>
+  				</c:choose>
              	 </div>
           		</div>
           </div>
@@ -31,7 +38,9 @@
               <label for="userPW" class="form-label">password</label>
               <input type="password" class="form-control" id="userPW" placeholder="user password" name="userPW" 
               value="${infoModifyMember.userPW}" readonly/>
+              <div class="invalid-feedback" id="invalid-feedbackPW01">글자 써보기</div>
                <button class="btn btn-primary" id="btnPasswordCheck">비밀번호 변경</button>
+               <button id="btnUserPW" class="btn btn-primary" disabled>비밀번호 확인</button>
             </div>
           </div>
         </div>
@@ -39,8 +48,9 @@
           <div class="col-6">
             <div class="mb-3">
               <label for="userName" class="form-label">이름</label>
-              <input type="text" class="form-control" id="userName" 
+              <input type="text" class="form-control" id="userName" maxlength="4"
               placeholder="user name" name="userName" value="${infoModifyMember.userName }" />
+              <div class="invalid-feedback" id="invalid-feedbackName">글자 써보기</div>
             </div>
           </div>
         </div>
@@ -48,10 +58,11 @@
           <div class="col-6">
             <div class="mb-3">
               <label for="nickName" class="form-label">닉네임</label>
-              <input type="text" class="form-control" id="nickName" 
+              <input type="text" class="form-control" id="nickName" maxlength="5"
               placeholder="user nickName" name="nickName" value="${infoModifyMember.nickName }" readonly/>
               <button id="btnNickName" class="btn btn-primary">닉네임 변경</button>
               <button id="btnNickNameCheck" class="btn btn-primary" disabled>닉네임 중복확인</button>
+              <div class="invalid-feedback" id="invalid-feedbackNickName">글자 써보기</div>
             </div>
           </div>
         </div>
@@ -63,6 +74,7 @@
               placeholder="post code" name="postCode" value="${infoModifyMember.postCode }"/>
               <div>
                 <button class="btn btn-primary mt-3" id="btnPostcode">우편번호 확인</button>
+                <div class="invalid-feedback" id="invalid-feedbackPost">글자 써보기</div>
               </div>
             </div>
           </div>
@@ -138,6 +150,34 @@
     </div>
 
     <script> 
+    // 비밀번호 정규화
+    function PassWordcheck(){
+		let PWRegex = /^(?=.*[a-z])(?=.*\d)(?=.*[@#$!%^&*?])[A-Za-z\d@#$!%^&*?]{8,16}$/;
+		//  소문자와 특수문자는 필요하고 8자리이상인 비밀번호
+		let userpw =$("#userPW").val().trim();
+		if(PWRegex.test(userpw)){
+			return true;
+		}
+	 		return false;
+	  }
+    $("#userPW").on("keyup" , function(){
+  	  if(PassWordcheck()){
+  		  $("#userPW").removeClass("is-invalid")
+  		  $("#userPW").addClass("is-valid")
+  		  $("#invalid-feedbackPW01").hide();
+  		  $("#btnUserPW").attr("disabled",false)
+  		  isPassWordCheck= true;
+  	  }else{
+  		  $("#userPW").addClass("is-invalid")
+  		  $("#invalid-feedbackPW01").show();
+  		  $("#invalid-feedbackPW01").text("8~16자리며 특수문자와 숫자가 적어도 하나 이상 포함되어야 합니다.");
+  	  }
+  	  
+    })
+    $("#btnUserPW").on("click",function(){
+    	 $("#userPW").attr("readonly",true)
+    	 return false;
+    })
     $("#btnSubmit").on("click", function(){
     	const check = confirm("정보 변경하시겠습니까?")
     	if(check){
@@ -193,6 +233,13 @@
         postcode();
         return false;
       });
+      $("#postCode").on("click",function(){
+    	  $("#postCode").removeClass("is-invalid")
+          $("#postCode").addClass("is-valid")
+    	  $("#invalid-feedbackPost").hide();
+    	  postcode();
+          return false; 
+      })
       
       //닉네임 변경확인-------------------------------------//
       $("#btnNickName").on("click",function(){

@@ -42,14 +42,15 @@ public class MemberLoginProcess extends HttpServlet {
 		String check = request.getParameter("check");	
 		
 		MemberDao memberDao = new MemberDao();
-		MemberDateDao MemberDateDao = new MemberDateDao();
+		MemberDateDao memberDateDao = new MemberDateDao();
 		MemberDto loginMember =new MemberDto();
 		HashMap<String,String> loginMap = new HashMap();
 		loginMap.put("userID", userID);
 		loginMap.put("userPW", userPW);
 		loginMember = memberDao.loginMember(loginMap);
 		if(loginMember !=null) {
-			MemberDateDao.loginDate(userID);
+			memberDateDao.datnoReset();
+			memberDateDao.loginDate(userID);
 			if(loginMember.getAdminNumber()==6) {
 				ModalState modalState = new ModalState("show","블랙입니다. 관리자에게 문의하세요");
 				session.setAttribute("modalState", modalState);
@@ -73,6 +74,7 @@ public class MemberLoginProcess extends HttpServlet {
 				response.sendRedirect("../index/index");				
 			}
 		}else{
+			session.removeAttribute("modalState");
 			ScriptWriter.alertAndBack(response, "아이디와 비밀번호를 확인해주세요");
 		}
 		

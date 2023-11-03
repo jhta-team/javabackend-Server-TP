@@ -40,6 +40,7 @@ public class MemberList extends HttpServlet {
 		MemberDateDao memberDateDao = new MemberDateDao();
 		HashMap<String, Integer> map = new HashMap();
 		String strPage = request.getParameter("page");
+		
 		int totalCount = memberDao.noBlackMemberCount();
 		int intpage =0;
 		int lastpage = 10;
