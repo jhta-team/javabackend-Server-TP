@@ -25,6 +25,7 @@
       <c:if test="${infoMember.adminNumber ==3 }"><img src="../upload/gold.png">골드</c:if>
       <c:if test="${infoMember.adminNumber ==4 }"><img src="../upload/platinum.png">플레티넘</c:if>
       <c:if test="${infoMember.adminNumber ==5 }"><img src="../upload/diamond.png">다이아몬드</c:if>
+      <c:if test="${infoMember.adminNumber ==1 }"><p>관리자</p> </c:if>
       </td> 
     </tr>
     <tr>

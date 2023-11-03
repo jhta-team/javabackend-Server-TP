@@ -21,12 +21,23 @@ public class MemberDateDao {
 	public int loginCount() {
 		int result=0;
 		SqlSession sqlSession = MybatisConnectionFactory.getSqlSession();
-		String strResult = null;
 		if(sqlSession.selectOne("loginCount")==null) {
 			result =0;
 		}else {
 			result = sqlSession.selectOne("loginCount");
 		}		
+		return result;
+	}
+	public int datnoReset() {
+		int result=0;
+		SqlSession sqlSession = MybatisConnectionFactory.getSqlSession();
+		result = sqlSession.update("datnoReset");
+		return result;
+	}
+	public int deleteDate(String id) {
+		int result=0;
+		SqlSession sqlSession = MybatisConnectionFactory.getSqlSession();
+		result = sqlSession.delete("deleteDate",id);
 		return result;
 	}
 }

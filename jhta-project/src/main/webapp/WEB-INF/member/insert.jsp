@@ -3,14 +3,14 @@
     <div class="container">
     	<%-- <h1>${pageContext.request.contextPath }</h1>
     	<h1>${request.contextPath }</h1> --%>
-      <form action="../member/insert-process" method="post" class="" 
+      <form action="../member/insert-process" method="post" class="needs-validation" novalidate
       name="member" id="joinform" enctype="multipart/form-data">  <!-- <form  -->
       								<!--방식은 post, 이미지나 파일을 받기 위해서 -->
         <div class="row d-flex justify-content-center mt-5">
           <div class="col-6">
             <div class="mb-3">
               <label for="userID" class="form-label">ID</label>
-              <input type="text" class="form-control" id="userID" placeholder="user id" name="userID" />
+              <input type="text" class="form-control " id="userID" placeholder="user id" name="userID" required />
               <button class="btn btn-primary" id="btnIDCheck" disabled>아이디 중복 확인</button>
               <div class="invalid-feedback" id="invalid-feedbackID">글자 써보기</div>
             </div>
@@ -20,7 +20,7 @@
           <div class="col-6">
             <div class="mb-3">
               <label for="userPW" class="form-label">password</label>
-              <input type="password" class="form-control" id="userPW" placeholder="user password" name="userPW" />
+              <input type="password" class="form-control" id="userPW" placeholder="user password" name="userPW" required />
               <div class="invalid-feedback" id="invalid-feedbackPW01">글자 써보기</div>
                <button class="btn btn-primary" id="btnShowPassword">비밀번호 보기</button>
             </div>
@@ -30,7 +30,7 @@
           <div class="col-6">
             <div class="mb-3">
               <label for="userPW02" class="form-label">password Confirm</label>
-              <input type="password" class="form-control" id="userPW02" placeholder="user password" />
+              <input type="password" class="form-control" id="userPW02" placeholder="user password" required/>
               <div class="invalid-feedback" id="invalid-feedbackPW02">글자 써보기</div>
             </div>
           </div>
@@ -40,7 +40,7 @@
             <div class="mb-3">
               	<label for="userName" class="form-label">Name</label>
               	<input type="text" class="form-control" id="userName" 
-              	maxlength="4" placeholder="user name" name="userName" />
+              	maxlength="4" placeholder="user name" name="userName" required/>
 			  	<div class="invalid-feedback" id="invalid-feedbackName">글자 써보기</div>            
             </div>
           </div>
@@ -50,7 +50,7 @@
             <div class="mb-3">
               <label for="nickName" class="form-label">NickName</label>
               <input type="text" class="form-control" id="nickName" 
-              placeholder="nick name" maxlength="5" name="nickName" />
+              placeholder="nick name" maxlength="5" name="nickName" required/>
 			   <button class="btn btn-primary" id="btnNickNameCheck">닉네임 중복확인</button>
 			   <div class="invalid-feedback" id="invalid-feedbackNickName">글자 써보기</div>            
             </div>
@@ -62,9 +62,9 @@
               <label for="gender" class="form-label">Gender</label>
               <div class="" >
                <label for="gender" class="form-label">남자</label>
-               <input type="radio" name="gender" class="gender" id="gender" value="1"/>
+               <input type="radio" name="gender" class="gender" id="gender" value="1" required/>
                <label for="gender" class="form-label">여자</label>
-               <input type="radio" name="gender" class="gender" id="gender" value="2"/>
+               <input type="radio" name="gender" class="gender" id="gender" value="2" required/>
                <div class="invalid-feedback" id="invalid-feedbackGender">글자 써보기</div>
               </div>             
             </div>
@@ -74,7 +74,7 @@
           <div class="col-6">
             <div class="mb-3">
               <label for="postCode" class="form-label">우편번호</label>
-              <input type="text" class="form-control" id="postCode" placeholder="post code" name="postCode" />
+              <input type="text" class="form-control" id="postCode" placeholder="post code" name="postCode" required/>
               <div>
                 <button class="btn btn-primary mt-3" id="btnPostcode">우편번호 확인</button>
               </div>
@@ -86,7 +86,7 @@
           <div class="col-6">
             <div class="mb-3">
               <label for="address" class="form-label">주소</label>
-              <input type="text" class="form-control" id="address" name="address" placeholder="address" />
+              <input type="text" class="form-control" id="address" name="address" placeholder="address" required />
               <div class="invalid-feedback" id="invalid-feedbackAddress">글자 써보기</div>
             </div>
           </div>
@@ -95,7 +95,7 @@
           <div class="col-6">
             <div class="mb-3">
               <label for="detailAddress" class="form-label">상세 주소</label>
-              <input type="text" class="form-control" id="detailAddress" placeholder="detail address" name="detailAddress" />
+              <input type="text" class="form-control" id="detailAddress" placeholder="detail address" name="detailAddress" required/>
               <div class="invalid-feedback" id="invalid-feedbackDetail">글자 써보기</div>
             </div>
           </div>
@@ -106,7 +106,7 @@
             <div class="mb-3">
               <label for="email" class="form-label">이메일</label>
               <input type="email" class="form-control" id="email" 
-              placeholder="e-mail" name="email" />
+              placeholder="e-mail" name="email" required/>
               <button id="sendEmail" class="btn btn-primary mt-3 sendEmail">인증메일 보내기</button>
                <div class="invalid-feedback" id="invalid-feedbackEmail">글자 써보기</div>
             </div>
@@ -124,7 +124,7 @@
           <div class="col-6">
             <div class="mb-3">
               <label for="mobile" class="form-label">통신사</label>
-				<select id="mobile" class="form-control" name="mobileTelcom">
+				<select id="mobile" class="form-control" name="mobileTelcom" >
     				<option id="telcom" value="untitled" selected>통신사 선택</option> 
     				<option id="telcom" value="LG">LGU+</option>
     				<option id="telcom" value="SKT">SKT</option>
@@ -142,11 +142,11 @@
             <div class="mb-3">
               <label for="tel" class="form-label">전화 번호</label>
               <div class="d-flex flex-row mb-3 gap-1" id="tel">
-              <input type="text" maxlength="3" class="form-control tel01" id="tel01" placeholder="tel" name="tel01" />
+              <input type="text" maxlength="3" class="form-control tel01" id="tel01" placeholder="tel" name="tel01" required/>
               <h2>-</h2>
-              <input type="text" maxlength="4" class="form-control tel01" id="tel02" name="tel02" />
+              <input type="text" maxlength="4" class="form-control tel01" id="tel02" name="tel02" required/>
               <h2>-</h2>
-              <input type="text" maxlength="4" class="form-control tel01" id="tel03" name="tel03" />
+              <input type="text" maxlength="4" class="form-control tel01" id="tel03" name="tel03" required/>
               </div>
             <div class="invalid-feedback" id="invalid-feedbackTel">글자 써보기</div> 
             </div>
@@ -193,6 +193,9 @@
     	    }
     	    $("#sendEmail").on("click",function(){
     	    	if(!emailCheck()){
+    	    		$("#email").addClass("is-invalid")
+    	    		$("#invalid-feedbackEmail").show();
+            		$("#invalid-feedbackEmail").text("이메일을 입력해주세요");
     	    		alert("이메일 형식에 맞지않습니다.")
     	    		return false;
     	    	}
@@ -204,6 +207,8 @@
     	    		console.log("data : " + data.checkNum);
     	    		$("#checkNum").attr('disabled',false)
     	    		emailCode = data.checkNum;
+    	    		$("#email").removeClass("is-invalid")
+    	            $("#email").addClass("is-valid")
     	    		alert("인증번호가 발송되었습니다.");
     	    	}
     	    });		
@@ -212,25 +217,36 @@
     	   $("#btnCheck").on("click",function(){
     		   if($("#checkNum").val() != emailCode){
     			   alert("인증번호가 다릅니다. 다시 입력해주세요");
+    			   $("#checkNum").addClass("is-invalid")
+    	           $("#invalid-feedbackcheckNum").show();
+    	           $("#invalid-feedbackcheckNum").text("인증번호를 입력해주세요");
     			   $("#checkNum").val("");
     			   $("#checkNum").focus();
     		   }else{
     			   if($("#checkNum").val()==""){
     				   alert("공란입니다. 이메일 인증을 받으세요");
+    				   $("#checkNum").addClass("is-invalid")
+        	           $("#invalid-feedbackcheckNum").show();
+        	           $("#invalid-feedbackcheckNum").text("인증번호를 입력해주세요");
     				   $("#checkNum").focus();
     			   }else{
     				   alert("인증번호 확인 되었습니다.");
+    				   $("#checkNum").removeClass("is-invalid")
+    				   $("#checkNum").addClass("is-valid")
         			   $("#checkNum").attr("readonly",true);
         			   isEmailCheck=true;
     			   } 
     		   }
     		   return false;
     	   }) 
+    	   
+   
     	   //회원가입 클릭시 
       $("#btnSubmit").on("click", function (e) {   //document.querySelector
         if ($("#userID").val().trim() === "") {    // val: value, trim : 공백
           $("#userID").val("");
           $("#userID").focus();
+          $("#userID").addClass("is-invalid")
           $("#invalid-feedbackID").show();
           $("#invalid-feedbackID").text("아이디를 입력해주세요");
           return false;
@@ -238,6 +254,7 @@
           alert("password는 필수입력 사항입니다.");
           $("#userPW").val("");
           $("#userPW").focus();
+          $("#userPW").addClass("is-invalid")
           $("#invalid-feedbackPW01").show();
           $("#invalid-feedbackPW01").text("비밀번호를 입력해주세요");
           return false;
@@ -245,66 +262,77 @@
           alert("password 확인");
           $("#userPW02").val("");
           $("#userPW02").focus();
+          $("#userPW02").addClass("is-invalid")
           $("#invalid-feedbackPW02").show();
           $("#invalid-feedbackPW02").text("비밀번호를 입력해주세요");
           return false;
         }else if ($("#userName").val().trim() === "") {
             $("#userName").val("");
             $("#userName").focus();
+            $("#userName").addClass("is-invalid")
             $("#invalid-feedbackName").show();
             $("#invalid-feedbackName").text("이름을 입력해주세요");
             return false;          
         }else if ($("#nickName").val().trim() === "") {
             $("#nickName").val("");
             $("#nickName").focus();
+            $("#nickName").addClass("is-invalid")
             $("#invalid-feedbackNickName").show();
             $("#invalid-feedbackNickName").text("닉네임을 입력해주세요");
-            return false;          
+            return false;        
         }else if($("input[name='gender']:checked").val()!= 1 && $("input[name='gender']:checked").val()!= 2 ){
         	$("#gender").focus();
+        	$("#gender").addClass("is-invalid")
         	$("#invalid-feedbackGender").show();
             $("#invalid-feedbackGender").text("성별을 선택해주세요");
-            return false;  
+            return false;
         }else if ($("#postCode").val().trim() === "") {
             $("#postCode").val("");
             $("#postCode").focus();
+            $("#postCode").addClass("is-invalid")
             $("#invalid-feedbackPost").show();
             $("#invalid-feedbackPost").text("우편번호 입력해주세요");
-            return false;          
+            return false;        
         }else if ($("#address").val().trim() === "") {
             $("#address").val("");
             $("#address").focus();
+            $("#address").addClass("is-invalid")
             $("#invalid-feedbackAddress").show();
             $("#invalid-feedbackAddress").text("주소를 입력해주세요");
-            return false;          
+            return false;       
         }else if ($("#detailAddress").val().trim() === "") {
             $("#detailAddress").val("");
             $("#detailAddress").focus();
+            $("#detailAddress").addClass("is-invalid")
             $("#invalid-feedbackDetail").show();
             $("#invalid-feedbackDetail").text("상세 주소를 입력해주세요");
-            return false;          
+            return false;      
         }else if ($("#email").val().trim() === "") {
             $("#email").val("");
             $("#email").focus();
+            $("#email").addClass("is-invalid")
             $("#invalid-feedbackEmail").show();
             $("#invalid-feedbackEmail").text("이메일을 입력해주세요");
-            return false;          
+            return false;        
         }else if (!emailCheck()) {
             $("#email").focus();
+            $("#email").addClass("is-invalid")
             $("#invalid-feedbackEmail").show();
             $("#invalid-feedbackEmail").text("이메일을 입력해주세요");
             return false;
         }else if ($("#checkNum").val().trim() === "") {
             $("#checkNum").val("");
             $("#checkNum").focus();
+            $("#checkNum").addClass("is-invalid")
             $("#invalid-feedbackcheckNum").show();
             $("#invalid-feedbackcheckNum").text("인증번호를 입력해주세요");
-            return false;          
+            return false;   
         }else if ($("#mobile").val().trim() == "untitled") {
             $("#mobile").focus();
+            $("#mobile").addClass("is-invalid")
             $("#invalid-feedbackMobile").show();
             $("#invalid-feedbackMobile").text("통신사를 선택해주세요");
-            return false;          
+              return false;        
         }else if(!isPhoneCheck){
        	 alert("핸드폰 번호 확인해주세요");
     	 return false;
@@ -338,6 +366,8 @@
       $("#userID").on("keyup" , function(){
     	  if(IDcheck()){
     		  $("#invalid-feedbackID").hide();
+    		  $("#userID").removeClass("is-invalid")
+    		  $("#userID").addClass("is-valid")
     		  $("#btnIDCheck").attr("disabled",false);
     	  }else{
     		  $("#invalid-feedbackID").show(); 
@@ -349,7 +379,8 @@
       })
       $("#userID").on("click" , function(){
     	  if(IDcheck()){
-    		  $("#invalid-feedbackID").hide(); }
+    		  $("#invalid-feedbackID").hide(); 
+    		  }
     	  else{
     	  $("#invalid-feedbackID").show(); 
 		  $("#invalid-feedbackID").text("최소 다섯자리이상의 아이디가 필요합니다.");     		  
@@ -368,6 +399,8 @@
    	  }
       $("#userPW").on("keyup" , function(){
     	  if(PassWordcheck()){
+    		  $("#userPW").removeClass("is-invalid")
+    		  $("#userPW").addClass("is-valid")
     		  $("#invalid-feedbackPW01").hide();
     		  isPassWordCheck= true;
     	  }else{
@@ -381,11 +414,15 @@
           $("#invalid-feedbackPW02").show();
           $("#invalid-feedbackPW02").text("password가 맞지 않습니다.");
         } else {
+          $("#userPW02").removeClass("is-invalid")
+   		  $("#userPW02").addClass("is-valid")
           $("#invalid-feedbackPW02").hide(); 
         }
       });
       $("#userName").on("keyup",function(){
     	  if(userNameCheck()){
+    		  $("#userName").removeClass("is-invalid")
+       		  $("#userName").addClass("is-valid")
     	  $("#invalid-feedbackName").hide();   		  
     	  }else{
     		  $("#invalid-feedbackName").show(); 
@@ -444,7 +481,7 @@
    	  }
        function userNameCheck(){
       		let userNameRegex = /^[가-힣]{3,6}$/;
-      		//  소문자와 특수문자는 필요하고 8자리이상인 비밀번호
+      		//  한글 3~6자리 
       		
       		let username =$("#userName").val().trim();
       		if(userNameRegex.test(username)  ){
@@ -462,6 +499,8 @@
       	          $("#invalid-feedbackNickName").text("비속어는 안됩니다.");
     		 }else{		 
     	  			if(nickNameCheck()){
+    	  			$("#nickName").removeClass("is-invalid")
+		            $("#nickName").addClass("is-valid")
     		  		$("#invalid-feedbackNickName").hide();
     		  		isNickNameFormCheck=true;
     	  			}else{
@@ -477,16 +516,22 @@
     	  $(".invalid-feedback").hide();
       })
       $("#detailAddress").on("keyup",function(){
+    	  $("#detailAddress").removeClass("is-invalid")
+          $("#detailAddress").addClass("is-valid")
     	  $("#invalid-feedbackDetail").hide();
       })
       $("#email").on("keyup",function(){
     	  if(emailCheck()){
+    		  $("#email").removeClass("is-invalid")
+              $("#email").addClass("is-valid")
     		  $("#invalid-feedbackEmail").hide();
     	  }
       })
 	 
       $("#mobile").on("change",function(){
     	  if($("#mobile").val()!="untitled"){
+    		  $("#mobile").removeClass("is-invalid")
+              $("#mobile").addClass("is-valid")
     		 $(".invalid-feedback").hide();
     	  }
       })
@@ -507,6 +552,7 @@
       $("#tel01").on("keyup",function(){
     	  if(phoneCheck()){
     		  $("#invalid-feedbackTel").hide();
+    		  
     		  isPhoneCheck=true;
     	  }else{
     		  $("#invalid-feedbackTel").show();
@@ -516,6 +562,7 @@
       $("#tel02").on("keyup",function(){
     	  if(phoneCheck()){
     		  $("#invalid-feedbackTel").hide();
+    		  
     		  isPhoneCheck=true;
     	  }else{
     		  $("#invalid-feedbackTel").show();
@@ -524,6 +571,7 @@
       })
       $("#tel03").on("keyup",function(){
     	  if(phoneCheck()){
+    		  
     		  $("#invalid-feedbackTel").hide();
     		  isPhoneCheck=true;
     	  }else{
@@ -543,16 +591,20 @@
         						  alert("쓸 수 없는 아이디입니다.");
         						  $("#userID").val("");
         						  $("#userID").focus();
+        						  $("#userID").addClass("is-invalid")
         					  }else{
         						  if($("#userID").val()!=""){
         						  const useID = confirm("쓸 수 있는 아이디입니다. 사용하시겠습니까?");        							  
         						  if(useID){
+        							$("#userID").removeClass("is-invalid")
+            		    	        $("#userID").addClass("is-valid")
           					  		$("#userID").attr("readonly",false);
           					  		$("#btnIDCheck").attr("disabled",true);
           					  		isIDCheck = true;
           					  		}
         						  }else{
         							  alert("공란입니다. 다시입력해주세여");
+        							  $("#userID").addClass("is-invalid")
         							  $("#userID").focus();
         						  }
         					  } 
@@ -572,28 +624,36 @@
     				  alert("중복된 닉네임입니다.");
     				  $("#nickName").val("");
     				  $("#nickName").focus();
+    				  $("#nickName").addClass("is-invalid")
     			  }else{
     				  if($("#nickName").val()!=""){
     					  if(badWordCheck()){
     						  alert("비속어입니다. 이쁜말해주세요");
     						  $("#nickName").focus();
     						  $("#nickName").val("");
+    						  $("#nickName").addClass("is-invalid")
     					  }else{
     						  if(!nickNameCheck()){
     							  alert("닉네임 형식에 맞춰주세요");
         						  $("#nickName").focus();
         						  $("#nickName").val("");
+        						  $("#nickName").addClass("is-invalid")
     						  }else{  
     				  		const nickName = confirm("사용가능한 닉네입니다.")
     				 		 if(nickName){
     					     $("#nickName").attr("readonly",false);
+    					     $("#nickName").removeClass("is-invalid")
+    		    	          $("#nickName").addClass("is-valid")
     					     isNickNameCheck = true;
     				  			}
     						 }
     						  
     					  }
     			  		}else{
-					  		alert("공란입니다 입려해주세요");
+					  		alert("공란입니다 입력해주세요");
+					  		$("#nickName").addClass("is-invalid")
+					  		$("#invalid-feedbackNickName").show();
+              				$("#invalid-feedbackNickName").text("닉네임은 3~5 한글만 가능합니다."); 
 					  		$("#nickName").focus();
 				  		}    		  
     		 		 }
@@ -651,6 +711,8 @@
         return false;
       });
       $("#postCode").on("click",function(){
+    	  $("#postCode").removeClass("is-invalid")
+          $("#postCode").addClass("is-valid")
     	  $("#invalid-feedbackPost").hide();
     	  postcode();
           return false; 
@@ -665,6 +727,8 @@
     		 $(this).val("");
     		  }
      });
+    //validation 
+  
      /*  $("#btnSubmitAjax").on("click",function(){
       	$.ajax({
       		url:"../member/insert-member-process.jsp",

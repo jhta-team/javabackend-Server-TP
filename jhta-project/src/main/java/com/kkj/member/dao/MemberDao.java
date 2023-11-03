@@ -33,7 +33,11 @@ public class MemberDao {
 	public int noBlackMemberCount() {
 		int result =0;
 		SqlSession sqlSession = MybatisConnectionFactory.getSqlSession();
-		result = sqlSession.selectOne("noBlackMemberCount");
+		if(sqlSession.selectOne("noBlackMemberCount")==null) {
+			result =0;
+		}else {
+			result = sqlSession.selectOne("noBlackMemberCount");
+		}		
 		return result;
 	}
 	public int blackMemberCount() {
@@ -155,5 +159,17 @@ public class MemberDao {
 		SqlSession sqlSession = MybatisConnectionFactory.getSqlSession();
 		result = sqlSession.update("findPWChange", map);
 		return result;
+	}
+	public String idCheckDelete(int no) {
+		String id =null;
+		SqlSession sqlSession = MybatisConnectionFactory.getSqlSession();
+		id = sqlSession.selectOne("idCheckDelete",no);
+		return id;
+	}
+	public String imageMember(int no) {
+		String id =null;
+		SqlSession sqlSession = MybatisConnectionFactory.getSqlSession();
+		id = sqlSession.selectOne("imageMember",no);
+		return id;
 	}
 }
