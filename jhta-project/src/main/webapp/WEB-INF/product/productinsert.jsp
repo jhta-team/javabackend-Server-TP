@@ -29,7 +29,9 @@
 
 				<div class="row d-flex justify-content-left mb-2">
 					<div class="col-10">
-						<label for="pdtPrice" class="form-label">상품가격</label> <input type="number" min="0" class="form-control" id="pdtPrice" placeholder="" name="pdtPrice" required="required" />
+						<label for="pdtPrice" class="form-label">상품가격</label> <input type="number" min="0" class="form-control" id="pdtPrice"
+						placeholder="" name="pdtPrice" required="required"
+						oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
 						<div class="invalid-feedback">숫자만 쓸 수 있습니다</div>
 					</div>
 				</div>
@@ -53,13 +55,17 @@
 					<label for="pdtCount" class="form-label">상품 수량 입력</label><br>
 					<div class="col-10 d-flex" >						
 						<label for="pdtCount" class="form-label">S</label>
-						<input type="number" min="0" class="form-control" id="pdtCountS" placeholder="" name="pdtCountS" required="required" />
+						<input type="number" min="0" class="form-control" id="pdtCountS" placeholder="" name="pdtCountS" required="required" 
+						oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
 						<label for="pdtCount" class="form-label">M</label>
-						<input type="number" min="0" class="form-control" id="pdtCountM" placeholder="" name="pdtCountM" required="required" />
+						<input type="number" min="0" class="form-control" id="pdtCountM" placeholder="" name="pdtCountM" required="required"
+						oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
 						<label for="pdtCount" class="form-label">L</label>
-						<input type="number" min="0" class="form-control" id="pdtCountL" placeholder="" name="pdtCountL" required="required" />
+						<input type="number" min="0" class="form-control" id="pdtCountL" placeholder="" name="pdtCountL" required="required" 
+						oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
 						<label for="pdtCount" class="form-label">XL</label>
-						<input type="number" min="0" class="form-control" id="pdtCountXL" placeholder="" name="pdtCountXL" required="required" />
+						<input type="number" min="0" class="form-control" id="pdtCountXL" placeholder="" name="pdtCountXL" required="required" 
+						oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
 					</div>
 					<div class="invalid-feedback">숫자만 쓸 수 있습니다</div>
 				</div>
@@ -69,14 +75,14 @@
 
 				<div class="row d-flex justify-content-left mb-2">
 					<div class="col-10">
-						<label for="pdtThum" class="form-label">상품썸네일</label> <input type="file" class="form-control" id="pdtThum" placeholder="png,jpg,gif" name="pdtThum" accept="image/gif, image/jpeg, image/png, image/jpg" required="required" />
+						<label for="pdtThum" class="form-label">상품썸네일</label> <input type="file" class="form-control" id="pdtThum" placeholder="png,jpg,gif" name="pdtThum" accept="image/gif, image/jpeg, image/png, image/jpg, image/webp" required="required" />
 						<div class="invalid-feedback">썸네일 등록은 필수 입니다</div>
 					</div>
 				</div>
 
 				<div class="row d-flex justify-content-left mb-2">
 					<div class="col-10">
-						<label for="pdtImage" class="form-label">상품 이미지 추가(최대3개)</label> <input type="file" class="form-control" id="pdtImage" placeholder="" name="pdtImage" accept="image/gif, image/jpeg, image/png, image/jpg" multiple  />
+						<label for="pdtImage" class="form-label">상품 이미지 추가(최대3개)</label> <input type="file" class="form-control" id="pdtImage" placeholder="" name="pdtImage" accept="image/gif, image/jpeg, image/png, image/jpg, image/webp" multiple  />
 						<div class="invalid-feedback">이미지는 최대 3개까지 가능합니다</div>
 					</div>
 				</div>
@@ -86,7 +92,7 @@
 				<div class="row d-flex justify-content-left mb-2">
 					<div class="col-5">
 						<label class="form-label">미리보기</label>
-						<div class="preview"></div>
+						<div class="preview" width="500"></div>
 					</div>
 				</div>
 			</div>
@@ -121,7 +127,7 @@
 						const ext = file.name.substring(file.name
 								.lastIndexOf(".") + 1);
 						console.log(ext);
-						if (!(ext === "png" || ext === "jpg" || ext === "gif" || ext === "jpeg")) {
+						if (!(ext === "png" || ext === "jpg" || ext === "gif" || ext === "jpeg" || ext === "webp")) {
 							alert("png,jpg,gif,jpeg만 쓸 수 있습니다.");
 							$("#profile").val("");
 							return false;
@@ -129,14 +135,13 @@
 							const reader = new FileReader();
 							reader.onload = function(e) {
 								$(".preview").html(
-										`<img src="\${e.target.result}">`);
+										`<img src="\${e.target.result}" width="500">`);
 							}
 							reader.readAsDataURL(file);
 						}
 					});
 
-	/* 파일 이미지 여러개 추가 실시간 */
-
+	/* 파일 이미지 갯수 확인 후 유효성 메시지 클래스 추가 */
 	$("#pdtImage").on("change", function(e){
 		const input = document.getElementById('pdtImage');
 		const files = input.files;
@@ -150,8 +155,8 @@
 		} 
 	});
 
-	
-	function uploadFiles() {
+	//상품등록 버튼 클릭시 파일 갯수 검사, 폼데이터 전송
+	function uploadFiles() { 
 		const input = document.getElementById('pdtImage');
 		const files = input.files;
 		console.log(files.length);
@@ -167,16 +172,30 @@
 	const price = document.getElementById('pdtPrice');
 	// 상품가격 유효성 검사 +,- 입력 방지
 	price.onkeydown = function(e) {
-		if (!((e.keyCode > 95 && e.keyCode < 106)
-				|| (e.keyCode > 47 && e.keyCode < 58) || e.keyCode == 8)) {
-			return false;
-		}
+	    // 허용되는 키 범위를 정의
+	    const allowedKeyCodes = [
+	        // 0-9 숫자
+	        48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+	        // 백스페이스
+	        8,
+	        // 화살표 키 (선택 사항)
+	        37, 38, 39, 40
+	    ];
+
+	    // 입력된 키 코드가 허용된 키 코드 목록에 없으면 입력을 방지
+	    if (!allowedKeyCodes.includes(e.keyCode)) {
+	        e.preventDefault();
+	        
+	    }
 	}
 	//ckeditor
 	ClassicEditor
 	.create( document.querySelector( "#pdtContent" ),{
 		ckfinder:{
 			uploadUrl:"../product/imgupload",success:function(response){
+				$.ajax({url:"../product/imgupload",success:function(response) {
+					console.log(response)
+				}})
 				console.log(response)
 			}
 		}, 
@@ -184,16 +203,11 @@
 	.catch( error => {
 	    console.error( error );
 	});
-
-
-	$.ajax({url:"../product/imgupload",success:function(response) {
-		console.log(response)
-	}})
-	
 	
 	
 	//validation 
 	const forms = document.querySelectorAll('.needs-validation')
+
 
 	  // Loop over them and prevent submission
 	  Array.from(forms).forEach(form => {

@@ -4,9 +4,11 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kkj.mybatis">
 
-	<select id="listProduct" parameterType="HashMap" resultType="ProductDto">
+	<select id="listProduct" parameterType="HashMap"
+		resultType="ProductDto">
 		SELECT a.* FROM
-		(SELECT p.*, rownum AS rn FROM product p ORDER BY pdtid DESC) a
+		(SELECT p.*, rownum AS rn FROM product p
+		ORDER BY pdtid DESC) a
 		WHERE rn BETWEEN #{start} AND #{end}
 	</select>
 
@@ -37,7 +39,8 @@
 	</insert>
 
 	<update id="updateProduct" parameterType="ProductDto">
-		UPDATE PRODUCT SET pdtname = #{pdtName},
+		UPDATE PRODUCT SET
+		pdtname = #{pdtName},
 		pdtcty = #{pdtCty},
 		pdtcontent = #{pdtContent},
 		pdtprice = #{pdtPrice},
@@ -56,5 +59,63 @@
 	<select id="countProduct" resultType="int">
 		select count(*) from
 		product
+	</select>
+
+	<select id="searchProduct" parameterType="HashMap"
+		resultType="ProductDto">
+		SELECT a.* from
+		(SELECT p.*, rownum rn FROM product p WHERE
+		<choose>
+			<when test="category=='pdtName'">
+				pdtName LIKE '%'||#{keyword}||'%'
+			</when>
+			<when test="category=='pdtColor'">
+				pdtColor LIKE '%'||#{keyword}||'%'
+			</when>
+			<when test="category=='pdtCty'">
+				pdtCty LIKE '%'||#{keyword}||'%'
+			</when>
+			<when test="category=='pdtPrice'">
+				pdtPrice = #{keyword}
+			</when>
+			<when test="category=='all'">
+				(pdtName LIKE '%'||#{keyword}||'%') or
+				(pdtColor LIKE
+				'%'||#{keyword}||'%') or
+				(pdtCty LIKE '%'||#{keyword}||'%') or
+				(pdtPrice = #{keyword})
+			</when>
+		</choose>
+		ORDER BY p.pdtid DESC) a
+		WHERE rn BETWEEN #{start} AND #{end}
+	</select>
+
+	<select id="searchProductCount" parameterType="HashMap"
+		resultType="int">
+		SELECT count(*) as count from
+		(SELECT p.*, rownum rn FROM product p
+		WHERE
+		<choose>
+			<when test="category=='pdtName'">
+				pdtName LIKE '%'||#{keyword}||'%'
+			</when>
+			<when test="category=='pdtColor'">
+				pdtColor LIKE '%'||#{keyword}||'%'
+			</when>
+			<when test="category=='pdtCty'">
+				pdtCty LIKE '%'||#{keyword}||'%'
+			</when>
+			<when test="category=='pdtPrice'">
+				pdtPrice = #{keyword}
+			</when>
+			<when test="category=='all'">
+				(pdtName LIKE '%'||#{keyword}||'%') or
+				(pdtColor LIKE
+				'%'||#{keyword}||'%') or
+				(pdtCty LIKE '%'||#{keyword}||'%') or
+				(pdtPrice = #{keyword})
+			</when>
+		</choose>
+		)
 	</select>
 </mapper>

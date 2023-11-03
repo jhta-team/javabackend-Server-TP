@@ -54,7 +54,6 @@ public class ProductList extends HttpServlet {
 		}
 		map.put("start", (intpage-1)*9 +1);
 		map.put("end", intpage*9);
-		System.out.println(map.values());
 		List<ProductDto> listDto = new ArrayList<ProductDto>();
 		listDto = pdtDao.listProduct(map);
 		
