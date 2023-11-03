@@ -14,17 +14,23 @@ public class CodyBoardImage {
 		try {
 			Part codyImage = request.getPart("codyImage");
 			if(!uploadImage.isEmpty()) {
-				String userID = "mok119";
+				String userID = "no123";
+				System.out.println(userID);
+				System.out.println("성공???");
 				String uploadDirectory = "/Users/junghunmok/upload";
 				String firstFileName = uploadImage.substring(0, uploadImage.lastIndexOf("."));
 				String ext = uploadImage.substring(uploadImage.lastIndexOf("."));
+				System.out.println("성공???");
 				newCodyImage = userID + ext;
-				codyImage.write(uploadDirectory + File.separator + newCodyImage); 
+				System.out.println("성공???");
+				System.out.println(newCodyImage);
+				codyImage.write(uploadDirectory + File.separator + newCodyImage);
 			}
 		} catch (IOException | ServletException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		System.out.println("성공???");
 		return newCodyImage;
 	}
 	

@@ -639,6 +639,16 @@
     <servlet-name>MemberFindPWProcess</servlet-name>
     <url-pattern>/member/findPW-process</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CodyBoardDeleteProcess</display-name>
+    <servlet-name>CodyBoardDeleteProcess</servlet-name>
+    <servlet-class>com.kkj.codyboard.controller.CodyBoardDeleteProcess</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CodyBoardDeleteProcess</servlet-name>
+    <url-pattern>/codyboard/delete-process</url-pattern>
+  </servlet-mapping>
     <servlet>
     <description></description>
     <display-name>MemberInsertForm</display-name>

@@ -74,7 +74,6 @@ public class MemberSendEmail extends HttpServlet {
 		// SMTP 서버에 접속하기 위한 정보들
 		
 		try{
-			
 		    Authenticator auth = new SMTPAuthenticator();
 		    Session ses = Session.getInstance(p, auth);     
 		    ses.setDebug(true); 

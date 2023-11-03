@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp"%>
+<script src="https://cdn.ckeditor.com/ckeditor5/31.1.0/classic/ckeditor.js"></script>
 <div class="container">
 	<form action="../codyboard/insert-process" method="post"
 		enctype="multipart/form-data">
@@ -18,16 +19,21 @@
 				<option value=13>고프코어</option>
 			</select>
 		</div>
-		<div class="mb-3">
+		
+<!-- 		<div id="editor">
+    		<p>This is some sample content.</p>
+  		</div> -->
+		 <div class="mb-3">
 			<label for="exampleFormControlTextarea1" class="form-label">내용</label>
 			<textarea class="form-control" id="codyBoardContent" rows="3"
 				name="codyBoardContent"></textarea>
 		</div>
 
-		
+		<div class="mb-3">	
 			<label for="formFileDisabled" class="form-label">코디사진</label>
-				<input multiple="multiple"class="form-control" type="file" id="codyImage" name="codyImage" placeholder="png,jpg" accept="image/gif, image/jpeg, image/png, image/jpg">
-			</div>
+				<input class="form-control" type="file" id="codyImage" name="codyImage" placeholder="png,jpg" accept="image/gif, image/jpeg, image/png, image/jpg">
+		</div>
+		
 		
 
 		<div class="mt-5 mb-5 d-flex justify-content-center">
@@ -40,6 +46,18 @@
 </div>
 <
 <script>
+
+/* ClassicEditor.create(document.querySelector("#editor"),{
+	ckfinder: {
+		uploadUrl : '../codyboard/insert-process'
+	},error:function(e){
+		console.log(e)
+	},
+	success:function(res){
+		console.log(res)
+	}
+}); */
+
 	/* $("#profile").on("change",function(e){
 	 const file = e.target.files[0];
 	 console.log(e.target.files);

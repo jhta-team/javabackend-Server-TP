@@ -26,9 +26,9 @@
 							<td colspan="3">
 								${codyBoard.userID } 
 								 <button>팔로우</button>
-								 <span id="follwCount">${follow}</span>
+								 <span id="followCount">${follow}</span>
 								 <button>팔로워</button>
-								 <span id="follwerCount">${follower}</span>
+								 <span id="followerCount">${follower}</span>
 							</td>
 						</tr>
 						<tr>
@@ -285,6 +285,8 @@
 		
 		})
 		
+		
+		
 		$("#follow").on("click", function(){
 			const userID = "${codyBoard.userID }"
 			$.ajax({
@@ -298,15 +300,19 @@
 					alert("팔로우 추가 실패!!")
 				},
 				success: function(res){
-					console.log(res)
-					if(res == "add"){						
-						/* ${"#followerCount"}.text(111) */
-						/* let count = document.getElementById("followerCount");
-						count.text(11) */
+					if(res.status == 1){						
+						console.log(res)
+						console.log("성공")
 						alert("팔로우성공")
+						$("#followerCount").text(res.followerCount)
+						console.log(res.followerCount +"어제랑 무엇이 다를까?")
 						
 					}else{
+						console.log(res)
+					    console.log("취소")
 						alert("팔로우취소")
+					    $("#followerCount").text(res.followerCount)
+					    console.log(res.followerCount +"어제랑 무엇이 다를까?")
 					}
 				}
 				})

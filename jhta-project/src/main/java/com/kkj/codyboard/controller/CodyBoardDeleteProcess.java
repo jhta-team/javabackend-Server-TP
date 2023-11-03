@@ -1,6 +1,6 @@
 package com.kkj.codyboard.controller;
 
-import jakarta.servlet.RequestDispatcher;
+import jakarta.el.ELException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -11,15 +11,15 @@ import java.io.IOException;
 import com.kkj.codyboard.dao.CodyBoardDao;
 
 /**
- * Servlet implementation class CodyBoardDelete
+ * Servlet implementation class CodyBoardDeleteProcess
  */
-public class CodyBoardDelete extends HttpServlet {
+public class CodyBoardDeleteProcess extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CodyBoardDelete() {
+    public CodyBoardDeleteProcess() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,12 +28,20 @@ public class CodyBoardDelete extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int codyBoardNo = Integer.parseInt(request.getParameter("no"));
-		String image = request.getParameter("image");
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/codyboard/deletecheck.jsp");
-		request.setAttribute("codyBoardNo", codyBoardNo);
-		request.setAttribute("image", image);
-		dispatcher.forward(request, response);
+		int codyBoardNo =  Integer.parseInt(request.getParameter("codyBoardNo"));
+		CodyBoardDao codyBoardDao = new CodyBoardDao();
+		CodyBoardImage codyBoardImage = new CodyBoardImage();
+		
+		try {
+			codyBoardDao.delete(codyBoardNo);
+			codyBoardImage.delete(request, response);
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			throw new ELException();
+			
+			
+		}
 	}
 
 	/**
