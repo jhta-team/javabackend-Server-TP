@@ -10,6 +10,7 @@ import jakarta.servlet.http.Part;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -53,12 +54,15 @@ public class CodyBoardInsertProcess extends HttpServlet {
 
 		
 		String uploadCodyImage = codyImageArray[1].trim().replace("\"", "");
+		System.out.println("=======>>>>>"+uploadCodyImage);
 		String newCodyImage = codyBoardImage.upload(request,response, uploadCodyImage);
 		
 		System.out.println(codyImageHeader);
 		System.out.println(codyImageArray[1]);
 		
-
+		System.out.println(codyTitle);
+		System.out.println(codyCategory);
+		System.out.println(codyContent);
 		
 
 		CodyBoardDto codyBoardDto = new CodyBoardDto();
@@ -67,19 +71,19 @@ public class CodyBoardInsertProcess extends HttpServlet {
 		codyBoardDto.setCategoryID(codyCategory);
 		codyBoardDto.setContent(codyContent);
 		codyBoardDto.setImages(newCodyImage);
-		codyBoardDto.setUserID("mok119");
+		codyBoardDto.setUserID("mok1119");
 		
 	
 		int result = codyBoardDao.insert(codyBoardDto);
 		if(result > 0) {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/codyboard/pagenation.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("../codyboard/page-nation");
 			dispatcher.forward(request, response);
 			
 			System.out.println("성공하였습니다.");
 		}else {
 			System.out.println("실패하였습니다.");
 		}
-		
+		PrintWriter out = new PrintWriter(System.out);	
 
 		
 		

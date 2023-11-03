@@ -5,7 +5,7 @@
 		insert into follow values(seq_follow.nextval, #{followID}, #{myID})
 	</insert>
 	
-	<select id="FindOneFollow" parameterType="FollowDto" resultType="boolean">
+	<select id="FindOneFollow" parameterType="FollowDto" resultType="FollowDto">
 		select * from follow where followID = #{followID} and myID = #{myID}
 	</select>
   	

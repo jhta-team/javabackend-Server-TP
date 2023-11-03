@@ -1,5 +1,7 @@
 package com.kkj.follow.dao;
 
+import java.util.HashMap;
+
 import java.util.Optional;
 
 import org.apache.ibatis.session.SqlSession;
@@ -11,34 +13,51 @@ import jakarta.el.ELException;
 
 public class FollowDao {
 
-	public int insert(FollowDto followDto) {
+	public HashMap<String,Integer> insert(FollowDto followDto) throws Exception {
 		int result = 0;
 		SqlSession sqlSession = MybatisConnectionFactory.getSqlSession();
 		result = sqlSession.insert("InsertFollow", followDto);
-		return result;
+		if(result > 0) {
+			int followCount = sqlSession.selectOne("countFollow", followDto.getMyID());
+			System.out.println("followcount===>>>" + followCount);
+			int followerCount = sqlSession.selectOne("countFollower", followDto.getFollowID());
+			System.out.println("followercount===>>>" + followerCount);
+			HashMap<String,Integer> count = new HashMap<String, Integer>();
+			count.put("followCount", followCount);
+			count.put("followerCount", followerCount);
+			return count;
+		}else {
+			throw new ELException("에러입니다.");
+		}
+		
+		
 		
 	}
 
 	public boolean checked(FollowDto followDto) {
-		try{
-			SqlSession sqlSession = MybatisConnectionFactory.getSqlSession();
-			boolean followCheck = sqlSession.selectOne("FindOneFollow", followDto);
-		
-			System.out.println(followCheck);
-			return followCheck;
-		}catch(Exception e) {
-			System.out.println(e);
-			return false;
-		}
+
+		SqlSession sqlSession = MybatisConnectionFactory.getSqlSession();
+		 FollowDto followCheck = sqlSession.selectOne("FindOneFollow", followDto);
+		 System.out.println(followCheck);
+		 Optional<FollowDto> followIsNull = Optional.ofNullable(followCheck);
+		System.out.println("+=======>>>" + followIsNull.isPresent());
+		return followIsNull.isPresent();
 		
 	}
 
-	public boolean delete(FollowDto followDto) {
+	public HashMap<String,Integer> delete(FollowDto followDto) {
 		int result = 0;
 		SqlSession sqlSession = MybatisConnectionFactory.getSqlSession();
 		result = sqlSession.delete("deleteFollow", followDto);
 		if(result > 0) {
-			return true;
+			int followCount = sqlSession.selectOne("countFollow", followDto.getMyID());
+			System.out.println("followcount===>>>" + followCount);
+			int followerCount = sqlSession.selectOne("countFollower", followDto.getFollowID());
+			System.out.println("followercount===>>>" + followerCount);
+			HashMap<String,Integer> count = new HashMap<String, Integer>();
+			count.put("followCount", followCount);
+			count.put("followerCount", followerCount);
+			return count;
 		}else {
 			throw new ELException("에러입니다.");
 		}

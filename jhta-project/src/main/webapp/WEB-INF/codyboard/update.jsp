@@ -54,6 +54,7 @@
 		<div>
 			<img src="/upload/${codyBoard.images }" id="prevCodyImage" width="200">
 			<input type="hidden" name="prevCodyImage" value="${codyBoard.images }">
+			<span id="newImage"></span>
 		</div>
 		
 		<div class="mt-5 mb-5 d-flex justify-content-center">
@@ -65,7 +66,14 @@
 	</form>
 </div>
 <<script>
-/* $("#profile").on("change",function(e){
+$("#codyImage").on("change",function(){
+	console.log("얍얍")
+	console.log($("#codyImage").val())
+	let newImage = $("#codyImage").val()
+	$("#prevCodyImage").attr("src",newImage);
+	
+})
+ $("#codyImage").on("change",function(e){
 				const file = e.target.files[0];
 				console.log(e.target.files);
 				console.log(file.name);
@@ -76,13 +84,14 @@
 					$("#profile").val("");
 					return false;
 				} else {
+					console.log("여기")
 					const reader = new FileReader();
 					reader.onload = function(e) {
-						$(".preview").html(`<img src="\${e.target.result}">`);
+						$("#newImage").html(`<img src="\${e.target.result}">`);
 					}
 					reader.readAsDataURL(file);
 				}
-		   }); */
+		   });
 /* $(document).ready(function(){
 	$("#btnSubmit").click(function(){
 		console.log($("#codyBoardTitle").val().length)
